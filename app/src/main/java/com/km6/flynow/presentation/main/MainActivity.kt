@@ -1,5 +1,6 @@
 package com.km6.flynow.presentation.main
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.km6.flynow.R
 import com.km6.flynow.databinding.ActivityMainBinding
+import com.km6.flynow.presentation.intro.MyAppIntroActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setupBottomNav()
+        checkFirstRun()
 //        testCrash()
     }
 //
@@ -41,6 +44,18 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
 //        }
+    }
+
+    private fun checkFirstRun() {
+        val sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val isFirstRun = sharedPreferences.getBoolean("isFirstRun", true)
+
+        // delete negation, Intro just showing at the first time run
+        if (isFirstRun) {
+            startActivity(Intent(this, MyAppIntroActivity::class.java))
+            // Set isFirstRun to false to indicate that the app has been launched before
+            sharedPreferences.edit().putBoolean("isFirstRun", false).apply()
+        }
     }
 
 //    private fun navigateToLogin() {
