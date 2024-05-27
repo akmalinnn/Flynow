@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_primaryContainer"
+    tools:context=".presentation.filter_result.FilterResultActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/layout_header"
+            layout="@layout/layout_header_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/layout_header"
+            tools:listitem="@layout/item_date" />
+
+        <Button
+            android:id="@+id/btn_filter_button"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter"
+            android:layout_marginHorizontal="8dp"
+            android:drawableLeft="@drawable/ic_filter"
+            android:drawablePadding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_destination"
+            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/md_theme_onPrimary"
+            android:textColor="@android:color/black"/>
+
+        <Button
+            android:id="@+id/btn_filter_selected_button"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/filter2"
+            android:layout_marginHorizontal="8dp"
+            android:drawableLeft="@drawable/ic_sort"
+            android:drawablePadding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_destination"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/md_theme_onPrimary"
+            android:textColor="@color/md_theme_primary"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_list_flight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintTop_toBottomOf="@id/btn_filter_button"
+            tools:listitem="@layout/item_flight" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
