@@ -32,6 +32,14 @@
             android:exported="false" />
         <activity
             android:name=".presentation.intro.MyAppIntroActivity"
+        <activity
+            android:name=".presentation.register.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.intro.MyAppIntroActivity"
             android:label="My Custom AppIntro" />
 
 
