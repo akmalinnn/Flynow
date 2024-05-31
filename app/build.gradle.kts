@@ -54,14 +54,14 @@ android {
             buildConfigField(
                 type = "String",
                 name = "API_KEY",
-                value = "\"CG-S4m7y1shFUUuFzSKrNouRhP2\"",
+                value = "\"https://flynow-staging-dot-fsw2-binar-academy.et.r.appspot.com/api/\"",
             )
         }
         create("integration") {
             buildConfigField(
                 type = "String",
                 name = "BASE_URL",
-                value = "\"endpoint/\"",
+                value = "\"https://flynow-staging-dot-fsw2-binar-academy.et.r.appspot.com/api/\"",
             )
             buildConfigField(
                 type = "String",

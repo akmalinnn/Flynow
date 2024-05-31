@@ -4,6 +4,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
+import org.json.JSONObject
+import retrofit2.HttpException
 import java.lang.Exception
 
 /**
@@ -95,7 +97,23 @@ fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
             },
         )
     }.catch { e ->
-        emit(ResultWrapper.Error(exception = Exception(e)))
+        when (e) {
+            is HttpException -> {
+                val response = e.response()
+                val errorMessage = if (response != null && response.errorBody() != null) {
+                    val errorJson = response.errorBody()?.string()
+                    val errorMessageJson = JSONObject(errorJson!!).getString("message")
+                    errorMessageJson
+                } else {
+                    "Terjadi kesalahan saat memproses permintaan"
+                }
+                emit(ResultWrapper.Error(exception = Exception(errorMessage)))
+            }
+            else -> {
+                emit(ResultWrapper.Error(exception = Exception(e)))
+            }
+        }
+
     }.onStart {
         emit(ResultWrapper.Loading())
     }
