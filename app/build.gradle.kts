@@ -108,6 +108,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.appIntro)
     implementation(libs.firebase.crashlytics)
+    implementation ("com.github.GoodieBag:Pinview:v1.4")
 
     testImplementation(libs.mockk.agent)
     androidTestImplementation(libs.mockk.android)

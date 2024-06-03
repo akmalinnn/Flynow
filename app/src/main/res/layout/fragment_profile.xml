@@ -1,43 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.profile.ProfileFragment">
-
-    <Button
-        android:id="@+id/cobaLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Coba Login"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    tools:ignore="Overdraw">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/cobaLogin"
+        android:id="@+id/tvAkun"
+        android:layout_width="328dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/akun"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Name"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivEdit"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_edit_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAkun"
+        tools:ignore="ContentDescription" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_token"
-        app:layout_constraintTop_toBottomOf="@id/tv_name"
+        android:id="@+id/tvProfile"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="-1sp"
+        android:text="@string/edit_profile"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivEdit"
+        app:layout_constraintStart_toEndOf="@id/ivEdit"
+        app:layout_constraintTop_toBottomOf="@id/tvAkun" />
+
+    <ImageView
+        android:id="@+id/ivSetting"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_account_settings"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Token"/>
+        app:layout_constraintTop_toBottomOf="@id/ivEdit"
+        tools:ignore="ContentDescription" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_logout"
-        app:layout_constraintTop_toBottomOf="@id/tv_token"
-        android:text="Logout"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/tvSetting"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="-1sp"
+        android:text="@string/accountSettings"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivSetting"
+        app:layout_constraintStart_toEndOf="@id/ivSetting"
+        app:layout_constraintTop_toBottomOf="@id/ivEdit" />
 
+    <ImageView
+        android:id="@+id/ivLogout"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:src="@drawable/ic_exit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivSetting"
+        tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@+id/tvLogout"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="-1sp"
+        android:text="@string/logout_account"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLogout"
+        app:layout_constraintStart_toEndOf="@id/ivLogout"
+        app:layout_constraintTop_toBottomOf="@id/ivSetting" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/ic_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvProfile" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/ic_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSetting" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="350dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="7dp"
+        android:background="@drawable/ic_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogout" />
+
+    <TextView
+        android:id="@+id/version_1_1"
+        android:layout_width="80dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="100dp"
+        android:lineSpacingExtra="0sp"
+        android:text="@string/app_version"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+    <TextView
+        android:id="@+id/profile_name_page"
+        android:layout_width="288dp"
+        android:layout_height="30dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="-1sp"
+        android:text="@string/logout_account"
+        android:textColor="@color/black"
+        android:layout_marginHorizontal="16dp"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
