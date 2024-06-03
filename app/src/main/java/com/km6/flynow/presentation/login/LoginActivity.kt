@@ -89,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
         )
     }
 
+
     private fun navigateToRegister() {
         startActivity(
             Intent(this, RegisterActivity::class.java).apply {

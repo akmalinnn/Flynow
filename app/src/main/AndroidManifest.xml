@@ -24,8 +24,7 @@
             android:name=".presentation.filter_result.FilterResultActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.intro.MyAppIntroActivity"
-            android:exported="false"/>
+            android:name=".presentation.intro.MyAppIntroActivity" />
         <activity
             android:name=".presentation.register.RegisterActivity"
             android:exported="false" />

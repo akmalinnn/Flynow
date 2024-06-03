@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/menu_tab_history"
-        android:name="com.km6.flynow.presentation.home.HomeFragment"
+        android:name="com.km6.flynow.presentation.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment

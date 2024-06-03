@@ -37,4 +37,5 @@ class UserRepositoryImpl(private val userPreferences: UserPreference) : UserRepo
     override fun clearToken() {
         userPreferences.clearToken()
     }
+
 }

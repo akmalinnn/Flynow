@@ -31,19 +31,20 @@ class ProfileFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
-        binding.tvName.text = viewModel.getUser()?.name ?: " Belum Login "
-        binding.tvToken.text = viewModel.getToken()
+        checkLoginStatus()
+//        binding.tvName.text = viewModel.getUser()?.name ?: " Belum Login "
+//        binding.tvToken.text = viewModel.getToken()
     }
 
     private fun setClickListeners() {
-        binding.cobaLogin.setOnClickListener{
-            startActivity(
-                Intent(requireContext(), LoginActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                },
-            )
+        binding.ivEdit.setOnClickListener{
+                startActivity(
+                    Intent(requireContext(), LoginActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    },
+                )
         }
-        binding.btnLogout.setOnClickListener{
+        binding.ivLogout.setOnClickListener{
             viewModel.logOut()
             startActivity(
                 Intent(requireContext(), LoginActivity::class.java).apply {
@@ -51,5 +52,28 @@ class ProfileFragment : Fragment() {
                 },
             )
         }
+        binding.tvLogout.setOnClickListener{
+            viewModel.logOut()
+            startActivity(
+                Intent(requireContext(), LoginActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                },
+            )
+        }
+    }
+
+    private fun checkLoginStatus() {
+        val token = viewModel.getToken()
+        if (token == null) {
+            navigateToLogin()
+        }
+    }
+
+    private fun navigateToLogin() {
+        startActivity(
+            Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+        )
     }
 }

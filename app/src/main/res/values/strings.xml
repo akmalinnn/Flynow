@@ -67,5 +67,13 @@
     <string name="text_error_password_empty">Password should not be empty</string>
     <string name="text_error_password_less_than_8_char">Password cannot less than 8 character</string>
     <string name="text_error_name_cannot_empty">Name cannot be empty</string>
+    <string name="history_tittle"> Riwayat Pembelian</string>
+    <string name="akun">Akun</string>
+    <string name="accountSettings">Pengaturan Akun</string>
+    <string name="edit_profile">Ubah Profile</string>
+    <string name="logout_account">Keluar</string>
+    <string name="notification_tittle_page">Notifikasi\n</string>
+    <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
+    <string name="app_version">version:0.0.1</string>
 
 </resources>
