@@ -31,6 +31,7 @@ class HistoryFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
         checkLoginStatus()
+
     }
 
 

@@ -6,55 +6,56 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.km6.flynow.R
+import com.km6.flynow.data.model.Airport
+import com.km6.flynow.databinding.FragmentHistoryBinding
+import com.km6.flynow.databinding.FragmentHomeBinding
+import com.km6.flynow.presentation.choose_date.ChooseDateFragment
+import com.km6.flynow.presentation.choose_destination.ChooseDestinationFragment
+import com.km6.flynow.presentation.choose_destination.DestinationSelectionListener
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class HomeFragment : Fragment(), DestinationSelectionListener {
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+        setClickAction()
+
+    }
+
+    private fun setClickAction() {
+        chooseDestination()
+    }
+
+    private fun chooseDestination() {
+        binding.layoutSearch.tvCityFrom.setOnClickListener{
+            val dialog = ChooseDestinationFragment.newInstance("from")
+            dialog.setDestinationSelectionListener(this)
+            dialog.show(parentFragmentManager, dialog.tag)
+        }
+        binding.layoutSearch.tvCityTo.setOnClickListener{
+            val dialog = ChooseDestinationFragment.newInstance("to")
+            dialog.setDestinationSelectionListener(this)
+            dialog.show(parentFragmentManager, dialog.tag)
+        }
+    }
+
+    override fun onDestinationSelected(airport: Airport, source: String) {
+        if (source == "from") {
+            binding.layoutSearch.tvCityFrom.text = airport.city
+        } else if (source == "to") {
+            binding.layoutSearch.tvCityTo.text = airport.city
+        }
     }
 }
