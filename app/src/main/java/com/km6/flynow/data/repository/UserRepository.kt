@@ -30,6 +30,7 @@ class UserRepositoryImpl(private val userPreferences: UserPreference) : UserRepo
         userPreferences.saveToken(token)
     }
 
+
     override fun getToken(): String? {
         return userPreferences.getToken()
     }

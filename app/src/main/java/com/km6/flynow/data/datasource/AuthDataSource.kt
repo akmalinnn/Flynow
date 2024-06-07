@@ -2,6 +2,8 @@ package com.km6.flynow.data.datasource
 
 import com.km6.flynow.data.source.network.model.login.LoginResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
+import com.km6.flynow.data.source.network.model.otp.VerifyOtpRequest
+import com.km6.flynow.data.source.network.model.otp.VerifyOtpResponse
 import com.km6.flynow.data.source.network.service.FlynowApiService
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -20,9 +22,12 @@ interface AuthDataSource {
                          phoneNumber: String,
                          imageFile: File
     ) : RegisterResponse
+
+    @Throws(exceptionClasses = [Exception::class])
+    suspend fun verifyOtp(email: String, otp: String): VerifyOtpResponse
 }
 
-class AuthDataSourceImpl(private val service: FlynowApiService) :AuthDataSource {
+class AuthDataSourceImpl(private val service: FlynowApiService) : AuthDataSource {
 
     override suspend fun login(email: String, password: String): LoginResponse {
         val emailRequestBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -52,5 +57,10 @@ class AuthDataSourceImpl(private val service: FlynowApiService) :AuthDataSource 
             phoneNumberRequestBody,
             imagePart
         )
+    }
+
+    override suspend fun verifyOtp(email: String, otp: String): VerifyOtpResponse {
+        val requestBody = VerifyOtpRequest(email, otp)
+        return service.verifyOtp(requestBody)
     }
 }

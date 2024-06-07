@@ -31,6 +31,10 @@
         <activity
             android:name=".presentation.login.LoginActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.otp.OtpActivity"
+            android:exported="false" />
+
 
         <activity
             android:name=".presentation.main.MainActivity"

@@ -15,6 +15,7 @@ import com.km6.flynow.R
 import com.km6.flynow.databinding.ActivityRegisterBinding
 import com.km6.flynow.presentation.login.LoginActivity
 import com.km6.flynow.presentation.main.MainActivity
+import com.km6.flynow.presentation.otp.OtpActivity
 import com.km6.flynow.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
@@ -92,7 +93,7 @@ class RegisterActivity : AppCompatActivity() {
                 doOnSuccess = {
                     binding.pbLoading.isVisible = false
                     binding.btnRegister.isVisible = true
-                    navigateToMain()
+                    navigateToOtp()
                 },
                 doOnError = {
                     binding.pbLoading.isVisible = false
@@ -172,5 +173,14 @@ class RegisterActivity : AppCompatActivity() {
             textInputLayout.isErrorEnabled = false
             true
         }
+    }
+
+    private fun navigateToOtp() {
+        startActivity(
+            Intent(this, OtpActivity::class.java).apply {
+                putExtra("email", binding.etEmail.text.toString().trim())
+            }
+        )
+        finish()
     }
 }

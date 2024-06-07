@@ -2,14 +2,18 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.BuildConfig
 import com.km6.flynow.data.source.network.model.login.LoginResponse
+import com.km6.flynow.data.source.network.model.otp.VerifyOtpRequest
+import com.km6.flynow.data.source.network.model.otp.VerifyOtpResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import java.util.concurrent.TimeUnit
 
@@ -31,6 +35,12 @@ interface FlynowApiService {
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part image: MultipartBody.Part
     ): RegisterResponse
+
+    @PUT("auth/verify-otp")
+    suspend fun verifyOtp(
+        @Body requestBody: VerifyOtpRequest
+    ): VerifyOtpResponse
+
 
     companion object {
         @JvmStatic
