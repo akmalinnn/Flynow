@@ -1,19 +1,18 @@
 package com.km6.flynow.data.mapper
 
-import com.km6.flynow.data.model.Airport
-import com.km6.flynow.data.model.Destination
+import com.km6.flynow.data.model.DestinationHistory
 import com.km6.flynow.data.source.local.database.entity.DestinationHistoryEntity
 
-fun Destination?.toDestinationHistoryEntity() =
+fun DestinationHistory?.toDestinationHistoryEntity() =
     DestinationHistoryEntity(
-        id =this?.id.orEmpty(),
+        id =this?.id,
         destinationName = this?.destinationName.orEmpty()
     )
 
-fun DestinationHistoryEntity?.toDestination() =
-    Destination(
-        id =this?.id.orEmpty(),
+fun DestinationHistoryEntity?.toDestinationHistory() =
+    DestinationHistory(
+        id =this?.id,
         destinationName = this?.destinationName.orEmpty()
     )
 
-fun List<DestinationHistoryEntity?>.toDestinationHistoryList() = this.map { it.toDestination() }
+fun List<DestinationHistoryEntity?>.toDestinationHistoryList() = this.map { it.toDestinationHistory() }

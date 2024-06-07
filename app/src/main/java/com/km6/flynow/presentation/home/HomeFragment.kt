@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.km6.flynow.R
 import com.km6.flynow.data.model.Airport
-import com.km6.flynow.databinding.FragmentHistoryBinding
 import com.km6.flynow.databinding.FragmentHomeBinding
-import com.km6.flynow.presentation.choose_date.ChooseDateFragment
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationFragment
 import com.km6.flynow.presentation.choose_destination.DestinationSelectionListener
+import com.km6.flynow.presentation.choose_passanger.ChoosePassangerFragment
 
 class HomeFragment : Fragment(), DestinationSelectionListener {
     private lateinit var binding: FragmentHomeBinding
@@ -36,6 +34,18 @@ class HomeFragment : Fragment(), DestinationSelectionListener {
 
     private fun setClickAction() {
         chooseDestination()
+        choosePassanger()
+    }
+
+    private fun choosePassanger() {
+        binding.layoutSearch.tvPassengerLabel.setOnClickListener{
+            val dialog = ChoosePassangerFragment()
+            dialog.show(parentFragmentManager, dialog.tag)
+        }
+        binding.layoutSearch.tvPassengerValue.setOnClickListener{
+            val dialog = ChoosePassangerFragment()
+            dialog.show(parentFragmentManager, dialog.tag)
+        }
     }
 
     private fun chooseDestination() {

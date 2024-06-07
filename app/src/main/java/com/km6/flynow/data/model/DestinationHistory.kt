@@ -1,6 +1,6 @@
 package com.km6.flynow.data.model
 
-data class Destination (
-    var id: String,
+data class DestinationHistory (
+    var id: Int? = null,
     var destinationName: String,
 )

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.km6.flynow.data.model.Destination
+import com.km6.flynow.data.model.DestinationHistory
 import com.km6.flynow.databinding.ItemDestinationResultBinding
 import com.refood.tastie.core.ViewHolderBinder
 
@@ -13,24 +13,24 @@ class DestinationHistoryAdapter (private val destinationHistoryListener: Destina
     private val dataDiffer =
         AsyncListDiffer(
             this,
-            object : DiffUtil.ItemCallback<Destination>() {
+            object : DiffUtil.ItemCallback<DestinationHistory>() {
                 override fun areItemsTheSame(
-                    oldItem: Destination,
-                    newItem: Destination,
+                    oldItem: DestinationHistory,
+                    newItem: DestinationHistory,
                 ): Boolean {
                     return oldItem.id == newItem.id && oldItem.id == newItem.id
                 }
 
                 override fun areContentsTheSame(
-                    oldItem: Destination,
-                    newItem: Destination,
+                    oldItem: DestinationHistory,
+                    newItem: DestinationHistory,
                 ): Boolean {
                     return oldItem.hashCode() == newItem.hashCode()
                 }
             },
         )
 
-    fun submitData(data: List<Destination>) {
+    fun submitData(data: List<DestinationHistory>) {
         dataDiffer.submitList(data)
     }
 
@@ -54,26 +54,26 @@ class DestinationHistoryAdapter (private val destinationHistoryListener: Destina
         holder: RecyclerView.ViewHolder,
         position: Int,
     ) {
-        (holder as ViewHolderBinder<Destination>).bind(dataDiffer.currentList[position])
+        (holder as ViewHolderBinder<DestinationHistory>).bind(dataDiffer.currentList[position])
     }
 }
 
 class CartViewHolder(
     private val binding: ItemDestinationResultBinding,
     private val destinationHistoryListener: DestinationHistoryListener?,
-) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<Destination> {
-    override fun bind(item: Destination) {
+) : RecyclerView.ViewHolder(binding.root), ViewHolderBinder<DestinationHistory> {
+    override fun bind(item: DestinationHistory) {
         setCartData(item)
         setClickListeners(item)
     }
 
-    private fun setCartData(item: Destination) {
+    private fun setCartData(item: DestinationHistory) {
         with(binding) {
             tvDestination.text = item.destinationName
 
         }
     }
-    private fun setClickListeners(item: Destination) {
+    private fun setClickListeners(item: DestinationHistory) {
         with(binding) {
             ivClose.setOnClickListener { destinationHistoryListener?.onRemoveDestinationClicked(item) }
         }
@@ -81,5 +81,5 @@ class CartViewHolder(
 }
 
 interface DestinationHistoryListener {
-    fun onRemoveDestinationClicked(destination: Destination)
+    fun onRemoveDestinationClicked(destinationHistory: DestinationHistory)
 }

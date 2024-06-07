@@ -1,25 +1,23 @@
 package com.km6.flynow.presentation.choose_destination
 
-import android.content.Context
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.km6.flynow.data.model.Airport
-import com.km6.flynow.data.model.Destination
+import com.km6.flynow.data.model.DestinationHistory
 import com.km6.flynow.databinding.FragmentChooseDestinationBinding
 import com.km6.flynow.presentation.choose_destination.adapter.AirportListAdapter
 import com.km6.flynow.presentation.choose_destination.adapter.DestinationHistoryAdapter
 import com.km6.flynow.presentation.choose_destination.adapter.DestinationHistoryListener
 import com.km6.flynow.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.UUID
 
 
 class ChooseDestinationFragment : BottomSheetDialogFragment() {
@@ -32,8 +30,8 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
     private val destinationHistoryAdapter: DestinationHistoryAdapter by lazy {
         DestinationHistoryAdapter(
             object : DestinationHistoryListener {
-                override fun onRemoveDestinationClicked(destination: Destination) {
-                    viewModel.removeDestination(destination)
+                override fun onRemoveDestinationClicked(destinationHistory: DestinationHistory) {
+                    viewModel.removeDestination(destinationHistory)
                 }
             },
         )
@@ -53,9 +51,17 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
-        setupListAirport()
         observeData()
+        setupListAirport()
         setupSearchView()
+        setOnClickAction()
+    }
+
+    private fun setOnClickAction() {
+        binding.tvDelete.setOnClickListener {
+            viewModel.deleteAllDestinationHistory()
+            observeData()
+        }
     }
 
     private fun setupViews() {
@@ -80,6 +86,12 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
         viewModel.getAllDestinationHistory().observe(viewLifecycleOwner) { result ->
             result.proceedWhen(
                 doOnSuccess = {
+                    binding.layoutState.root.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.tvRecentSearch.isVisible = true
+                    binding.tvDelete.isVisible = true
+                    binding.rvAirport.isVisible = false
                     binding.rvListDestination.isVisible = true
                     result.payload?.let {
                         // set list cart data
@@ -87,10 +99,30 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
                     }
                 },
                 doOnError = {
-                    binding.tvDelete.text = "juju"
+
                 },
                 doOnLoading = {
-                    binding.tvDelete.text = "loading"
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.rvAirport.isVisible = false
+                    binding.tvRecentSearch.isVisible = true
+                    binding.rvListDestination.isVisible = false
+                    binding.tvDelete.isVisible = false
+                },
+                doOnEmpty = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.text = "Riwayat Kosong"
+                    binding.rvListDestination.isVisible = false
+                    binding.rvAirport.isVisible = false
+                    binding.tvDelete.isVisible = false
+                    result.payload?.let {
+                        // set list cart data
+                        destinationHistoryAdapter.submitData(it)
+                    }
                 }
             )
         }
@@ -100,9 +132,8 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Tangani pengiriman query pencarian
-                val id = UUID.randomUUID().toString()
                 getAirportList(query)
-                addToDestinationHistory(id, query)
+                addToDestinationHistory(query)
                 return false
             }
 
@@ -162,13 +193,7 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
     }
 
     private fun showRecentSearch() {
-        binding.layoutState.root.isVisible = false
-        binding.layoutState.pbLoading.isVisible = false
-        binding.layoutState.tvError.isVisible = false
-        binding.tvRecentSearch.isVisible = true
-        binding.rvListDestination.isVisible = true
-        binding.rvAirport.isVisible = false
-        binding.tvDelete.isVisible = true
+        observeData()
     }
 
     override fun onStart() {
@@ -190,8 +215,20 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
         destinationSelectionListener = listener
     }
 
-    fun addToDestinationHistory(idDestination: String, destination:String) {
-        viewModel.addToDestinationHistory(idDestination, destination)
+    fun addToDestinationHistory(destination:String) {
+        viewModel.addToDestinationHistory(destination).observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+
+                },
+                doOnError = {
+
+                },
+                doOnLoading = {
+
+                },
+            )
+        }
     }
 
     companion object {

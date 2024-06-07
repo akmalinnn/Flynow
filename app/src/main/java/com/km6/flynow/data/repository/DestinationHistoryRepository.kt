@@ -3,7 +3,7 @@ package com.km6.flynow.data.repository
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDataSource
 import com.km6.flynow.data.mapper.toDestinationHistoryEntity
 import com.km6.flynow.data.mapper.toDestinationHistoryList
-import com.km6.flynow.data.model.Destination
+import com.km6.flynow.data.model.DestinationHistory
 import com.km6.flynow.data.source.local.database.entity.DestinationHistoryEntity
 import com.km6.flynow.utils.ResultWrapper
 import com.km6.flynow.utils.proceed
@@ -16,19 +16,19 @@ import kotlinx.coroutines.flow.onStart
 
 
 interface DestinationHistoryRepository {
-    fun getUserDestinationHistoryData() : Flow<ResultWrapper<List<Destination>>>
+    fun getUserDestinationHistoryData() : Flow<ResultWrapper<List<DestinationHistory>>>
 
     fun createDestination(
-        destination: Destination
+        destinationHistory: DestinationHistory
     ) : Flow<ResultWrapper<Boolean>>
 
-    fun deleteDestination(item: Destination): Flow<ResultWrapper<Boolean>>
+    fun deleteDestination(item: DestinationHistory): Flow<ResultWrapper<Boolean>>
 
     fun deleteAllDestinationHistory() : Flow<ResultWrapper<Boolean>>
 }
 
 class DestinationHistoryRepositoryImpl(private val destinationHistoryDataSource: DestinationHistoryDataSource) : DestinationHistoryRepository {
-    override fun getUserDestinationHistoryData(): Flow<ResultWrapper<List<Destination>>> {
+    override fun getUserDestinationHistoryData(): Flow<ResultWrapper<List<DestinationHistory>>> {
         return destinationHistoryDataSource.getAllDestinationHistory()
             .map {
                 proceed {
@@ -45,26 +45,20 @@ class DestinationHistoryRepositoryImpl(private val destinationHistoryDataSource:
             }
     }
 
-    override fun createDestination(destination: Destination): Flow<ResultWrapper<Boolean>> {
-        return destination.id?.let { id ->
-            proceedFlow {
+    override fun createDestination(destinationHistory: DestinationHistory): Flow<ResultWrapper<Boolean>> {
+        return proceedFlow {
                 val affectedRow =
                     destinationHistoryDataSource.insertDestination(
                         DestinationHistoryEntity(
-                            id = id,
-                            destinationName = destination.destinationName
-                        ),
+                            destinationName = destinationHistory.destinationName
+                        )
                     )
                 affectedRow > 0
             }
-        } ?: flow {
-            // when id is doesnt exist
-            emit(ResultWrapper.Error(IllegalStateException("Destination ID not found")))
         }
-    }
 
-    override fun deleteDestination(item: Destination): Flow<ResultWrapper<Boolean>> {
-        return proceedFlow { destinationHistoryDataSource.deleteDestination(item.toDestinationHistoryEntity())>0 }
+    override fun deleteDestination(item: DestinationHistory): Flow<ResultWrapper<Boolean>> {
+        return proceedFlow { destinationHistoryDataSource.deleteDestination(item.toDestinationHistoryEntity()) > 0 }
     }
 
     override fun deleteAllDestinationHistory(): Flow<ResultWrapper<Boolean>> {
@@ -73,5 +67,4 @@ class DestinationHistoryRepositoryImpl(private val destinationHistoryDataSource:
             true
         }
     }
-
 }

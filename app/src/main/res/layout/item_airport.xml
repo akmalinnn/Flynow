@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp">
@@ -12,31 +13,30 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_airport_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jakarta International"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_margin="8dp"/>
-
-            <TextView
-                android:id="@+id/tv_airport_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_airport_name"
-                android:text="JDS"
-                android:layout_margin="8dp"/>
-
-            <TextView
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
                 android:id="@+id/tv_airport_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_airport_code"
-                android:text="Palembang"
-                android:layout_margin="8dp"/>
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/airport_location_format"
+                tools:text ="Palembang, IDN (PLM)"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tv_airport_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jakarta International"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/tv_airport_city"
+                app:layout_constraintTop_toBottomOf="@+id/tv_airport_city"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="16dp"/>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

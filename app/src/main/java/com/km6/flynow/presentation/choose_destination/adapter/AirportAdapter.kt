@@ -1,12 +1,15 @@
 package com.km6.flynow.presentation.choose_destination.adapter
 
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.km6.flynow.R
 import com.km6.flynow.data.model.Airport
 import com.km6.flynow.databinding.ItemAirportBinding
+
 
 class AirportListAdapter(private val itemClick: (Airport) -> Unit) :
     RecyclerView.Adapter<AirportListAdapter.ItemAirportViewHolder>() {
@@ -53,9 +56,9 @@ class AirportListAdapter(private val itemClick: (Airport) -> Unit) :
 
         fun bindView(item: Airport) {
             with(item) {
+                val fullLocation = binding.root.context.getString(R.string.airport_location_format, item.city, item.country, item.airportCode)
                 binding.tvAirportName.text = item.airportName
-                binding.tvAirportCode.text = item.airportCode
-                binding.tvAirportCity.text = item.city
+                binding.tvAirportCity.text = fullLocation
                 itemView.setOnClickListener { itemClick(this) }
             }
         }

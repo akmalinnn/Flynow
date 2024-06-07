@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DestinationHistoryDao {
-    @Query("SELECT * FROM DESTINATIONHISTORY")
+    @Query("SELECT * FROM destinationhistory")
     fun getAllDestinationHistory(): Flow<List<DestinationHistoryEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -19,6 +19,6 @@ interface DestinationHistoryDao {
     @Delete
     suspend fun deleteDestination(destination: DestinationHistoryEntity): Int
 
-    @Query("DELETE FROM DESTINATIONHISTORY")
+    @Query("DELETE FROM destinationhistory")
     suspend fun deleteAllDestinationHistory()
 }

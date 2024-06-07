@@ -4,10 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "destinationHistory")
+@Entity(tableName = "destinationhistory")
 data class DestinationHistoryEntity (
-    @PrimaryKey
-    var id: String,
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
     @ColumnInfo(name = "destination_name")
     var destinationName: String,
 )

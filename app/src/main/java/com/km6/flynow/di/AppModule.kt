@@ -21,6 +21,7 @@ import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
+import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.login.LoginViewModel
 import com.km6.flynow.presentation.main.MainViewModel
@@ -29,7 +30,6 @@ import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.presentation.register.RegisterViewModel
 import com.km6.flynow.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
@@ -82,6 +82,7 @@ object AppModule {
             viewModelOf(::HistoryViewModel)
             viewModelOf(::NotificationViewModel)
             viewModelOf(::ChooseDestinationViewModel)
+            viewModelOf(::ChoosePassangerViewModel)
 
         }
 
