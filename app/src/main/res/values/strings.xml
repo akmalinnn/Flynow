@@ -26,7 +26,7 @@
     <string name="seat_class">Seat Class</string>
     <string name="search">Cari Penerbangan</string>
     <string name="seat_value">Business</string>
-    <string name="passenger_value">2 Penumpang</string>
+    <string name="passenger_value">%1$s Penumpang</string>
     <string name="depature">Depature</string>
     <string name="depature_value">1 Maret 2024</string>
     <string name="return_label">Return</string>

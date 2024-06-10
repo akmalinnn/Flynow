@@ -15,10 +15,15 @@
     import com.km6.flynow.presentation.choose_destination.ChooseDestinationFragment
     import com.km6.flynow.presentation.choose_destination.DestinationSelectionListener
     import com.km6.flynow.presentation.choose_passanger.ChoosePassangerFragment
+    import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
+    import com.km6.flynow.presentation.choose_passanger.PassengerCountDataListener
+    import org.koin.androidx.viewmodel.ext.android.viewModel
     import java.util.Date
 
-    class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedListener {
+    class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedListener, PassengerCountDataListener {
         private lateinit var binding: FragmentHomeBinding
+
+        private val viewModel: HomeViewModel by viewModel()
 
         private var airportFrom: Airport? = null
         private var airportTo: Airport? = null
@@ -47,6 +52,7 @@
         private fun setupView() {
             binding.layoutSearch.tvCityFrom.text = "Pilih Asal"
             binding.layoutSearch.tvCityTo.text = "Pilih Tujuan"
+            binding.layoutSearch.tvPassengerValue.text = "Pilih Penumpang"
         }
 
         private fun setClickAction() {
@@ -90,11 +96,13 @@
 
         private fun choosePassanger() {
             binding.layoutSearch.tvPassengerLabel.setOnClickListener{
-                val dialog = ChoosePassangerFragment()
+                val dialog = ChoosePassangerFragment.newInstance(viewModel.adultCount,viewModel.childrenCount,viewModel.babyCount,viewModel.totalPassenger)
+                dialog.setPassengerCountDataListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
             binding.layoutSearch.tvPassengerValue.setOnClickListener{
-                val dialog = ChoosePassangerFragment()
+                val dialog = ChoosePassangerFragment.newInstance(viewModel.adultCount,viewModel.childrenCount,viewModel.babyCount,viewModel.totalPassenger)
+                dialog.setPassengerCountDataListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
         }
@@ -141,16 +149,14 @@
                 binding.layoutSearch.tvDepatureValue.setTextColor(Color.BLACK)
 
             } else if (source == "returnDate") {
-                val dDate = Date(departureDate)
-                val rDate = Date(selectedDate)
-                if (rDate.before(dDate)){
-                    Toast.makeText(requireContext(), "Error : Return date must after Departure Date", Toast.LENGTH_SHORT).show()
-                } else {
-                    returnDate = selectedDate
-                    binding.layoutSearch.tvReturnValue.text = formattedDate
-                    binding.layoutSearch.tvReturnValue.setTextColor(Color.BLACK)
-                }
-
+                returnDate = selectedDate
+                binding.layoutSearch.tvReturnValue.text = formattedDate
+                binding.layoutSearch.tvReturnValue.setTextColor(Color.BLACK)
             }
+        }
+
+        override fun onPassengerDataUpdated(adultCount: Int, childrenCount: Int, babyCount: Int, totalPassenger: Int) {
+            viewModel.updatePassengerData(adultCount, childrenCount, babyCount, totalPassenger)
+            binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
         }
     }
