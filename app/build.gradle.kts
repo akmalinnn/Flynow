@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.appIntro)
     implementation(libs.firebase.crashlytics)
     implementation ("com.github.GoodieBag:Pinview:v1.4")
+    implementation ("com.google.android.material:material:1.9.0")
 
     // The view calendar library
     implementation (libs.view)

@@ -35,8 +35,8 @@
     <string name="depature_return">Pulang-Pergi?</string>
     <string name="to">To</string>
     <string name="from">From</string>
-    <string name="city_to">Melbourne (MLB)</string>
-    <string name="city_from">Jakarta (JKTA)</string>
+    <string name="city_to">%1$s (%2$s)</string>
+    <string name="city_from">%1$s (%2$s)</string>
     <string name="flight_destination">MLB</string>
     <string name="flight_departure">JKTA</string>
     <string name="hei_mau_kemana">Hei, Mau kemana?</string>

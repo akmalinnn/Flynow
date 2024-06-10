@@ -92,7 +92,7 @@ class RegisterActivity : AppCompatActivity() {
                 doOnSuccess = {
                     binding.pbLoading.isVisible = false
                     binding.btnRegister.isVisible = true
-                    navigateToMain()
+                    navigateToLogin()
                 },
                 doOnError = {
                     binding.pbLoading.isVisible = false

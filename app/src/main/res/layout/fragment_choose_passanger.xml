@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.choose_passanger.ChoosePassangerFragment">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_close"
+        android:layout_margin="10dp" />
+
+    <ImageView
+        android:id="@+id/iv_adult"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_adult"
+        app:layout_constraintBottom_toBottomOf="@id/tv_adult"
+        android:src="@drawable/ic_adult"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_adult"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dewasa"
+        app:layout_constraintStart_toEndOf="@id/iv_adult"
+        app:layout_constraintTop_toBottomOf="@id/iv_close"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_adult_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(12 tahun keatas)"
+        android:textSize="14sp"
+        android:textColor="#808080"
+        app:layout_constraintTop_toBottomOf="@+id/tv_adult"
+        app:layout_constraintStart_toStartOf="@id/tv_adult"/>
+
+    <include
+        android:id="@+id/layout_count_adult"
+        layout="@layout/layout_count"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_adult"
+        android:layout_marginEnd="16dp"/>
+
+<!--    batas-->
+
+    <ImageView
+        android:id="@+id/iv_children"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_children"
+        app:layout_constraintBottom_toBottomOf="@id/tv_children"
+        android:src="@drawable/ic_adult"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_children"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anak"
+        app:layout_constraintStart_toEndOf="@id/iv_children"
+        app:layout_constraintTop_toBottomOf="@id/tv_adult_desc"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_children_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(2-11 tahun keatas)"
+        android:textSize="14sp"
+        android:textColor="#808080"
+        app:layout_constraintTop_toBottomOf="@+id/tv_children"
+        app:layout_constraintStart_toStartOf="@id/tv_children"/>
+
+    <include
+        android:id="@+id/layout_count_children"
+        layout="@layout/layout_count"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_children"
+        android:layout_marginEnd="16dp"/>
+
+<!--    batas-->
+
+    <ImageView
+        android:id="@+id/iv_baby"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_baby"
+        app:layout_constraintBottom_toBottomOf="@id/tv_baby"
+        android:src="@drawable/ic_adult"
+        android:layout_marginStart="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_baby"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Baby"
+        app:layout_constraintStart_toEndOf="@id/iv_baby"
+        app:layout_constraintTop_toBottomOf="@id/tv_children_desc"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"/>
+
+    <TextView
+        android:id="@+id/tv_baby_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(2-11 tahun keatas)"
+        android:textSize="14sp"
+        android:textColor="#808080"
+        app:layout_constraintTop_toBottomOf="@+id/tv_baby"
+        app:layout_constraintStart_toStartOf="@id/tv_baby"/>
+
+    <include
+        android:id="@+id/layout_count_baby"
+        layout="@layout/layout_count"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_baby"
+        android:layout_marginEnd="16dp"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_baby_desc"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/md_theme_primary"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

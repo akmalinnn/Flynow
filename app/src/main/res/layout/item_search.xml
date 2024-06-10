@@ -52,10 +52,12 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:text="@string/city_from"
+            tools:text="Jakarta (JKTA)"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/tv_from"
             app:layout_constraintTop_toTopOf="@id/iv_plane_from"
-            app:layout_constraintBottom_toBottomOf="@id/iv_plane_from"/>
+            app:layout_constraintBottom_toBottomOf="@id/iv_plane_from"
+            android:textColor="@color/md_theme_primary"/>
 
         <ImageView
             android:id="@+id/iv_plane_to"
@@ -85,10 +87,12 @@
             android:layout_weight="1"
             android:layout_marginStart="24dp"
             android:text="@string/city_to"
+            tools:text="Singapore (SGP)"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/tv_to"
             app:layout_constraintTop_toTopOf="@id/iv_plane_to"
-            app:layout_constraintBottom_toBottomOf="@id/iv_plane_to"/>
+            app:layout_constraintBottom_toBottomOf="@id/iv_plane_to"
+            android:textColor="@color/md_theme_primary"/>
 
         <TextView
             android:id="@+id/tv_depature_return"
@@ -135,10 +139,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:text="@string/depature_value"
-            android:textColor="@android:color/darker_gray"
+            android:text="Pilih Tanggal"
+            android:textColor="@color/md_theme_primary"
             app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
-            app:layout_constraintTop_toBottomOf="@id/tv_depature_label"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_depature_label" />
 
         <ImageView
             android:id="@+id/iv_calendar_return"
@@ -170,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:text="@string/date_return"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/md_theme_primary"
             app:layout_constraintTop_toBottomOf="@id/tv_return_label"
             app:layout_constraintStart_toEndOf="@id/iv_calendar_return"/>
 

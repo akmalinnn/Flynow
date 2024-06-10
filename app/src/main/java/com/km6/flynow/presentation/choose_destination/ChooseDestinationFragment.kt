@@ -153,6 +153,7 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
     private fun getAirportList(keyword: String? = null) {
         val token = viewModel.getToken()
         if (token != null) {
+            Log.d("Token", token)
             viewModel.searchAirport(token, keyword).observe(viewLifecycleOwner) {
                 it.proceedWhen(
                     doOnLoading = {
@@ -182,6 +183,16 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
                         binding.layoutState.pbLoading.isVisible = false
                         binding.layoutState.tvError.isVisible = true
                         binding.layoutState.tvError.text = "Lokasi Tidak Ditemukan"
+                        binding.tvRecentSearch.isVisible = false
+                        binding.rvListDestination.isVisible = false
+                        binding.rvAirport.isVisible = false
+                        binding.tvDelete.isVisible = false
+                    },
+                    doOnError = {
+                        binding.layoutState.root.isVisible = true
+                        binding.layoutState.pbLoading.isVisible = false
+                        binding.layoutState.tvError.isVisible = true
+                        binding.layoutState.tvError.text = it.exception.toString()
                         binding.tvRecentSearch.isVisible = false
                         binding.rvListDestination.isVisible = false
                         binding.rvAirport.isVisible = false
