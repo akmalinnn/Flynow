@@ -25,8 +25,6 @@
 
         private val viewModel: HomeViewModel by viewModel()
 
-        private var airportFrom: Airport? = null
-        private var airportTo: Airport? = null
         private var departureDate: Long = 0L
         private var returnDate: Long = 0L
 
@@ -50,9 +48,28 @@
         }
 
         private fun setupView() {
-            binding.layoutSearch.tvCityFrom.text = "Pilih Asal"
-            binding.layoutSearch.tvCityTo.text = "Pilih Tujuan"
-            binding.layoutSearch.tvPassengerValue.text = "Pilih Penumpang"
+            if (viewModel.airportFrom == null) {
+                binding.layoutSearch.tvCityFrom.text = "Pilih Asal"
+            } else {
+                val airportFromText = getString(R.string.city_from, viewModel.airportFrom!!.city, viewModel.airportFrom!!.airportCode)
+                binding.layoutSearch.tvCityFrom.text = airportFromText
+                binding.layoutSearch.tvCityFrom.setTextColor(Color.BLACK)
+            }
+
+            if (viewModel.airportTo == null) {
+                binding.layoutSearch.tvCityTo.text = "Pilih Asal"
+            } else {
+                val airportToText = getString(R.string.city_to, viewModel.airportTo!!.city, viewModel.airportTo!!.airportCode)
+                binding.layoutSearch.tvCityTo.text = airportToText
+                binding.layoutSearch.tvCityTo.setTextColor(Color.BLACK)
+            }
+
+            if (viewModel.totalPassenger == 0) {
+                binding.layoutSearch.tvPassengerValue.text = "Pilih Penumpang"
+            } else {
+                binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
+            }
+
         }
 
         private fun setClickAction() {
@@ -64,15 +81,15 @@
 
         private fun swapAirport() {
             binding.layoutSearch.ivSwitch.setOnClickListener {
-                if (airportFrom != null && airportTo != null) {
-                    val tempAirport = airportFrom
-                    airportFrom = airportTo
-                    airportTo = tempAirport
+                if (viewModel.airportFrom != null && viewModel.airportTo != null) {
+                    val tempAirport = viewModel.airportFrom
+                    viewModel.airportFrom = viewModel.airportTo
+                    viewModel.airportTo = tempAirport
 
-                    val airportFromText = getString(R.string.city_from, airportFrom?.city, airportFrom?.airportCode)
+                    val airportFromText = getString(R.string.city_from, viewModel.airportFrom?.city, viewModel.airportFrom?.airportCode)
                     binding.layoutSearch.tvCityFrom.text = airportFromText
 
-                    val airportToText = getString(R.string.city_to, airportTo?.city, airportTo?.airportCode)
+                    val airportToText = getString(R.string.city_to, viewModel.airportTo?.city, viewModel.airportTo?.airportCode)
                     binding.layoutSearch.tvCityTo.text = airportToText
                 } else {
                     Toast.makeText(requireContext(), "Error : Please select destination first", Toast.LENGTH_SHORT).show()
@@ -122,22 +139,18 @@
 
         override fun onDestinationSelected(airport: Airport, source: String) {
             if (source == "from") {
-                if (airport.airportCode == airportTo?.airportCode) {
+                if (airport.airportCode == viewModel.airportTo?.airportCode) {
                     Toast.makeText(requireContext(), "Error : Departure airport is the same as Destination Airport", Toast.LENGTH_SHORT).show()
                 } else {
-                    airportFrom = airport
-                    val airportFromText = getString(R.string.city_from, airport.city, airport.airportCode)
-                    binding.layoutSearch.tvCityFrom.text = airportFromText
-                    binding.layoutSearch.tvCityFrom.setTextColor(Color.BLACK)
+                    viewModel.airportFrom = airport
+                    setupView()
                 }
             } else if (source == "to") {
-                if (airport.airportCode == airportFrom?.airportCode) {
+                if (airport.airportCode == viewModel.airportFrom?.airportCode) {
                     Toast.makeText(requireContext(), "Error : Destination Airport is the same as Departure airport", Toast.LENGTH_SHORT).show()
                 } else {
-                    airportTo = airport
-                    val airportToText = getString(R.string.city_to, airport.city, airport.airportCode)
-                    binding.layoutSearch.tvCityTo.text = airportToText
-                    binding.layoutSearch.tvCityTo.setTextColor(Color.BLACK)
+                    viewModel.airportTo = airport
+                    setupView()
                 }
             }
         }
