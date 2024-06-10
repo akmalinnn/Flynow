@@ -10,10 +10,12 @@ import com.km6.flynow.data.repository.UserRepositoryImpl
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
+import com.km6.flynow.presentation.forgotpassword.ForgotPasswordViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.login.LoginViewModel
 import com.km6.flynow.presentation.main.MainViewModel
 import com.km6.flynow.presentation.notification.NotificationViewModel
+import com.km6.flynow.presentation.otp.OtpViewModel
 import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.presentation.register.RegisterViewModel
 import com.km6.flynow.utils.SharedPreferenceUtils
@@ -64,6 +66,8 @@ object AppModule {
             viewModelOf(::ProfileViewModel)
             viewModelOf(::HistoryViewModel)
             viewModelOf(::NotificationViewModel)
+            viewModelOf(::OtpViewModel)
+            viewModelOf(::ForgotPasswordViewModel)
 
         }
 

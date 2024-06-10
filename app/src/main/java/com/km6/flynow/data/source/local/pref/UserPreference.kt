@@ -12,6 +12,8 @@ interface UserPreference {
     fun saveToken(token: String)
     fun getToken(): String?
     fun clearToken()
+    fun saveOtp(otp: String)
+    fun getOtp(): String?
 }
 
 class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
@@ -45,7 +47,8 @@ class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
             isVerified = pref.getBoolean(KEY_IS_VERIFIED, false),
             deletedAt = pref.getString(KEY_DELETED_AT, null),
             createdAt = pref.getString(KEY_CREATED_AT, "") ?: "",
-            updatedAt = pref.getString(KEY_UPDATED_AT, "") ?: ""
+            updatedAt = pref.getString(KEY_UPDATED_AT, "") ?: "",
+            otp = pref.getString(KEY_UPDATED_AT, "") ?: "",
         )
     }
 
@@ -60,6 +63,7 @@ class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
             remove(KEY_DELETED_AT)
             remove(KEY_CREATED_AT)
             remove(KEY_UPDATED_AT)
+            remove(KEY_OTP)
             apply()
         }
     }
@@ -68,9 +72,18 @@ class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
         pref[KEY_TOKEN] = token
     }
 
+    override fun saveOtp(otp: String) {
+        pref[KEY_OTP] = otp
+    }
+
     override fun getToken(): String? {
         return pref.getString(KEY_TOKEN, null)
     }
+
+    override fun getOtp(): String? {
+        return pref.getString(KEY_OTP, null)
+    }
+
 
     override fun clearToken() {
         pref.edit().remove(KEY_TOKEN).apply()
@@ -88,5 +101,6 @@ class UserPreferenceImpl(private val pref: SharedPreferences) : UserPreference {
         const val KEY_CREATED_AT = "createdAt"
         const val KEY_UPDATED_AT = "updatedAt"
         const val KEY_TOKEN = "token"
+        const val KEY_OTP = "otp"
     }
 }
