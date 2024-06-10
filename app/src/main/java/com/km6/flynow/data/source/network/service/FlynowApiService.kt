@@ -1,7 +1,11 @@
 package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
+import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
 import com.km6.flynow.data.source.network.model.login.LoginResponse
+import com.km6.flynow.data.source.network.model.otp.ResendOtpRequest
+import com.km6.flynow.data.source.network.model.otp.ResendOtpResponse
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpRequest
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
@@ -41,6 +45,15 @@ interface FlynowApiService {
         @Body requestBody: VerifyOtpRequest
     ): VerifyOtpResponse
 
+    @PUT("auth/resend-otp")
+    suspend fun resendOtp(
+        @Body requestBody: ResendOtpRequest
+    ): ResendOtpResponse
+
+    @PUT("auth/forgot-password")
+    suspend fun forgotPassword(
+        @Body requestBody: ForgotPasswordRequest
+    ): ForgotPasswordResponse
 
     companion object {
         @JvmStatic

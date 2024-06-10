@@ -76,5 +76,7 @@
     <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="app_version">version:0.0.1</string>
     <string name="text_otp">Ketik 6 digit kode yang dikirimkan ke email</string>
+    <string name="text_input_email">Masukkan email</string>
+    <string name="text_send_email_reset">Kirim</string>
 
 </resources>

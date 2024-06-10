@@ -18,6 +18,10 @@ interface AuthRepository {
         imageFile: File
     ): Flow<ResultWrapper<Boolean>>
     suspend fun verifyOtp(email: String, otp: String): Flow<ResultWrapper<Boolean>>
+
+    suspend fun resendOtp(email: String): Flow<ResultWrapper<Boolean>>
+
+    suspend fun forgotPassword(email: String): Flow<ResultWrapper<Boolean>>
 }
 
 class AuthRepositoryImpl(private val authDataSource: AuthDataSource) : AuthRepository {
@@ -60,4 +64,28 @@ class AuthRepositoryImpl(private val authDataSource: AuthDataSource) : AuthRepos
             }
         }
     }
+
+    override suspend fun resendOtp(email: String): Flow<ResultWrapper<Boolean>> {
+        return proceedFlow {
+            val response = authDataSource.resendOtp(email)
+            if (response.message == "New OTP has been sent to your email") {
+                true
+            } else {
+                throw Exception(response.message)
+            }
+        }
+    }
+
+    override suspend fun forgotPassword(email: String): Flow<ResultWrapper<Boolean>> {
+        return proceedFlow {
+            val response = authDataSource.forgotPassword(email)
+            if (response.message == "Reset Password Link Successfully Sent") {
+                true
+            } else {
+                throw Exception(response.message)
+            }
+        }
+    }
+
+
 }

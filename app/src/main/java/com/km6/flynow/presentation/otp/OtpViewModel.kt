@@ -16,10 +16,22 @@ class OtpViewModel(private val authRepository: AuthRepository) : ViewModel() {
     val verifyOtpResult: LiveData<ResultWrapper<Boolean>>
         get() = _verifyOtpResult
 
+    private val _resendOtpResult = MutableLiveData<ResultWrapper<Boolean>>()
+    val resendOtpResult: LiveData<ResultWrapper<Boolean>>
+        get() = _resendOtpResult
+
     fun verifyOtp(email: String, otp: String) {
         viewModelScope.launch(Dispatchers.IO) {
             authRepository.verifyOtp(email, otp).collect {
                 _verifyOtpResult.postValue(it)
+            }
+        }
+    }
+
+    fun resendOtp(email: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            authRepository.resendOtp(email).collect {
+                _resendOtpResult.postValue(it)
             }
         }
     }
