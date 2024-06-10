@@ -12,6 +12,9 @@ import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
 import android.widget.CalendarView
+import com.km6.flynow.utils.getFormattedDate
+import com.km6.flynow.utils.getIsoFormattedDate
+import com.km6.flynow.utils.getTimestamp
 
 
 class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
@@ -60,8 +63,8 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
             binding.cvCalendar.date
         }
 
-        formattedDate = getFormattedDate(selectedDate)
-        isoDate = getIsoFormattedDate(selectedDate)
+        formattedDate = selectedDate.getFormattedDate()
+        isoDate = selectedDate.getIsoFormattedDate()
 
 
         val calendar = Calendar.getInstance()
@@ -83,7 +86,7 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         binding.cvCalendar.date = selectedDate
-        binding.tvDate.text = getFormattedDate(selectedDate)
+        binding.tvDate.text = selectedDate.getFormattedDate()
         binding.cvCalendar.setOnDateChangeListener{_, year, month, dayOfMonth ->
             formattedDate = getFormattedDate(year, month, dayOfMonth)
             isoDate = getIsoFormattedDate(year, month, dayOfMonth)
@@ -94,50 +97,6 @@ class CalendarBottomSheetFragment : BottomSheetDialogFragment() {
         binding.ivClose.setOnClickListener {
             dismiss()
         }
-    }
-
-    private fun getIsoFormattedDate(year: Int, month: Int, dayOfMonth: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, dayOfMonth, 0, 0, 0) // Setel waktu ke tengah malam
-        calendar.set(Calendar.MILLISECOND, 0) // Setel milidetik ke 0 untuk konsistensi
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
-        return dateFormat.format(calendar.time)
-    }
-
-    private fun getIsoFormattedDate(milliseconds: Long): String {
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = milliseconds
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-        return getIsoFormattedDate(year, month, dayOfMonth)
-    }
-
-
-    fun getTimestamp(year: Int, month: Int, dayOfMonth: Int): Long {
-        val calendar = Calendar.getInstance()
-        calendar.set(year, month, dayOfMonth, 0, 0, 0)
-        calendar.set(Calendar.MILLISECOND, 0)
-        return calendar.timeInMillis
-    }
-
-    private fun getFormattedDate(year: Int, month: Int, dayOfMonth: Int): String {
-        return "$dayOfMonth ${getMonthName(month)} $year"
-    }
-
-    private fun getFormattedDate(milliseconds: Long): String {
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = milliseconds
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
-        return getFormattedDate(year, month, dayOfMonth)
-    }
-
-    private fun getMonthName(month: Int): String {
-        val monthNames = arrayOf("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember")
-        return monthNames[month]
     }
 
     fun setOnDateSelectedListener(listener: OnDateSelectedListener) {

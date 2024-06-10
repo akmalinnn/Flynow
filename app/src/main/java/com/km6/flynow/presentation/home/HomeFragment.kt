@@ -17,6 +17,7 @@
     import com.km6.flynow.presentation.choose_passanger.ChoosePassangerFragment
     import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
     import com.km6.flynow.presentation.choose_passanger.PassengerCountDataListener
+    import com.km6.flynow.utils.getFormattedDate
     import org.koin.androidx.viewmodel.ext.android.viewModel
     import java.util.Date
 
@@ -25,8 +26,6 @@
 
         private val viewModel: HomeViewModel by viewModel()
 
-        private var departureDate: Long = 0L
-        private var returnDate: Long = 0L
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -70,6 +69,19 @@
                 binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
             }
 
+            if(viewModel.departureDate == 0L) {
+                binding.layoutSearch.tvDepatureValue.text = "Pilih Tanggal"
+            } else {
+                binding.layoutSearch.tvDepatureValue.text = viewModel.departureDate.getFormattedDate()
+                binding.layoutSearch.tvDepatureValue.setTextColor(Color.BLACK)
+            }
+
+            if (viewModel.returnDate == 0L) {
+                binding.layoutSearch.tvReturnValue.text = "Pilih Tanggal"
+            } else {
+                binding.layoutSearch.tvReturnValue.text = viewModel.returnDate.getFormattedDate()
+                binding.layoutSearch.tvReturnValue.setTextColor(Color.BLACK)
+            }
         }
 
         private fun setClickAction() {
@@ -99,13 +111,13 @@
 
         private fun chooseDate() {
             binding.layoutSearch.ivCalendarDepature.setOnClickListener {
-                val dialog = CalendarBottomSheetFragment.newInstance("departureDate", departureDate, departureDate)
+                val dialog = CalendarBottomSheetFragment.newInstance("departureDate", viewModel.departureDate, viewModel.departureDate)
                 dialog.setOnDateSelectedListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
 
             binding.layoutSearch.ivCalendarReturn.setOnClickListener {
-                val dialog = CalendarBottomSheetFragment.newInstance("returnDate", returnDate, departureDate)
+                val dialog = CalendarBottomSheetFragment.newInstance("returnDate", viewModel.returnDate, viewModel.departureDate)
                 dialog.setOnDateSelectedListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
@@ -157,12 +169,12 @@
 
         override fun onDateSelected(selectedDate:Long, formattedDate: String, isoDate:String, source: String) {
             if (source == "departureDate") {
-                departureDate = selectedDate
+                viewModel.departureDate = selectedDate
                 binding.layoutSearch.tvDepatureValue.text = formattedDate
                 binding.layoutSearch.tvDepatureValue.setTextColor(Color.BLACK)
 
             } else if (source == "returnDate") {
-                returnDate = selectedDate
+                viewModel.returnDate = selectedDate
                 binding.layoutSearch.tvReturnValue.text = formattedDate
                 binding.layoutSearch.tvReturnValue.setTextColor(Color.BLACK)
             }

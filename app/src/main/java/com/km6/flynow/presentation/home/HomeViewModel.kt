@@ -6,6 +6,9 @@ import com.km6.flynow.data.model.Airport
 class HomeViewModel : ViewModel() {
     var airportFrom: Airport? = null
     var airportTo: Airport? = null
+    var departureDate: Long = 0L
+    var returnDate: Long = 0L
+
     var adultCount: Int = 0
     var childrenCount: Int = 0
     var babyCount: Int = 0
@@ -16,6 +19,5 @@ class HomeViewModel : ViewModel() {
         this.childrenCount = childrenCount
         this.babyCount = babyCount
         this.totalPassenger = totalPassenger
-
     }
 }
