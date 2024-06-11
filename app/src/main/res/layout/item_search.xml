@@ -114,134 +114,186 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_plane_to" />
 
-        <ImageView
-            android:id="@+id/iv_calendar_depature"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="12dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintStart_toStartOf="@id/btn_search_button"
-            app:layout_constraintTop_toBottomOf="@id/tv_depature_return" />
-        <TextView
-            android:id="@+id/tv_depature_label"
-            android:layout_width="0dp"
+
+        <GridLayout
+            android:id="@+id/gl_section"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/depature"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
-            app:layout_constraintTop_toTopOf="@id/iv_calendar_depature"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_depature_return"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"
+            android:columnCount="2"
+            android:rowCount="2">
 
-        <TextView
-            android:id="@+id/tv_depature_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="Pilih Tanggal"
-            android:textColor="@color/md_theme_primary"
-            app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
-            app:layout_constraintTop_toBottomOf="@id/tv_depature_label" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_departure_date"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_calendar_return"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="12dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintEnd_toEndOf="@id/btn_search_button"
-            app:layout_constraintStart_toEndOf="@id/iv_passengers"
-            app:layout_constraintTop_toBottomOf="@id/tv_depature_return" />
+                <ImageView
+                    android:id="@+id/iv_calendar_depature"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/tv_return_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/return_label"
-            android:textStyle="bold"
-            android:gravity="end"
-            app:layout_constraintStart_toEndOf="@id/iv_calendar_return"
-            app:layout_constraintTop_toTopOf="@id/iv_calendar_return"
-            />
+                <TextView
+                    android:id="@+id/tv_depature_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/depature"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_depature"/>
 
-        <TextView
-            android:id="@+id/tv_return_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/date_return"
-            android:textColor="@color/md_theme_primary"
-            app:layout_constraintTop_toBottomOf="@id/tv_return_label"
-            app:layout_constraintStart_toEndOf="@id/iv_calendar_return"/>
+                <TextView
+                    android:id="@+id/tv_depature_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="Pilih Tanggal"
+                    android:textColor="@color/md_theme_primary"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
+                    app:layout_constraintTop_toBottomOf="@id/tv_depature_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/iv_passengers"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginVertical="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_person"
-            app:layout_constraintStart_toStartOf="@+id/tv_depature_return"
-            app:layout_constraintTop_toBottomOf="@id/iv_calendar_depature" />
+<!--            BATAS-->
 
-        <TextView
-            android:id="@+id/tv_passenger_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/passengers"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/iv_passengers"
-            app:layout_constraintTop_toTopOf="@id/iv_passengers"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_return_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginStart="16dp">
 
-        <TextView
-            android:id="@+id/tv_passenger_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/passenger_value"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintStart_toEndOf="@id/iv_passengers"
-            app:layout_constraintTop_toBottomOf="@id/tv_passenger_label"/>
+                <ImageView
+                    android:id="@+id/iv_calendar_return"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_calendar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/iv_seat_class"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginVertical="16dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_seat"
-            app:layout_constraintEnd_toEndOf="@id/btn_search_button"
-            app:layout_constraintStart_toEndOf="@id/iv_passengers"
-            app:layout_constraintTop_toBottomOf="@+id/iv_calendar_return" />
+                <TextView
+                    android:id="@+id/tv_return_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/return_label"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_return"
+                    app:layout_constraintTop_toTopOf="@id/iv_calendar_return" />
 
-        <TextView
-            android:id="@+id/tv_seat_label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/seat_class"
-            android:textStyle="bold"
-            android:gravity="end"
-            app:layout_constraintStart_toEndOf="@id/iv_seat_class"
-            app:layout_constraintTop_toTopOf="@id/iv_seat_class"
-            />
+                <TextView
+                    android:id="@+id/tv_return_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/date_return"
+                    android:textColor="@color/md_theme_primary"
+                    app:layout_constraintStart_toEndOf="@id/iv_calendar_return"
+                    app:layout_constraintTop_toBottomOf="@id/tv_return_label" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/tv_seat_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:text="@string/seat_value"
-            android:textColor="@android:color/darker_gray"
-            app:layout_constraintTop_toBottomOf="@id/tv_seat_label"
-            app:layout_constraintStart_toEndOf="@id/iv_seat_class"/>
+<!--            BATAS-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_choose_passenger"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/iv_passengers"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_passenger_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/passengers"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/iv_passengers"
+                    app:layout_constraintTop_toTopOf="@id/iv_passengers"/>
+
+                <TextView
+                    android:id="@+id/tv_passenger_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/passenger_value"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintStart_toEndOf="@id/iv_passengers"
+                    app:layout_constraintTop_toBottomOf="@id/tv_passenger_label"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--            BATAS-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/section_choose_seat_class"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_seat_class"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_seat"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_seat_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@string/seat_class"
+                    android:textStyle="bold"
+                    android:gravity="end"
+                    app:layout_constraintStart_toEndOf="@id/iv_seat_class"
+                    app:layout_constraintTop_toTopOf="@id/iv_seat_class"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_seat_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/seat_value"
+                    android:textColor="@android:color/darker_gray"
+                    app:layout_constraintTop_toBottomOf="@id/tv_seat_label"
+                    app:layout_constraintStart_toEndOf="@id/iv_seat_class"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </GridLayout>
+
 
         <Button
             android:id="@+id/btn_search_button"
@@ -255,7 +307,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_seat_value" />
+            app:layout_constraintTop_toBottomOf="@id/gl_section" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

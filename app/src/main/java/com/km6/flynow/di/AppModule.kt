@@ -22,6 +22,8 @@ import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
+import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassFragment
+import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.home.HomeViewModel
 import com.km6.flynow.presentation.login.LoginViewModel
@@ -90,7 +92,7 @@ object AppModule {
                 )
             }
             viewModelOf(::HomeViewModel)
-
+            viewModelOf(::ChooseSeatClassViewModel)
         }
 
     val modules =

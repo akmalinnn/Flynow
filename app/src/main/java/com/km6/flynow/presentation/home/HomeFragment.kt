@@ -9,6 +9,7 @@
     import android.widget.Toast
     import com.km6.flynow.R
     import com.km6.flynow.data.model.Airport
+    import com.km6.flynow.data.model.SeatClass
     import com.km6.flynow.databinding.FragmentHomeBinding
     import com.km6.flynow.presentation.calendar.CalendarBottomSheetFragment
     import com.km6.flynow.presentation.calendar.OnDateSelectedListener
@@ -17,11 +18,14 @@
     import com.km6.flynow.presentation.choose_passanger.ChoosePassangerFragment
     import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
     import com.km6.flynow.presentation.choose_passanger.PassengerCountDataListener
+    import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassFragment
+    import com.km6.flynow.presentation.choose_seat_class.OnSeatClassSelectedListener
     import com.km6.flynow.utils.getFormattedDate
     import org.koin.androidx.viewmodel.ext.android.viewModel
     import java.util.Date
 
-    class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedListener, PassengerCountDataListener {
+    class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedListener, PassengerCountDataListener,
+        OnSeatClassSelectedListener {
         private lateinit var binding: FragmentHomeBinding
 
         private val viewModel: HomeViewModel by viewModel()
@@ -43,7 +47,6 @@
             super.onViewCreated(view, savedInstanceState)
             setupView()
             setClickAction()
-
         }
 
         private fun setupView() {
@@ -82,13 +85,29 @@
                 binding.layoutSearch.tvReturnValue.text = viewModel.returnDate.getFormattedDate()
                 binding.layoutSearch.tvReturnValue.setTextColor(Color.BLACK)
             }
+
+            if (viewModel.seatClass?.name == null ) {
+                binding.layoutSearch.tvSeatValue.text =  "Pilih Kelas"
+            } else {
+                binding.layoutSearch.tvSeatValue.text = viewModel.seatClass!!.name
+            }
         }
 
         private fun setClickAction() {
             chooseDestination()
-            choosePassanger()
+            choosePassenger()
             chooseDate()
+            chooseSeatClass()
             swapAirport()
+        }
+
+        private fun chooseSeatClass() {
+            binding.layoutSearch.sectionChooseSeatClass.setOnClickListener {
+                val selectedPosition = viewModel.seatClassPosition
+                val dialog = ChooseSeatClassFragment.newInstance(selectedPosition)
+                dialog.setOnSeatClassSelectedListener(this)
+                dialog.show(parentFragmentManager, dialog.tag)
+            }
         }
 
         private fun swapAirport() {
@@ -110,26 +129,21 @@
         }
 
         private fun chooseDate() {
-            binding.layoutSearch.ivCalendarDepature.setOnClickListener {
+            binding.layoutSearch.sectionDepartureDate.setOnClickListener{
                 val dialog = CalendarBottomSheetFragment.newInstance("departureDate", viewModel.departureDate, viewModel.departureDate)
                 dialog.setOnDateSelectedListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
 
-            binding.layoutSearch.ivCalendarReturn.setOnClickListener {
+            binding.layoutSearch.sectionReturnDate.setOnClickListener{
                 val dialog = CalendarBottomSheetFragment.newInstance("returnDate", viewModel.returnDate, viewModel.departureDate)
                 dialog.setOnDateSelectedListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
             }
         }
 
-        private fun choosePassanger() {
-            binding.layoutSearch.tvPassengerLabel.setOnClickListener{
-                val dialog = ChoosePassangerFragment.newInstance(viewModel.adultCount,viewModel.childrenCount,viewModel.babyCount,viewModel.totalPassenger)
-                dialog.setPassengerCountDataListener(this)
-                dialog.show(parentFragmentManager, dialog.tag)
-            }
-            binding.layoutSearch.tvPassengerValue.setOnClickListener{
+        private fun choosePassenger() {
+            binding.layoutSearch.sectionChoosePassenger.setOnClickListener{
                 val dialog = ChoosePassangerFragment.newInstance(viewModel.adultCount,viewModel.childrenCount,viewModel.babyCount,viewModel.totalPassenger)
                 dialog.setPassengerCountDataListener(this)
                 dialog.show(parentFragmentManager, dialog.tag)
@@ -183,5 +197,11 @@
         override fun onPassengerDataUpdated(adultCount: Int, childrenCount: Int, babyCount: Int, totalPassenger: Int) {
             viewModel.updatePassengerData(adultCount, childrenCount, babyCount, totalPassenger)
             binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
+        }
+
+        override fun onSeatClassSelected(seatClass: SeatClass, position: Int) {
+            viewModel.seatClass = seatClass
+            viewModel.seatClassPosition = position
+            setupView()
         }
     }

@@ -2,6 +2,7 @@ package com.km6.flynow.presentation.home
 
 import androidx.lifecycle.ViewModel
 import com.km6.flynow.data.model.Airport
+import com.km6.flynow.data.model.SeatClass
 
 class HomeViewModel : ViewModel() {
     var airportFrom: Airport? = null
@@ -13,6 +14,9 @@ class HomeViewModel : ViewModel() {
     var childrenCount: Int = 0
     var babyCount: Int = 0
     var totalPassenger : Int = 0
+
+    var seatClass: SeatClass? = null
+    var seatClassPosition: Int = -1
 
     fun updatePassengerData(adultCount: Int, childrenCount: Int, babyCount: Int, totalPassenger: Int) {
         this.adultCount = adultCount
