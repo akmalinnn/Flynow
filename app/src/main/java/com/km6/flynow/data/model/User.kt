@@ -9,5 +9,6 @@ data class User(
     val isVerified: Boolean,
     val deletedAt: String?,
     val createdAt: String,
-    val updatedAt: String
+    val otp: String,
+    val updatedAt: String,
 )
