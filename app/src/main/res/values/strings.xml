@@ -52,7 +52,7 @@
     <string name="airline">Jet Air</string>
     <string name="filter">Filter</string>
     <string name="direct">Direct</string>
-    <string name="time_spent">4h om</string>
+    <string name="time_spent">4h 0m</string>
     <string name="choose_flight">Pilihan Penerbangan</string>
     <string name="departure">Keberangakatan</string>
     <string name="airport_departure">Soekarno Hatta - Terminal 1A Domestik</string>
@@ -75,10 +75,32 @@
     <string name="notification_tittle_page">Notifikasi\n</string>
     <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="app_version">version:0.0.1</string>
+    <string name="text_title_flight_details">Rincian Penerbangan</string>
+    <string name="text_continue_to_pay">Lanjut Pembayaran</string>
+    <string name="text_title_biodata_penumpang">Biodata Penumpang</string>
+    <string name="text_title">Title</string>
+    <string name="text_full_name">Nama Lengkap</string>
+    <string name="text_til_full_name">Masukkan Nama Lengkap</string>
+    <string name="text_switch">Punya Nama Keluarga?</string>
+    <string name="text_family_name">Nama Keluarga</string>
+    <string name="text_til_family_name">Masukkan Nama Keluarga</string>
+    <string name="text_date">Tanggal Lahir</string>
+    <string name="text_til_date">dd/mm/yyyy</string>
+    <string name="text_nationality">Kewarganegaraan</string>
+    <string name="text_til_nationality">Masukkan Kewarganegaraan</string>
+    <string name="text_ktp_paspor">KTP/Paspor</string>
+    <string name="text_til_ktp_paspor">Masukkan KTP/Paspor</string>
+    <string name="text_negara_penerbit">Negara Penerbit</string>
+    <string name="text_til_negara_penerbit">Masukkan Negara Penerbit</string>
+    <string name="text_to_choose_seat">Lanjut Pilih Kursi</string>
+    <string name="text_title_biodata_pemesan">Biodata Pemesan</string>
+    <string name="text_no_telp">Nomor Telepon</string>
+    <string name="text_til_no_telp">Masukkan Nomor Telepon</string>
+    <string name="text_til_email">Masukkan Email</string>
+    <string name="text_save">Simpan</string>
     <string name="text_otp">Ketik 6 digit kode yang dikirimkan ke email</string>
     <string name="text_input_email">Masukkan email</string>
     <string name="text_send_email_reset">Kirim</string>
-
     <string name="airport_location_format">%1$s, %2$s (%3$s)</string>
 
 </resources>

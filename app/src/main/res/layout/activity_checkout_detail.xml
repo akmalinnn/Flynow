@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".presentation.checkout_detail.CheckoutDetailActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/md_theme_primary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_back"
+            tools:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_title_toolbar"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:text="@string/text_title_flight_details"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_action_bar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_flight_destination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/md_theme_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Jakarta -> Melbourne" />
+
+            <TextView
+                android:id="@+id/tv_brackets1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_flight_destination"
+                app:layout_constraintTop_toTopOf="@id/tv_flight_destination"
+                tools:text="( " />
+
+            <TextView
+                android:id="@+id/tv_time_spent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_brackets1"
+                app:layout_constraintTop_toTopOf="@id/tv_flight_destination"
+                tools:text="@string/time_spent" />
+
+            <TextView
+                android:id="@+id/tv_brackets2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/tv_time_spent"
+                app:layout_constraintTop_toTopOf="@id/tv_flight_destination"
+                tools:text=") " />
+
+            <FrameLayout
+                android:id="@+id/item_checkout_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_flight_destination">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/bg_card"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_take_off_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="07:00" />
+
+                        <TextView
+                            android:id="@+id/tv_take_off_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="@id/tv_take_off_time"
+                            app:layout_constraintTop_toBottomOf="@id/tv_take_off_time"
+                            tools:text="3 Maret 2023" />
+
+                        <TextView
+                            android:id="@+id/tv_airport_origin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/tv_take_off_date"
+                            app:layout_constraintTop_toBottomOf="@id/tv_take_off_date"
+                            tools:text="Soekarno Hatta - Terminal 1A Domestik" />
+
+                        <TextView
+                            android:id="@+id/tv_departure"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/md_theme_primaryFixed_mediumContrast"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Keberangkatan" />
+
+                        <View
+                            android:id="@+id/v_line"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/gray"
+                            app:layout_constraintTop_toBottomOf="@id/tv_airport_origin" />
+
+                        <ImageView
+                            android:id="@+id/iv_logo"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_airline"
+                            app:layout_constraintBottom_toTopOf="@id/v_line_2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/v_line" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_flight_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
+                            android:layout_marginTop="16dp"
+                            android:orientation="vertical"
+                            app:layout_constraintStart_toEndOf="@id/iv_logo"
+                            app:layout_constraintTop_toBottomOf="@id/v_line">
+
+                            <TextView
+                                android:id="@+id/tv_flight_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="Jet Air - Economy" />
+
+                            <TextView
+                                android:id="@+id/tv_flight_code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="JT - 203" />
+
+                            <TextView
+                                android:id="@+id/tv_information_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:textColor="@color/black"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                tools:text="Informasi:" />
+
+                            <TextView
+                                android:id="@+id/tv_baggage_capacity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                tools:text="Baggage 20 kg" />
+
+                            <TextView
+                                android:id="@+id/tv_cabin_baggage_capacity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                tools:text="Cabin baggage 7 kg" />
+
+                            <TextView
+                                android:id="@+id/tv_more_service"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                tools:text="In Flight Entertainment" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/v_line_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginHorizontal="16dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/gray"
+                            app:layout_constraintTop_toBottomOf="@id/ll_flight_info" />
+
+                        <TextView
+                            android:id="@+id/tv_landing_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/v_line_2"
+                            tools:text="11:00" />
+
+                        <TextView
+                            android:id="@+id/tv_landing_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="@id/tv_landing_time"
+                            app:layout_constraintTop_toBottomOf="@id/tv_landing_time"
+                            tools:text="3 Maret 2023" />
+
+                        <TextView
+                            android:id="@+id/tv_airport_destination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/tv_landing_date"
+                            app:layout_constraintTop_toBottomOf="@id/tv_landing_date"
+                            tools:text="Melbourne International Airport" />
+
+                        <TextView
+                            android:id="@+id/tv_arrival"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/md_theme_primaryFixed_mediumContrast"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/v_line_2"
+                            tools:text="Kedatangan" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tv_price_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_checkout_detail"
+                tools:text="Rincian Harga" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_price_details"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="4dp"
+                android:nestedScrollingEnabled="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_price_details"
+                tools:listitem="@layout/item_price_details" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_total_flight_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="18dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_total_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Total" />
+
+            <TextView
+                android:id="@+id/tv_total_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/md_theme_primaryFixed_mediumContrast"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="IDR 9.850.000" />
+
+            <Button
+                android:id="@+id/btn_continue_to_pay"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/md_theme_inversePrimary"
+                android:text="@string/text_continue_to_pay"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/tv_total_price" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
