@@ -25,6 +25,7 @@ mockk = "1.13.10"
 coroutine-test = "1.7.2"
 turbine = "1.0.0"
 core-testing = "2.2.0"
+view = "2.5.1"
 
 appIntro = "6.3.1"
 legacySupportV4 = "1.0.0"
@@ -91,6 +92,8 @@ gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "gr
 google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServices" }
 firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-crashlytics-gradle", version.ref = "firebaseCrashlyticsGradle" }
 
+#calendar layout
+view = { module = "com.kizitonwose.calendar:view", version.ref = "view" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.choose_destination.ChooseDestinationFragment">
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/search_view_background"
+        android:iconifiedByDefault="false"
+        android:queryHint="Masukkan Kota atau Negara"
+        app:layout_constraintEnd_toStartOf="@id/iv_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_close"
+        app:layout_constraintTop_toTopOf="@id/searchView"
+        app:layout_constraintBottom_toBottomOf="@id/searchView"
+        />
+
+    <TextView
+        android:id="@+id/tv_recent_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        android:text="Pencarian Terkini"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_recent_search"
+        android:text="Hapus"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginEnd="16dp"
+        android:textColor="#cc0000"/>
+
+    <include
+        android:id="@+id/layout_state"
+        layout="@layout/layout_content_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_destination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_recent_search"
+        android:layout_marginTop="16dp"
+        tools:listitem="@layout/item_destination_result"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_airport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        tools:listitem="@layout/item_airport"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:visibility="gone" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,4 +52,10 @@
     </style>
 
     <style name="Theme.Flynow" parent="Base.Theme.Flynow" />
+
+    <!-- Custom SearchView style to remove the underline -->
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="submitBackground">@android:color/transparent</item>
+    </style>
 </resources>

@@ -31,6 +31,8 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -73,6 +75,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -109,6 +112,10 @@ dependencies {
     implementation(libs.appIntro)
     implementation(libs.firebase.crashlytics)
     implementation ("com.github.GoodieBag:Pinview:v1.4")
+    implementation ("com.google.android.material:material:1.9.0")
+
+    // The view calendar library
+    implementation (libs.view)
 
     testImplementation(libs.mockk.agent)
     androidTestImplementation(libs.mockk.android)

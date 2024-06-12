@@ -26,7 +26,7 @@
     <string name="seat_class">Seat Class</string>
     <string name="search">Cari Penerbangan</string>
     <string name="seat_value">Business</string>
-    <string name="passenger_value">2 Penumpang</string>
+    <string name="passenger_value">%1$s Penumpang</string>
     <string name="depature">Depature</string>
     <string name="depature_value">1 Maret 2024</string>
     <string name="return_label">Return</string>
@@ -35,8 +35,8 @@
     <string name="depature_return">Pulang-Pergi?</string>
     <string name="to">To</string>
     <string name="from">From</string>
-    <string name="city_to">Melbourne (MLB)</string>
-    <string name="city_from">Jakarta (JKTA)</string>
+    <string name="city_to">%1$s (%2$s)</string>
+    <string name="city_from">%1$s (%2$s)</string>
     <string name="flight_destination">MLB</string>
     <string name="flight_departure">JKTA</string>
     <string name="hei_mau_kemana">Hei, Mau kemana?</string>
@@ -78,5 +78,7 @@
     <string name="text_otp">Ketik 6 digit kode yang dikirimkan ke email</string>
     <string name="text_input_email">Masukkan email</string>
     <string name="text_send_email_reset">Kirim</string>
+
+    <string name="airport_location_format">%1$s, %2$s (%3$s)</string>
 
 </resources>
