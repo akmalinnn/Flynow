@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import com.google.android.material.textfield.TextInputLayout
 import com.km6.flynow.R
 import com.km6.flynow.databinding.ActivityLoginBinding
+import com.km6.flynow.presentation.forget_password.ForgotPasswordActivity
 import com.km6.flynow.presentation.main.MainActivity
 import com.km6.flynow.presentation.register.RegisterActivity
 import com.km6.flynow.utils.highLightWord
@@ -79,6 +80,10 @@ class LoginActivity : AppCompatActivity() {
         binding.tvSignup.setOnClickListener {
             navigateToRegister()
         }
+
+        binding.tvForgetPassword.setOnClickListener {
+            navigateToForgetPassword()
+        }
     }
 
     private fun navigateToMain() {
@@ -93,6 +98,14 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToRegister() {
         startActivity(
             Intent(this, RegisterActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            },
+        )
+    }
+
+    private fun navigateToForgetPassword() {
+        startActivity(
+            Intent(this, ForgotPasswordActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
             },
         )

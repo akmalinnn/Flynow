@@ -24,11 +24,13 @@ import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassFragment
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
+import com.km6.flynow.presentation.forgotpassword.ForgotPasswordViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.home.HomeViewModel
 import com.km6.flynow.presentation.login.LoginViewModel
 import com.km6.flynow.presentation.main.MainViewModel
 import com.km6.flynow.presentation.notification.NotificationViewModel
+import com.km6.flynow.presentation.otp.OtpViewModel
 import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.presentation.register.RegisterViewModel
 import com.km6.flynow.utils.SharedPreferenceUtils
@@ -93,6 +95,8 @@ object AppModule {
             }
             viewModelOf(::HomeViewModel)
             viewModelOf(::ChooseSeatClassViewModel)
+            viewModelOf(::OtpViewModel)
+            viewModelOf(::ForgotPasswordViewModel)
         }
 
     val modules =

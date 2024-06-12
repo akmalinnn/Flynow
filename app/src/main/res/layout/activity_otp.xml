@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.otp.OtpActivity">
 
     <ImageView
         android:id="@+id/backButton"
@@ -23,7 +24,7 @@
        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton"
-        tools:text="Masukkan OTP" />
+        android:text="Masukkan OTP" />
 
 
     <TextView
@@ -36,19 +37,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="Ketik 6 digit kode yang dikirimkan ke +6212121212121" />
+        android:text="@string/text_otp" />
 
     <com.goodiebag.pinview.Pinview
         android:id="@+id/pinview"
-        app:pinBackground="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:pinWidth="40dp"
         app:pinHeight="40dp"
-        app:pinLength="4"
+        app:pinLength="6"
         app:cursorVisible="false"
-        app:forceKeyboard="true"
-        app:hint="0"
+        app:forceKeyboard="false"
         app:inputType="number"
         app:password="false"
         app:layout_constraintTop_toBottomOf="@id/instruction"
@@ -61,10 +60,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/pinview"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pinview"
-        tools:text="Kirim Ulang OTP dalam 60 detik" />
+        android:text="Kirim Ulang OTP dalam " />
+
+    <TextView
+        android:id="@+id/time_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/resendOtp"
+        app:layout_constraintStart_toEndOf="@+id/resendOtp"
+        app:layout_constraintTop_toTopOf="@+id/resendOtp"
+        tools:text="60 " />
 
     <TextView
         android:id="@+id/requestNewOtpEmail"
@@ -76,6 +85,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resendOtp"
-        tools:text="Minta kode baru via Email" />
+        android:text="Minta kode baru via Email" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
