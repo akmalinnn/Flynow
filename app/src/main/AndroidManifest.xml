@@ -16,19 +16,22 @@
         android:theme="@style/Theme.Flynow"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.checkout_success.CheckoutSuccessActivity"
+            android:name=".presentation.checkout.chooseseat.ChooseSeatActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.webview.WebViewActivity"
+            android:name=".presentation.checkout.checkout_success.CheckoutSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.checkout_penumpang.BiodataPenumpangActivity"
+            android:name=".presentation.checkout.webview.WebViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.checkout.checkout_penumpang.BiodataPenumpangActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.checkout_pemesan.BiodataPemesanActivity"
+            android:name=".presentation.checkout.checkout_pemesan.BiodataPemesanActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.checkout_detail.CheckoutDetailActivity"
+            android:name=".presentation.checkout.checkout_detail.CheckoutDetailActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.flight_detail.FlightDetailActivity"
