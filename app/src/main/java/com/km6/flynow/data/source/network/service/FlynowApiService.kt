@@ -2,6 +2,9 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.model.Flight
+import com.km6.flynow.data.source.network.model.flight.FlightResponse
+import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
 import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
@@ -24,6 +27,7 @@ import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Body
@@ -53,6 +57,9 @@ interface FlynowApiService {
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part image: MultipartBody.Part
     ): RegisterResponse
+
+    @GET("flight")
+    suspend fun getFlight(): FlightResponse
 
     @GET("airports/search")
     suspend fun searchAirport(

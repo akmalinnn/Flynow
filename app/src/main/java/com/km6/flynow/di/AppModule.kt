@@ -4,6 +4,8 @@ import com.km6.flynow.presentation.notification.NotificationViewModel
 import android.content.SharedPreferences
 import com.km6.flynow.data.datasource.AuthDataSource
 import com.km6.flynow.data.datasource.AuthDataSourceImpl
+import com.km6.flynow.data.datasource.FlightApiDataSource
+import com.km6.flynow.data.datasource.FlightDataSource
 import com.km6.flynow.data.datasource.airport.AirportApiDataSource
 import com.km6.flynow.data.datasource.airport.AirportDataSource
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDataSource
@@ -20,6 +22,8 @@ import com.km6.flynow.data.repository.AirportRepository
 import com.km6.flynow.data.repository.AirportRepositoryImpl
 import com.km6.flynow.data.repository.AuthRepository
 import com.km6.flynow.data.repository.AuthRepositoryImpl
+import com.km6.flynow.data.repository.FlightRepository
+import com.km6.flynow.data.repository.FlightRepositoryImpl
 import com.km6.flynow.data.repository.DestinationHistoryRepository
 import com.km6.flynow.data.repository.DestinationHistoryRepositoryImpl
 import com.km6.flynow.data.repository.HistoryRepository
@@ -38,6 +42,7 @@ import com.km6.flynow.data.source.local.database.dao.DestinationHistoryDao
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
+import com.km6.flynow.presentation.filter_result.FilterResultViewModel
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
@@ -68,7 +73,7 @@ import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
 object AppModule {
     private val networkModule =
         module {
-            single<FlynowApiService> { FlynowApiService.invoke(get()) }
+            single<FlynowApiService> { FlynowApiService.invoke() }
         }
 
     private val localModule =
@@ -92,6 +97,7 @@ object AppModule {
     private val dataSourceModule =
         module {
             single<AuthDataSource> { AuthDataSourceImpl(get()) }
+            single<FlightDataSource> { FlightApiDataSource(get()) }
             single<AirportDataSource> {AirportApiDataSource(get())}
             single<HistoryDataSource> { HistoryApiDataSource(get()) }
             single<FavoriteFlightDataSource> { FavoriteFlightApiDataSource(get()) }
@@ -109,6 +115,7 @@ object AppModule {
             single<HistoryRepository> { HistoryRepositoryImpl(get()) }
             single<FavoriteFlightRepository> { FavoriteFlightRepositoryImpl(get()) }
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
+            single<FlightRepository> { FlightRepositoryImpl(get()) }
             single<PaymentRepository> { PaymentRepository(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<NotificationDetailRepository> { NotificationDetailRepositoryImpl(get()) }
@@ -132,6 +139,7 @@ object AppModule {
             viewModelOf(::ChooseSeatClassViewModel)
             viewModelOf(::OtpViewModel)
             viewModelOf(::ForgotPasswordViewModel)
+            viewModelOf(::FilterResultViewModel)
             viewModelOf(::HistoryDetailViewModel)
             viewModelOf(::PaymentViewModel)
             viewModelOf(::NotificationDetailViewmodel)

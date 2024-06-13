@@ -1,21 +1,58 @@
 package com.km6.flynow.presentation.filter_result
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.km6.flynow.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.km6.flynow.data.model.Flight
+import com.km6.flynow.databinding.ActivityFilterResultBinding
+import com.km6.flynow.presentation.filter_result.adapter.FilterResultAdapter
+import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
+import com.km6.flynow.utils.proceedWhen
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterResultActivity : AppCompatActivity() {
+    private val binding: ActivityFilterResultBinding by lazy {
+        ActivityFilterResultBinding.inflate(layoutInflater)
+    }
+    private val viewModel: FilterResultViewModel by viewModel()
+    private val filterResultAdapter: FilterResultAdapter by lazy {
+        FilterResultAdapter {
+            navigateToDetail(it)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_filter_result)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(binding.root)
+        setupListFlight()
+        getFlightData()
+
+    }
+
+    private fun setupListFlight() {
+        binding.rvListFlight.apply {
+            adapter = filterResultAdapter
+            layoutManager =
+                LinearLayoutManager(this@FilterResultActivity, LinearLayoutManager.VERTICAL, false)
         }
+    }
+
+    private fun getFlightData() {
+        viewModel.getFlights().observe(this) {
+            it.proceedWhen(
+                doOnSuccess = {
+                    it.payload?.let { data -> bindFlight(data) }
+                }
+            )
+        }
+    }
+
+    private fun bindFlight(data: List<Flight>) {
+        filterResultAdapter.submitData((data))
+    }
+
+    private fun navigateToDetail(it: Flight) {
+        startActivity(Intent(this, FlightDetailActivity::class.java))
     }
 }
