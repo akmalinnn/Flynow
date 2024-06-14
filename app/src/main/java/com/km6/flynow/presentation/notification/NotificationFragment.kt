@@ -6,54 +6,62 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.km6.flynow.databinding.FragmentNotificationBinding
 import com.km6.flynow.presentation.login.LoginActivity
-import com.km6.flynow.presentation.profile.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotificationFragment : Fragment() {
-    private lateinit var binding: FragmentNotificationBinding
 
+    private lateinit var binding: FragmentNotificationBinding
     private val viewModel: NotificationViewModel by viewModel()
+    private lateinit var adapter: NotificationAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentNotificationBinding.inflate(layoutInflater, container, false)
+        binding = FragmentNotificationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkLoginStatus()
-//        binding.tvName.text = viewModel.getUser()?.name ?: " Belum Login "
-//        binding.tvToken.text = viewModel.getToken()
+        setupRecyclerView()
+        observeViewModel()
+        setupClickListeners()
     }
 
-
-    private fun checkLoginStatus() {
-        val token = viewModel.getToken()
-        if (token == null) {
-            // Token not found, show "must login" fragment
-            showMustLoginFragment()
-            setClickListeners()
-        } else {
-            // Token found, hide "must login" fragment
-            hideMustLoginFragment()
-        }
+    private fun setupRecyclerView() {
+        adapter = NotificationAdapter(emptyList()) // Initialize adapter with empty list
+        binding.rvNotification.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvNotification.adapter = adapter
     }
 
-    private fun setClickListeners() {
-        binding.layoutMustLogin.btnLogin.setOnClickListener{
-            startActivity(
-                Intent(requireContext(), LoginActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                },
-            )
+    private fun observeViewModel() {
+        viewModel.notifications.observe(viewLifecycleOwner, Observer { notifications ->
+            notifications?.let {
+                adapter = NotificationAdapter(it) // Update adapter with new list
+                binding.rvNotification.adapter = adapter
+            }
+        })
+
+        viewModel.getToken()?.let { token ->
+            if (token.isEmpty()) {
+                showMustLoginFragment()
+            } else {
+                hideMustLoginFragment()
+                viewModel.loadNotifications() // Load notifications if user is logged in
+            }
+        } ?: showMustLoginFragment()
+    }
+
+    private fun setupClickListeners() {
+        binding.layoutMustLogin.btnLogin.setOnClickListener {
+            startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            })
         }
     }
 
@@ -72,5 +80,4 @@ class NotificationFragment : Fragment() {
         binding.layoutMustLogin.textView2.visibility = View.GONE
         binding.layoutMustLogin.btnLogin.visibility = View.GONE
     }
-
 }

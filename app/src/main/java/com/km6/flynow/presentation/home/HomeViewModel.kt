@@ -5,6 +5,7 @@ import com.km6.flynow.data.model.Airport
 import com.km6.flynow.data.model.SeatClass
 
 class HomeViewModel : ViewModel() {
+
     var airportFrom: Airport? = null
     var airportTo: Airport? = null
     var departureDate: Long = 0L

@@ -43,6 +43,9 @@ class RegisterActivity : AppCompatActivity() {
         binding.tvSignin.setOnClickListener {
             navigateToLogin()
         }
+        binding.ibBack.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun navigateToLogin() {

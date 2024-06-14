@@ -51,6 +51,10 @@
         <activity
             android:name=".presentation.forget_password.ForgotPasswordActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".presentation.history.historydetail.HistoryDetailActivity"
+            android:exported="true"/>
       
         <activity
             android:name=".presentation.main.MainActivity"

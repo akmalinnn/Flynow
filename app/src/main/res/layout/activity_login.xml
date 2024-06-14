@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".presentation.login.LoginActivity">
 
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="40dp"
+        android:layout_height= "40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_back_black"
+        android:layout_margin="4dp"
+        android:background="@null"/>
+
+
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"

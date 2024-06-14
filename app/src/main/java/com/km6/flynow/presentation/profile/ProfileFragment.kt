@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
 import com.km6.flynow.R
 import com.km6.flynow.databinding.FragmentProfileBinding
 import com.km6.flynow.presentation.login.LoginActivity
@@ -32,8 +33,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
         checkLoginStatus()
-//        binding.tvName.text = viewModel.getUser()?.name ?: " Belum Login "
-//        binding.tvToken.text = viewModel.getToken()
+        setProfile()
+
     }
 
     private fun setClickListeners() {
@@ -60,6 +61,13 @@ class ProfileFragment : Fragment() {
                 },
             )
         }
+    }
+
+    private fun setProfile() {
+        binding.tvProfileNamePage.text = viewModel.getUser()?.name
+        binding.tvProfileEmailPage.text = viewModel.getUser()?.email
+//        binding.ivProfilePhoto.load(viewModel.getUser()?.image)
+//        binding.tvToken.text = viewModel.getToken()
     }
 
     private fun checkLoginStatus() {

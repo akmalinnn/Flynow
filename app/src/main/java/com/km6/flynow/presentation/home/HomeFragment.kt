@@ -59,7 +59,7 @@
             }
 
             if (viewModel.airportTo == null) {
-                binding.layoutSearch.tvCityTo.text = "Pilih Asal"
+                binding.layoutSearch.tvCityTo.text = "Pilih Destinasi"
             } else {
                 val airportToText = getString(R.string.city_to, viewModel.airportTo!!.city, viewModel.airportTo!!.airportCode)
                 binding.layoutSearch.tvCityTo.text = airportToText

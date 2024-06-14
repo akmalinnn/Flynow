@@ -84,6 +84,10 @@ class LoginActivity : AppCompatActivity() {
         binding.tvForgetPassword.setOnClickListener {
             navigateToForgetPassword()
         }
+
+        binding.ibBack.setOnClickListener {
+           navigateToMain()
+        }
     }
 
     private fun navigateToMain() {
@@ -93,6 +97,7 @@ class LoginActivity : AppCompatActivity() {
             },
         )
     }
+
 
 
     private fun navigateToRegister() {
