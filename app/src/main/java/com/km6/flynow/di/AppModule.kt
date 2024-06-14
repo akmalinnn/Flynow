@@ -1,5 +1,6 @@
 package com.km6.flynow.di
 
+import com.km6.flynow.presentation.notification.NotificationViewModel
 import android.content.SharedPreferences
 import com.km6.flynow.data.datasource.AuthDataSource
 import com.km6.flynow.data.datasource.AuthDataSourceImpl
@@ -22,14 +23,12 @@ import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
-import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassFragment
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
 import com.km6.flynow.presentation.forgotpassword.ForgotPasswordViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.home.HomeViewModel
 import com.km6.flynow.presentation.login.LoginViewModel
 import com.km6.flynow.presentation.main.MainViewModel
-import com.km6.flynow.presentation.notification.NotificationViewModel
 import com.km6.flynow.presentation.otp.OtpViewModel
 import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.presentation.register.RegisterViewModel

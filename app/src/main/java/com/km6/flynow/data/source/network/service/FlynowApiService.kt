@@ -1,6 +1,7 @@
 package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
@@ -62,6 +63,10 @@ interface FlynowApiService {
     suspend fun forgotPassword(
         @Body requestBody: ForgotPasswordRequest
     ): ForgotPasswordResponse
+
+    @GET("history")
+    suspend fun getHistory(): List<HistoryItem>
+
 
     companion object {
         @JvmStatic

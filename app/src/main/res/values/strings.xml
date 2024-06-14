@@ -102,5 +102,7 @@
     <string name="text_input_email">Masukkan email</string>
     <string name="text_send_email_reset">Kirim</string>
     <string name="airport_location_format">%1$s, %2$s (%3$s)</string>
+    <string name="name_profile_fragment">Name</string>
+    <string name="name_email_fragment">email\n</string>
 
 </resources>

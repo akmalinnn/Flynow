@@ -19,6 +19,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/md_theme_primary"
@@ -39,7 +41,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/tv_destination"
         app:layout_constraintTop_toBottomOf="@id/layout_header"
-        tools:text="( " />
+        android:text="( " />
 
     <TextView
         android:id="@+id/tv_time_spent"
@@ -65,7 +67,7 @@
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@id/tv_time_spent"
         app:layout_constraintTop_toBottomOf="@id/layout_header"
-        tools:text=") " />
+        android:text=") " />
 
     <include
         android:id="@+id/item_flight_detail"
@@ -102,6 +104,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_checkout"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="IDR. 80.000.000/pax" />
+
 
     <Button
         android:id="@+id/btn_checkout"

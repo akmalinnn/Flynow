@@ -1,11 +1,15 @@
 package com.km6.flynow.presentation.otp
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.GRAY
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import com.km6.flynow.R
 import com.km6.flynow.databinding.ActivityOtpBinding
 import com.km6.flynow.presentation.login.LoginActivity
 import com.km6.flynow.presentation.main.MainActivity
@@ -25,22 +29,13 @@ class OtpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        sendOtp()
+//        sendOtp()
         startOtpTimer()
         setClickListeners()
         observeResult()
     }
 
     private fun setClickListeners() {
-        // Click listener for requesting a new OTP
-        binding.requestNewOtpEmail.setOnClickListener {
-            val email = intent.getStringExtra("email")
-            if (email != null) {
-                viewModel.resendOtp(email)
-            } else {
-                Toast.makeText(this, "Email is missing", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         // Pin view listener to verify OTP
         binding.pinview.setPinViewEventListener { pinview, fromUser ->
@@ -95,7 +90,7 @@ class OtpActivity : AppCompatActivity() {
                 },
                 doOnLoading = {
                     // Show loading indicator when resending OTP
-                    showLoading(true)
+                    binding.requestNewOtpEmail.isEnabled = false
                 }
             )
         }
@@ -109,31 +104,34 @@ class OtpActivity : AppCompatActivity() {
         )
     }
 
-    private fun sendOtp() {
-        val email = intent.getStringExtra("email")
-        if (email != null) {
-            viewModel.resendOtp(email)
-        } else {
-            Toast.makeText(this, "Email is missing", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun sendOtp() {
+//        val email = intent.getStringExtra("email")
+//        if (email != null) {
+//            viewModel.resendOtp(email)
+//        } else {
+//            Toast.makeText(this, "Email is missing", Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
-
-    private fun showLoading(isLoading: Boolean) {
-//        binding.progressBar.isVisible = isLoading
-        binding.requestNewOtpEmail.isEnabled = !isLoading
-    }
 
     private fun startOtpTimer() {
         otpTimer = object : CountDownTimer(otpTimerDuration, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val secondsRemaining = millisUntilFinished / 1000
                 binding.timeOtp.text = secondsRemaining.toString()
+                binding.requestNewOtpEmail.isEnabled = false
+                binding.requestNewOtpEmail.setTextColor(
+                    ContextCompat.getColor(binding.getRoot().context, R.color.md_theme_outline)
+                )
             }
 
             override fun onFinish() {
                 binding.timeOtp.text = "0"
-                binding.resendOtp.isEnabled = true
+                binding.requestNewOtpEmail.isEnabled = true
+                binding.requestNewOtpEmail.setTextColor(
+                    ContextCompat.getColor(binding.getRoot().context, R.color.md_theme_primary)
+                )
+                requestOtp()
             }
         }
         otpTimer.start()
@@ -142,6 +140,20 @@ class OtpActivity : AppCompatActivity() {
     private fun stopOtpTimer() {
         otpTimer.cancel()
     }
+
+    private fun requestOtp() {
+        binding.requestNewOtpEmail.setOnClickListener {
+            val email = intent.getStringExtra("email")
+            if (email != null) {
+                viewModel.resendOtp(email)
+                Toast.makeText(this, "Sending OTP", Toast.LENGTH_SHORT).show()
+                startOtpTimer()
+            } else {
+                Toast.makeText(this, "Email is missing", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

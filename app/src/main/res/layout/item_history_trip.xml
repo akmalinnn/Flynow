@@ -1,325 +1,261 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/cardDetail"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardDetail">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="1dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="6dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="1dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top|start"
-                android:layout_margin="10dp"
                 android:background="@drawable/bg_status_history"
                 android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                tools:text="Paid!"
-                android:textColor="@color/white" />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="Paid!"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp">
+                android:orientation="horizontal"
+                android:padding="9dp"
+                app:layout_constraintTop_toBottomOf="@id/status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutFlightSchedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@id/label"
+                tools:layout_editor_absoluteX="10dp">
 
                 <LinearLayout
-                    android:id="@+id/label"
-                    android:layout_width="match_parent"
+                    android:id="@+id/layoutDeparture"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal"
-                    android:padding="9dp">
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvjakarta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="20dp"
+                        android:text="Jakarta"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvBerangkat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineHeight="20dp"
+                        android:text="5 Maret 2023" />
+
+                    <TextView
+                        android:id="@+id/tvJamBerangkat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:lineHeight="20dp"
+                        android:text="19:00" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layoutFlightTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/layoutArrive"
+                    app:layout_constraintStart_toEndOf="@+id/layoutDeparture"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvJam"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:lineHeight="18dp"
+                            android:text="4h"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvMenit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="2dp"
+                            android:layout_marginTop="2dp"
+                            android:lineHeight="18dp"
+                            android:text="0m"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:src="@drawable/ic_arrow" />
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/layoutFlightSchedule"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layoutArrive"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/label">
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/layoutDeparture"
+                    <TextView
+                        android:id="@+id/tvMelbourne"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
+                        android:lineHeight="20dp"
+                        android:text="Melbourne"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvKedatangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="20dp"
+                        android:text="5 Maret 2023" />
+
+                    <TextView
+                        android:id="@+id/tvJamKedatangan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:orientation="vertical">
+                        android:lineHeight="20dp"
+                        android:text="21:00" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tvjakarta"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="20dp"
-                            tools:text="Jakarta"
-                            android:textStyle="bold"
-                            tools:ignore="UnusedAttribute" />
+                ==
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <TextView
-                            android:id="@+id/tvBerangkat"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:lineHeight="20dp"
-                            android:text="5 Maret 2023"
+            <View
+                android:id="@+id/grid"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/md_theme_secondary"
+                app:layout_constraintTop_toBottomOf="@id/layoutFlightSchedule"/>
 
-                            tools:ignore="SmallSp,UnusedAttribute" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/grid">
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvJamBerangkat"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:lineHeight="20dp"
-                                tools:text="19:00"
-                                tools:ignore="UnusedAttribute" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layoutFlightTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="13dp"
-                        android:layout_toEndOf="@id/layoutDeparture"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvJam"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:lineHeight="18dp"
-                                android:text="4h "
-                                android:textSize="12sp"
-                                tools:ignore="UnusedAttribute" />
-
-                            <TextView
-                                android:id="@+id/tvMenit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="2dp"
-                                android:layout_marginTop="2dp"
-                                android:lineHeight="18dp"
-                                android:text="0m"
-                                android:textSize="12sp"
-                                tools:ignore="UnusedAttribute" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginBottom="2dp"
-                            android:src="@drawable/arrows"
-                            tools:ignore="ContentDescription" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layoutArrive"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="40dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_toEndOf="@id/layoutFlightTime"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvMelbourne"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="20dp"
-                            android:text="Melbourne"
-                            tools:ignore="UnusedAttribute"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/tvKedatangan"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="20dp"
-                            android:text="5 Maret 2023"
-                            tools:ignore="SmallSp,UnusedAttribute" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:id="@+id/tvJamKedatangan"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
-                                android:lineHeight="20dp"
-                                android:text="21:00"
-                                tools:ignore="UnusedAttribute" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_location"
-                        tools:ignore="ContentDescription" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_marginStart="200dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginEnd="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:src="@drawable/ic_location"
-                        tools:ignore="ContentDescription" />
-
-
-                </RelativeLayout>
-
-                <View
-                    android:id="@+id/grid"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@id/layoutFlightSchedule"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/md_theme_secondary" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layoutAirline"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/grid">
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
-                        android:id="@+id/layoutAirline"
+                    <TextView
+                        android:id="@+id/Boking"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:orientation="vertical">
+                        android:lineHeight="18dp"
+                        android:text="Booking Code : "
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/Boking"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="18dp"
-                            android:text="Booking Code : "
-                            tools:ignore="UnusedAttribute"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/Kode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="18dp"
-                            android:text="453653657"
-                            tools:ignore="UnusedAttribute" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layoutClass"
+                    <TextView
+                        android:id="@+id/Kode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_toEndOf="@id/layoutAirline"
-                        android:orientation="vertical">
+                        android:lineHeight="18dp"
+                        android:text="453653657" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/Class"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Class : "
-                            android:textStyle="bold"/>
+                <LinearLayout
+                    android:id="@+id/layoutClass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/layoutAirline"
+                    app:layout_constraintTop_toTopOf="@+id/layoutAirline">
 
-                        <TextView
-                            android:id="@+id/Economy"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="18dp"
-                            android:text="Economy"
-                            tools:ignore="UnusedAttribute" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/layoutharga"
+                    <TextView
+                        android:id="@+id/Class"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_toEndOf="@id/layoutClass">
+                        android:text="Class : "
+                        android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/Economy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="18dp"
+                        android:text="Economy" />
+                </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tvPrice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:lineHeight="24dp"
-                            android:text="IDR 5.950.000"
-                            android:textColor="@color/md_theme_primary"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            tools:ignore="UnusedAttribute" />
+                <LinearLayout
+                    android:id="@+id/layoutharga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toEndOf="@id/layoutClass"
+                    app:layout_constraintTop_toTopOf="@+id/layoutClass">
 
-                    </LinearLayout>
-                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/tvPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineHeight="24dp"
+                        android:text="IDR 5.950.000"
+                        android:textColor="@color/md_theme_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </RelativeLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </RelativeLayout>
-
-
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-

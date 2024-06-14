@@ -1,25 +1,37 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.history.HistoryFragment">
 
+    <ImageButton
+        android:id="@+id/ib_search_history"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_find_temp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        android:background="@null"/>
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:text="@string/history_tittle"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!--  RecyclerView below the TextView  -->
+
+
+
+    <!-- RecyclerView below the TextView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistory"
         android:layout_width="match_parent"
@@ -31,21 +43,27 @@
         app:layout_constraintTop_toBottomOf="@id/textView"
         tools:listitem="@layout/item_history_trip" />
 
+    <!-- Included layout for login prompt -->
     <include
         android:id="@+id/layout_must_login"
         layout="@layout/fragment_must_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-<!--    <include-->
-<!--        android:id="@+id/layout_search"-->
-<!--        layout="@layout/fragment_must_login"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
-
-
+    <!-- Uncomment and add necessary constraints if needed -->
+    <!--
+    <include
+        android:id="@+id/layout_search"
+        layout="@layout/fragment_must_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    -->
 </androidx.constraintlayout.widget.ConstraintLayout>
