@@ -6,7 +6,9 @@
     import android.view.LayoutInflater
     import android.view.View
     import android.view.ViewGroup
+    import android.widget.GridLayout
     import android.widget.Toast
+    import androidx.core.view.isVisible
     import com.km6.flynow.R
     import com.km6.flynow.data.model.Airport
     import com.km6.flynow.data.model.SeatClass
@@ -45,9 +47,10 @@
             savedInstanceState: Bundle?,
         ) {
             super.onViewCreated(view, savedInstanceState)
-            setupView()
             setClickAction()
+            setupView()
         }
+
 
         private fun setupView() {
             if (viewModel.airportFrom == null) {
@@ -70,6 +73,7 @@
                 binding.layoutSearch.tvPassengerValue.text = "Pilih Penumpang"
             } else {
                 binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
+                binding.layoutSearch.tvPassengerValue.setTextColor(Color.BLACK)
             }
 
             if(viewModel.departureDate == 0L) {
@@ -90,7 +94,10 @@
                 binding.layoutSearch.tvSeatValue.text =  "Pilih Kelas"
             } else {
                 binding.layoutSearch.tvSeatValue.text = viewModel.seatClass!!.name
+                binding.layoutSearch.tvSeatValue.setTextColor(Color.BLACK)
             }
+
+            switchState(viewModel.isRoundTrip)
         }
 
         private fun setClickAction() {
@@ -99,6 +106,24 @@
             chooseDate()
             chooseSeatClass()
             swapAirport()
+            switchListener()
+        }
+
+        private fun switchListener() {
+            binding.layoutSearch.switch1.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.isRoundTrip = isChecked
+                switchState(viewModel.isRoundTrip)
+            }
+        }
+
+        private fun switchState(isRoundTrip: Boolean) {
+            if(isRoundTrip) {
+                binding.layoutSearch.sectionReturnDate.isClickable = true
+                binding.layoutSearch.tvReturnValue.setTextColor(getResources().getColor(R.color.md_theme_primary) )
+            } else {
+                binding.layoutSearch.sectionReturnDate.isClickable = false
+                binding.layoutSearch.tvReturnValue.setTextColor(Color.GRAY)
+            }
         }
 
         private fun chooseSeatClass() {
@@ -197,6 +222,7 @@
         override fun onPassengerDataUpdated(adultCount: Int, childrenCount: Int, babyCount: Int, totalPassenger: Int) {
             viewModel.updatePassengerData(adultCount, childrenCount, babyCount, totalPassenger)
             binding.layoutSearch.tvPassengerValue.text = getString(R.string.passenger_value, viewModel.totalPassenger.toString())
+            setupView()
         }
 
         override fun onSeatClassSelected(seatClass: SeatClass, position: Int) {

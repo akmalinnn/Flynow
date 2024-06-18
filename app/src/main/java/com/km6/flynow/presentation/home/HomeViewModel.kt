@@ -19,6 +19,8 @@ class HomeViewModel : ViewModel() {
     var seatClass: SeatClass? = null
     var seatClassPosition: Int = -1
 
+    var isRoundTrip = false
+
     fun updatePassengerData(adultCount: Int, childrenCount: Int, babyCount: Int, totalPassenger: Int) {
         this.adultCount = adultCount
         this.childrenCount = childrenCount
