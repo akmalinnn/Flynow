@@ -11,7 +11,7 @@ data class Airline(
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("deletedAt")
-    val deletedAt: String?,
+    val deletedAt: Any?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("image")

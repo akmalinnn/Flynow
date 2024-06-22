@@ -22,10 +22,10 @@ import com.km6.flynow.data.repository.AirportRepository
 import com.km6.flynow.data.repository.AirportRepositoryImpl
 import com.km6.flynow.data.repository.AuthRepository
 import com.km6.flynow.data.repository.AuthRepositoryImpl
-import com.km6.flynow.data.repository.FlightRepository
-import com.km6.flynow.data.repository.FlightRepositoryImpl
 import com.km6.flynow.data.repository.DestinationHistoryRepository
 import com.km6.flynow.data.repository.DestinationHistoryRepositoryImpl
+import com.km6.flynow.data.repository.FlightRepository
+import com.km6.flynow.data.repository.FlightRepositoryImpl
 import com.km6.flynow.data.repository.HistoryRepository
 import com.km6.flynow.data.repository.HistoryRepositoryImpl
 import com.km6.flynow.data.repository.NotificationDetailRepository
@@ -42,10 +42,11 @@ import com.km6.flynow.data.source.local.database.dao.DestinationHistoryDao
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.local.pref.UserPreferenceImpl
 import com.km6.flynow.data.source.network.service.FlynowApiService
-import com.km6.flynow.presentation.filter_result.FilterResultViewModel
+//import com.km6.flynow.presentation.filter_result.FilterResultViewModel
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
+import com.km6.flynow.presentation.filter_result.FilterResultViewModel
 import com.km6.flynow.presentation.forgotpassword.ForgotPasswordViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
 import com.km6.flynow.presentation.history.historydetail.HistoryDetailViewModel

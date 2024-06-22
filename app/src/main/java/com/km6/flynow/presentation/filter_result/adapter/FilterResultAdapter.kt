@@ -35,7 +35,7 @@ class FilterResultAdapter(
             },
         )
 
-    fun submitData(items: List<Flight>) {
+    fun submitData(items: List<Flight>?) {
         asyncDataDiffer.submitList(items)
     }
 

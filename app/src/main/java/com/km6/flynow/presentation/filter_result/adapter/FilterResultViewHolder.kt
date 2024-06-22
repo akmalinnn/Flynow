@@ -6,6 +6,7 @@ import com.km6.flynow.data.model.Flight
 import com.km6.flynow.databinding.ActivityFilterResultBinding
 import com.km6.flynow.databinding.ItemFlightBinding
 import com.km6.flynow.utils.toDollarFormat
+import com.km6.flynow.utils.toTimeFormat
 
 class FilterResultViewHolder(
     private val binding: ItemFlightBinding,
@@ -16,8 +17,8 @@ class FilterResultViewHolder(
             binding.tvPrice.text = it.price.toDollarFormat()
             binding.tvAirline.text = it.airlineName
             binding.tvSeatValue.text = it.flightClass
-            binding.tvArrivalTime.text = it.arrivalTime
-            binding.tvDepartureTime.text = it.departureTime
+            binding.tvArrivalTime.text = it.arrivalTime.toTimeFormat()
+            binding.tvDepartureTime.text = it.departureTime.toTimeFormat()
             binding.tvFlightDeparture.text = it.depaturecity
             binding.tvFlightArrival.text = it.arrivalcity
         }

@@ -2,7 +2,6 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
-import com.km6.flynow.data.model.Flight
 import com.km6.flynow.data.source.network.model.flight.FlightResponse
 import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
@@ -27,7 +26,6 @@ import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Body
@@ -60,6 +58,19 @@ interface FlynowApiService {
 
     @GET("flight")
     suspend fun getFlight(): FlightResponse
+
+    @GET("flight/search")
+    suspend fun searchFlight(
+        @Query("da") da : String? = null,
+        @Query("aa") aa : String? = null,
+        @Query("dd") dd : String? = null,
+        @Query("rd") rd : String? = null,
+        @Query("adult") adult : String? = null,
+        @Query("child") child : String? = null,
+        @Query("baby") baby : String? = null,
+        @Query("class") clas : String? = null,
+        @Query("sort") sort : String? = null
+    ) : FlightResponse
 
     @GET("airports/search")
     suspend fun searchAirport(
