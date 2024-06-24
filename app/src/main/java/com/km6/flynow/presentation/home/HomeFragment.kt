@@ -191,14 +191,14 @@
         override fun onDestinationSelected(airport: Airport, source: String) {
             if (source == "from") {
                 if (airport.airportCode == viewModel.airportTo?.airportCode) {
-                    Toast.makeText(requireContext(), "Error : Departure airport is the same as Destination Airport", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error : Departure airport is the same as Destination com.km6.flynow.data.source.network.model.history.Airport", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.airportFrom = airport
                     setupView()
                 }
             } else if (source == "to") {
                 if (airport.airportCode == viewModel.airportFrom?.airportCode) {
-                    Toast.makeText(requireContext(), "Error : Destination Airport is the same as Departure airport", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Error : Destination com.km6.flynow.data.source.network.model.history.Airport is the same as Departure airport", Toast.LENGTH_SHORT).show()
                 } else {
                     viewModel.airportTo = airport
                     setupView()

@@ -7,78 +7,102 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.km6.flynow.R
-import com.km6.flynow.data.model.HistoryItem
+import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.ItemHistoryTripBinding
+import com.km6.flynow.utils.calculateEstimatedTime
+import com.km6.flynow.utils.toCustomDateFormat
+import com.km6.flynow.utils.toCustomTimeFormat
+import com.km6.flynow.utils.toIDRFormat
 
-class HistoryAdapter(private val itemClick: (HistoryItem) -> Unit) :
+class HistoryAdapter(private val itemClick: (History) -> Unit) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
-    private val diffCallback = object : DiffUtil.ItemCallback<HistoryItem>() {
-        override fun areItemsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {
-            return oldItem == newItem
-        }
+    private val dataDiffer =
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<History>() {
+                override fun areItemsTheSame(
+                    oldItem: History,
+                    newItem: History,
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-        override fun areContentsTheSame(oldItem: HistoryItem, newItem: HistoryItem): Boolean {
-            return oldItem == newItem
-        }
+                override fun areContentsTheSame(
+                    oldItem: History,
+                    newItem: History,
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
+            },
+        )
+
+    fun submitData(data: List<History>) {
+        dataDiffer.submitList(data)
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
-
-    fun submitData(items: List<HistoryItem>) {
-        differ.submitList(items)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): HistoryViewHolder {
         val binding = ItemHistoryTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HistoryViewHolder(binding)
+        return HistoryViewHolder(binding, itemClick)
     }
 
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        holder.bind(differ.currentList[position])
-        holder.itemView.setOnClickListener {
-            val item = differ.currentList[position]
-            itemClick.invoke(item)
-        }
-    }
-    override fun getItemCount(): Int = differ.currentList.size
 
-    inner class HistoryViewHolder(
-        private val binding: ItemHistoryTripBinding
+    override fun onBindViewHolder(
+        holder: HistoryViewHolder,
+        position: Int,
+    ) {
+        holder.bindView(dataDiffer.currentList[position])
+    }
+
+
+
+    override fun getItemCount(): Int = dataDiffer.currentList.size
+
+    class HistoryViewHolder(
+        private val binding: ItemHistoryTripBinding,
+        val itemClick: (History) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(item: History) {
 
-        init {
-            binding.root.setOnClickListener {
-                val position = adapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    itemClick.invoke(differ.currentList[position])
-                }
+            when (item.paymentStatus) {
+                "paid" -> binding.status.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history)
+
+                "pending" -> binding.status.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_pending)
+
+                "Issue!" -> binding.status.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
+
+                else -> binding.status.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
             }
-        }
 
-        fun bind(item: HistoryItem) {
-            with(binding) {
-                status.text = item.status
-                tvjakarta.text = item.departureCity
-                tvBerangkat.text = item.departureDate
-                tvJamBerangkat.text = item.departureTime
-                tvMelbourne.text = item.arrivalCity
-                tvKedatangan.text = item.arrivalDate
-                tvJamKedatangan.text = item.arrivalTime
-                tvJam.text = item.durationHours
-                tvMenit.text = item.durationMinutes
-                Kode.text = item.bookingCode
-                Economy.text = item.flightClass
-                tvPrice.text = item.price
+            binding.tvCodeBooking.text = item.bookingCode
+            binding.tvAirportDeparatureName.text = item.airportDepartureCity
+            binding.tvAirportArrivalName.text = item.airportArrivalCity
+            binding.tvDateDeparature.text = item.departureTime.toCustomDateFormat()
+            binding.tvDateArrival.text = item.arrivalTime.toCustomDateFormat()
+            binding.tvTimeDeparature.text = item.departureTime.toCustomTimeFormat()
+            binding.tvTimeArrival.text = item.arrivalTime.toCustomTimeFormat()
+            binding.tvClassType.text = item.flightClass
+            binding.tvPrice.text = item.price.toIDRFormat()
 
-                // Set background based on status
-                when (item.status) {
-                    "Paid!" -> status.background = ContextCompat.getDrawable(root.context, R.drawable.bg_status_history)
-                    "Refunded" -> status.background = ContextCompat.getDrawable(root.context, R.drawable.bg_status_history)
-                    "Issue!" -> status.background = ContextCompat.getDrawable(root.context, R.drawable.bg_status_history_issue)
-                    else -> status.background = ContextCompat.getDrawable(root.context, R.drawable.bg_status_history)
-                }
+            binding.status.text = item.paymentStatus
+
+            val estimatedTime =
+                item.departureTime.toCustomTimeFormat()
+                    ?.let { item.arrivalTime.toCustomTimeFormat()
+                        ?.let { it1 -> calculateEstimatedTime(it, it1) } }
+            binding.tvEstimatedTime.text = estimatedTime
+
+            itemView.setOnClickListener { itemClick(item) }
             }
         }
     }
-}
+
+
+
+

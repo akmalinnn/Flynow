@@ -104,5 +104,17 @@
     <string name="airport_location_format">%1$s, %2$s (%3$s)</string>
     <string name="name_profile_fragment">Name</string>
     <string name="name_email_fragment">email\n</string>
+    <string name="booking_code">Booking Code :</string>
+    <string name="jakarta">Jakarta</string>
+    <string name="kodebooking">453653657</string>
+    <string name="total_detail_history">Total</string>
+    <string name="adults_label">%1$d Adults</string>
+    <string name="children_label">%1$d Children</string>
+    <string name="babies_label">%1$d Babies</string>
+
+     <string name="price_label">Price: %d</string>
+    <string name="childernText">%1$s</string>
+    <string name="adultText">%1$s</string>
+
 
 </resources>

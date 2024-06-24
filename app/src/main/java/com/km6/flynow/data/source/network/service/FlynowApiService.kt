@@ -1,7 +1,8 @@
 package com.km6.flynow.data.source.network.service
 
+import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
-import com.km6.flynow.data.model.HistoryItem
+import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
@@ -10,10 +11,14 @@ import com.km6.flynow.data.source.network.model.otp.ResendOtpRequest
 import com.km6.flynow.data.source.network.model.otp.ResendOtpResponse
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpRequest
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpResponse
+import com.km6.flynow.data.source.network.model.payment.PaymentRequest
+
+import com.km6.flynow.data.source.network.model.payment.PaymentResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -65,14 +70,28 @@ interface FlynowApiService {
     ): ForgotPasswordResponse
 
     @GET("history")
-    suspend fun getHistory(): List<HistoryItem>
+    suspend fun getHistory(
+    ): HistoryItemResponse
+
+    @GET("payment")
+    suspend fun createPayment(
+        @Body requestBody: PaymentRequest
+    ): PaymentResponse
 
 
     companion object {
         @JvmStatic
-        operator fun invoke(): FlynowApiService {
+        operator fun invoke(preference: UserPreference): FlynowApiService {
+            val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val okHttpClient =
                 OkHttpClient.Builder()
+                    .addInterceptor(loggingInterceptor)
+                    .addInterceptor { chain ->
+                        val request =
+                            chain.request().newBuilder()
+                                .addHeader("Authorization", "Bearer ${preference.getToken()}")
+                        chain.proceed(request.build())
+                    }
                     .connectTimeout(120, TimeUnit.SECONDS)
                     .readTimeout(120, TimeUnit.SECONDS)
                     .build()

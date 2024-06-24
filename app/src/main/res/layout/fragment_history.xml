@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".presentation.history.HistoryFragment">
 
-    <ImageButton
-        android:id="@+id/ib_search_history"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/ic_find_temp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        android:background="@null"/>
+<!--    <ImageButton-->
+<!--        android:id="@+id/ib_search_history"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:src="@drawable/ic_find_temp"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/textView"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/textView"-->
+<!--        android:background="@null"/>-->
 
     <TextView
         android:id="@+id/textView"
@@ -39,7 +39,9 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/textView"
         tools:listitem="@layout/item_history_trip" />
 
