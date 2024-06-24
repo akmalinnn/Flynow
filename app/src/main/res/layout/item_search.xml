@@ -102,7 +102,6 @@
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:text="@string/depature_return"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/iv_plane_to"
             app:layout_constraintTop_toBottomOf="@id/iv_plane_to" />
 
@@ -148,7 +147,7 @@
                     android:layout_weight="1"
                     android:layout_marginHorizontal="8dp"
                     android:text="@string/depature"
-                    android:textStyle="bold"
+                    android:textColor="@color/gray"
                     app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
                     app:layout_constraintTop_toTopOf="@id/iv_calendar_depature"/>
 
@@ -157,7 +156,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="Pilih Tanggal"
+                    android:textStyle="bold"
                     android:textColor="@color/md_theme_primary"
                     app:layout_constraintStart_toEndOf="@id/iv_calendar_depature"
                     app:layout_constraintTop_toBottomOf="@id/tv_depature_label" />
@@ -183,6 +184,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:textColor="@color/gray"
                     android:id="@+id/tv_return_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -190,7 +192,6 @@
                     android:layout_weight="1"
                     android:gravity="end"
                     android:text="@string/return_label"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/iv_calendar_return"
                     app:layout_constraintTop_toTopOf="@id/iv_calendar_return" />
 
@@ -200,6 +201,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:text="@string/date_return"
+                    android:layout_marginTop="2dp"
+                    android:textStyle="bold"
                     android:textColor="@color/md_theme_primary"
                     app:layout_constraintStart_toEndOf="@id/iv_calendar_return"
                     app:layout_constraintTop_toBottomOf="@id/tv_return_label" />
@@ -225,23 +228,25 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:textColor="@color/gray"
                     android:id="@+id/tv_passenger_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="8dp"
                     android:text="@string/passengers"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/iv_passengers"
                     app:layout_constraintTop_toTopOf="@id/iv_passengers"/>
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/tv_passenger_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="@string/passenger_value"
-                    android:textColor="@android:color/darker_gray"
+                    android:textColor="@color/md_theme_primary"
                     app:layout_constraintStart_toEndOf="@id/iv_passengers"
                     app:layout_constraintTop_toBottomOf="@id/tv_passenger_label"/>
 
@@ -268,25 +273,27 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:textColor="@color/gray"
                     android:id="@+id/tv_seat_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="8dp"
                     android:text="@string/seat_class"
-                    android:textStyle="bold"
                     android:gravity="end"
                     app:layout_constraintStart_toEndOf="@id/iv_seat_class"
                     app:layout_constraintTop_toTopOf="@id/iv_seat_class"
                     />
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/tv_seat_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/seat_value"
-                    android:textColor="@android:color/darker_gray"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/md_theme_primary"
                     app:layout_constraintTop_toBottomOf="@id/tv_seat_label"
                     app:layout_constraintStart_toEndOf="@id/iv_seat_class"
                     android:maxLines="1"
