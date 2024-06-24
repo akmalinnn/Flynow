@@ -27,7 +27,7 @@
     <string name="search">Cari Penerbangan</string>
     <string name="seat_value">Business</string>
     <string name="passenger_value">%1$s Penumpang</string>
-    <string name="depature">Departure</string>
+    <string name="depature">Depature</string>
     <string name="depature_value">1 Maret 2024</string>
     <string name="return_label">Return</string>
     <string name="date_return">Pilih Tanggal</string>
@@ -72,7 +72,7 @@
     <string name="accountSettings">Pengaturan Akun</string>
     <string name="edit_profile">Ubah Profile</string>
     <string name="logout_account">Keluar</string>
-    <string name="notification_tittle_page">Notifikasi</string>
+    <string name="notification_tittle_page">Notifikasi\n</string>
     <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="app_version">version:0.0.1</string>
     <string name="text_title_flight_details">Rincian Penerbangan</string>
@@ -121,6 +121,9 @@
     <string name="mulai_dari">Mulai Dari</string>
     <string name="mulai_dari_home">Mulai Dari</string>
     <string name="discount">Discount: %1$s</string>
+    <string name="tv_depature">Keberangkatan</string>
+    <string name="tv_arrival">Kepulangan</string>
+    <string name="depature_destination"><![CDATA[{%1$s} -> {%2$s}]]></string>
 
 
 </resources>

@@ -15,7 +15,7 @@ class HomeViewModel(
     var airportTo: Airport? = null
     var departureDate: Long = 0L
     var returnDate: Long = 0L
-
+    var roundTrip: Boolean = false
     var adultCount: Int = 0
     var childrenCount: Int = 0
     var babyCount: Int = 0

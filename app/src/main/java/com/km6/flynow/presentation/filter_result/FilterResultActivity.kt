@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.km6.flynow.data.model.Flight
+import com.km6.flynow.data.model.Search
 import com.km6.flynow.databinding.ActivityFilterResultBinding
 import com.km6.flynow.presentation.filter_result.adapter.FilterResultAdapter
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
@@ -89,7 +90,7 @@ class FilterResultActivity : AppCompatActivity() {
     }
 
     private var selectedDepartureFlight: Flight? = null
-    private var isRoundTrip: Boolean = false
+    private var searchParams: Search? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,11 +101,11 @@ class FilterResultActivity : AppCompatActivity() {
 //        departureFlight = intent.getParcelableExtra("DEPARTURE_FLIGHT")!!
 //        returnFlight = intent.getParcelableExtra("RETURN_FLIGHT")
 
-        isRoundTrip = intent.getBooleanExtra("IS_ROUND_TRIP", false)
+        searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 
 
         setupListFlight()
-        getSearchFlight("CGK", "DPS", "2024-08-02", "2024-08-02", "1", "1", "0", "economy", "price-asc")
+        getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas.toString(), "price-asc")
     }
 
     private fun getSearchFlight(
@@ -123,7 +124,7 @@ class FilterResultActivity : AppCompatActivity() {
                 doOnSuccess = {
                     val flightResponse = it.payload?.first
                     val returnFlightResponse = it.payload?.second
-                    bindFlight(if (selectedDepartureFlight == null || !isRoundTrip) flightResponse else returnFlightResponse)
+                    bindFlight(if (selectedDepartureFlight == null || !searchParams?.roundTrip!!) flightResponse else returnFlightResponse)
                     Log.d("flightResponse", "getSearchFlight: $flightResponse")
                     Log.d("returnflightResponse", "getSearchFlight: $returnFlightResponse")
                 },
@@ -146,7 +147,7 @@ class FilterResultActivity : AppCompatActivity() {
     }
 
     private fun handleFlightSelection(flight: Flight) {
-        if (!isRoundTrip) {
+        if (!searchParams?.roundTrip!!) {
             // One-way trip, navigate to detail directly
             navigateToDetail(flight, null)
         } else {
