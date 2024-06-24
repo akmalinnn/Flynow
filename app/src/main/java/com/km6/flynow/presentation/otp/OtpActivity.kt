@@ -37,7 +37,6 @@ class OtpActivity : AppCompatActivity() {
 
     private fun setClickListeners() {
 
-        // Pin view listener to verify OTP
         binding.pinview.setPinViewEventListener { pinview, fromUser ->
             val otp = pinview.value
             if (otp.length == 6) {

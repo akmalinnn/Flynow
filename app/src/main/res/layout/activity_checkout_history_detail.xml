@@ -44,7 +44,6 @@
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +81,7 @@
                 app:layout_constraintStart_toStartOf="@+id/tv_issued"
                 app:layout_constraintTop_toBottomOf="@+id/tv_issued"
                 tools:text="Jakarta -> Melbourne"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="8dp"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_section_checkout"
@@ -107,7 +106,7 @@
                         app:layout_constraintBottom_toTopOf="@id/tv_take_off_time"
                         app:layout_constraintEnd_toStartOf="@id/tv_number_booking_code"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:text="Booking Code: " />
+                        tools:text="Booking Code: " />
 
                     <TextView
                         android:id="@+id/tv_number_booking_code"
@@ -164,7 +163,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:text="Keberangkatan" />
+                        tools:text="Keberangkatan" />
 
                     <View
                         android:id="@+id/v_line"
@@ -221,7 +220,7 @@
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:text="Informasi:" />
+                            tools:text="Informasi:" />
 
                         <TextView
                             android:id="@+id/tv_name_passenger"
@@ -294,24 +293,11 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/v_line_2"
-                        android:text="Kedatangan" />
+                        tools:text="Kedatangan" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/tv_flight_destination_return"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/md_theme_primary"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/cv_section_checkout"
-                app:layout_constraintTop_toBottomOf="@id/cv_section_checkout"
-                tools:text="Jakarta -> Melbourne"
-                android:layout_marginTop="16dp"/>
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_section_checkout_return"
@@ -320,7 +306,7 @@
                 android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="4dp"
-                app:layout_constraintTop_toBottomOf="@id/tv_flight_destination_return">
+                app:layout_constraintTop_toBottomOf="@id/cv_section_checkout">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -336,7 +322,7 @@
                         app:layout_constraintBottom_toTopOf="@id/tv_take_off_time_return"
                         app:layout_constraintEnd_toStartOf="@id/tv_number_booking_code_return"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:text="Booking Code: " />
+                        tools:text="Booking Code: " />
 
                     <TextView
                         android:id="@+id/tv_number_booking_code_return"
@@ -393,7 +379,7 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:text="Keberangkatan" />
+                        tools:text="Keberangkatan" />
 
                     <View
                         android:id="@+id/v_line_return"
@@ -450,7 +436,7 @@
                             android:textColor="@color/black"
                             android:textSize="18sp"
                             android:textStyle="bold"
-                            android:text="Informasi:" />
+                            tools:text="Informasi:" />
 
                         <TextView
                             android:id="@+id/tv_name_passenger_return"
@@ -523,11 +509,17 @@
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/v_line_2_return"
-                        android:text="Kedatangan" />
+                        tools:text="Kedatangan" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/total_detail_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/cv_section_checkout_return">
 
             <TextView
                 android:id="@+id/tv_price_details"
@@ -537,8 +529,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cv_section_checkout_return"
-                android:text="Rincian Harga" />
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="Rincian Harga" />
 
             <TextView
                 android:id="@+id/tv_price_details_passengers"
@@ -554,9 +546,9 @@
                 android:id="@+id/tv_price_passengers"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:textAlignment="textEnd"
+
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_price_details_passengers"
@@ -577,13 +569,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="16dp"
                 android:textAlignment="textEnd"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tv_price_details_passengers_childern"
                 tools:text="IDR 9.550.000" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -611,7 +602,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="Total" />
+                tools:text="Total" />
 
             <TextView
                 android:id="@+id/tv_total_price"
@@ -633,7 +624,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/md_theme_inversePrimary"
-                android:text="Lanjut Pembayaran"
+                android:text="Beranda"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/tv_total_price" />

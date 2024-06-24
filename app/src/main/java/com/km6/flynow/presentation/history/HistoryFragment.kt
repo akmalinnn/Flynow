@@ -5,47 +5,99 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.km6.flynow.data.model.HistoryItem
+import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.FragmentHistoryBinding
-import com.km6.flynow.presentation.choose_destination.ChooseDestinationFragment
+import com.km6.flynow.presentation.choose_destination.adapter.AirportListAdapter
 import com.km6.flynow.presentation.history.historydetail.HistoryDetailActivity
 import com.km6.flynow.presentation.login.LoginActivity
+import com.km6.flynow.utils.GridSpacingItemDecoration
+import com.km6.flynow.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment : Fragment() {
-    private lateinit var binding: FragmentHistoryBinding
 
+    private lateinit var binding: FragmentHistoryBinding
     private val viewModel: HistoryViewModel by viewModel()
+
+    private val productAdapter: HistoryAdapter by lazy {
+        HistoryAdapter {
+            navigateToDetailActivity(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?,
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkLoginStatus()
-        setupObservers()
+        setupListProduct()
+        getHistoryList()
+    }
+
+    private fun setupListProduct() {
+        val itemDecoration = GridSpacingItemDecoration(1, 12, true)
+        binding.rvHistory.apply {
+            layoutManager = LinearLayoutManager(context).apply {
+                reverseLayout = true
+                stackFromEnd = true
+            }
+            adapter = productAdapter
+            addItemDecoration(itemDecoration)
+        }
+    }
+
+    private fun getHistoryList() {
+        val token = viewModel.getToken()
+        if (token != null) {
+            viewModel.getHistory().observe(viewLifecycleOwner) { it ->
+                it.proceedWhen(
+                    doOnLoading = {
+                        binding.rvHistory.isVisible = true
+                    },
+                    doOnSuccess = {
+                        binding.rvHistory.isVisible = true
+                        it.payload?.let { data -> bindHistoryList(data) }
+                    },
+                    doOnError = { error ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${error.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    },
+                    doOnEmpty = { error ->
+                        Toast.makeText(
+                            requireContext(),
+                            "Error Empty: ${error.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            }
+        }
+    }
+
+    private fun bindHistoryList(data: List<History>) {
+        productAdapter.submitData(data)
     }
 
     private fun checkLoginStatus() {
         val token = viewModel.getToken()
         if (token == null) {
-            // Token not found, show "must login" fragment
             showMustLoginFragment()
             setClickListeners()
         } else {
-            // Token found, hide "must login" fragment
             hideMustLoginFragment()
         }
     }
@@ -58,6 +110,13 @@ class HistoryFragment : Fragment() {
                 }
             )
         }
+    }
+
+    private fun navigateToDetailActivity(historyItem: History) {
+        val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {
+            putExtra(HistoryDetailActivity.EXTRA_HISTORY_ITEM, historyItem)
+        }
+        startActivity(intent)
     }
 
     private fun showMustLoginFragment() {
@@ -75,37 +134,4 @@ class HistoryFragment : Fragment() {
         binding.layoutMustLogin.textView2.visibility = View.GONE
         binding.layoutMustLogin.btnLogin.visibility = View.GONE
     }
-
-    private fun setupObservers() {
-        viewModel.historyItems.observe(viewLifecycleOwner, Observer { items ->
-            if (items != null) {
-                initRecyclerView(items)
-            }
-        })
-    }
-
-    private fun initRecyclerView(items: List<HistoryItem>) {
-        val adapter = HistoryAdapter { item ->
-            navigateToDetailActivity(item)
-        }
-        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvHistory.adapter = adapter
-
-        adapter.submitData(items)
-    }
-
-    private fun navigateToDetailActivity(historyItem: HistoryItem) {
-        val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {
-            putExtra(HistoryDetailActivity.EXTRA_HISTORY_ITEM, historyItem)
-        }
-        startActivity(intent)
-    }
-
-//    private fun chooseDestination() {
-//        binding.ibSearchHistory.setOnClickListener{
-//            val dialog = ChooseDestinationFragment.newInstance("from")
-//            dialog.setDestinationSelectionListener(this)
-//            dialog.show(parentFragmentManager, dialog.tag)
-//        }
-//    }
 }

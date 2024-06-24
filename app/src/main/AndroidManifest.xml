@@ -55,6 +55,10 @@
         <activity
             android:name=".presentation.history.historydetail.HistoryDetailActivity"
             android:exported="true"/>
+        <activity
+            android:name=".presentation.payment.PaymentActivity"
+            android:exported="true"/>
+
       
         <activity
             android:name=".presentation.main.MainActivity"

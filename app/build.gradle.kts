@@ -45,6 +45,8 @@ android {
         buildConfig = true
     }
 
+
+
     flavorDimensions += "env"
     productFlavors {
         create("production") {
@@ -69,6 +71,20 @@ android {
                 type = "String",
                 name = "API_KEY",
                 value = "\"CG-S4m7y1shFUUuFzSKrNouRhP2\"",
+            )
+        }
+
+    }
+
+    packagingOptions {
+        resources {
+            excludes += setOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE",
+                "META-INF/NOTICE.txt",
+                "META-INF/LICENSE-notice.md"
             )
         }
     }
@@ -113,6 +129,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation ("com.github.GoodieBag:Pinview:v1.4")
     implementation ("com.google.android.material:material:1.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     // The view calendar library
     implementation (libs.view)

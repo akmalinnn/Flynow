@@ -37,3 +37,32 @@ fun String?.stringToCurrency(
 }
 
 fun String?.toDollarFormat() = this.stringToCurrency("en", "US")
+
+// New function for Int type
+fun Int?.intToCurrency(
+    language: String,
+    country: String,
+): String? {
+    return try {
+        val localeID = Locale(language, country)
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        numberFormat.format(this).toString()
+    } catch (e: Exception) {
+        null
+    }
+}
+
+// Function to convert Int to IDR format and change symbol to IDR
+fun Int?.toIDRFormat(): String? {
+    return try {
+        val localeID = Locale("in", "ID")
+        val numberFormat = NumberFormat.getCurrencyInstance(localeID)
+        val formattedValue = numberFormat.format(this)
+        formattedValue.replace("Rp", "IDR ")
+        formattedValue.replace(",00", "")
+    } catch (e: Exception) {
+        null
+    }
+}
+
+

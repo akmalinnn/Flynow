@@ -48,3 +48,52 @@ fun getTimestamp(year: Int, month: Int, dayOfMonth: Int): Long {
     calendar.set(Calendar.MILLISECOND, 0)
     return calendar.timeInMillis
 }
+
+fun String.toCustomDateFormat(): String? {
+    return try {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val outputFormat = SimpleDateFormat("dd MMMM yyyy", Locale("in", "ID"))
+        val date: Date = inputFormat.parse(this)
+        outputFormat.format(date)
+    } catch (e: Exception) {
+        null
+    }
+}
+
+// Function to convert ISO 8601 string to custom time format
+fun String.toCustomTimeFormat(): String? {
+    return try {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val outputFormat = SimpleDateFormat("HH:mm", Locale("in", "ID"))
+        val date: Date = inputFormat.parse(this)
+        outputFormat.format(date)
+    } catch (e: Exception) {
+        null
+    }
+
+}
+
+fun calculateEstimatedTime(departureTime: String, arrivalTime: String): String {
+    val format = SimpleDateFormat("HH:mm", Locale.getDefault())
+    format.timeZone = TimeZone.getTimeZone("UTC") // Adjust timezone if necessary
+
+    try {
+        val departureDate = format.parse(departureTime)
+        val arrivalDate = format.parse(arrivalTime)
+
+        val diff = arrivalDate.time - departureDate.time
+
+        val hours = diff / (60 * 60 * 1000)
+        val minutes = (diff % (60 * 60 * 1000)) / (60 * 1000)
+
+        val hoursString = if (hours > 0) "$hours h" else ""
+        val minutesString = if (minutes > 0) " $minutes m" else ""
+
+        return "$hoursString$minutesString".trim()
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return ""
+    }
+}
