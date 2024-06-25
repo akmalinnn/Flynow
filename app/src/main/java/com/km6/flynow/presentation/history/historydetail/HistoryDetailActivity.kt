@@ -32,8 +32,6 @@ class HistoryDetailActivity : AppCompatActivity() {
         parametersOf(intent.extras)
     }
 
-    private val viewModelPayment: PaymentViewModel by viewModel ()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +50,13 @@ class HistoryDetailActivity : AppCompatActivity() {
             binding.tvPricePassengers.text = totalPrice.toIDRFormat()
         }
 
+
         viewModel.totalChildrenPrice.observe(this) { totalPrice ->
-            binding.tvPricePassengersChildern.text = totalPrice.toIDRFormat()
+            binding.tvPricePassengersChildren.text = totalPrice.toIDRFormat()
+        }
+
+        viewModel.totalBabyPrice.observe(this) { totalPrice ->
+            binding.tvPricePassengersChildren.text = totalPrice.toIDRFormat()
         }
 
         viewModel.historyItem.observe(this) { historyItem ->
@@ -68,24 +71,19 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
         binding.btnContinueToBeranda.setOnClickListener {
             val historyItem = viewModel.historyItem.value
+            val totalPrice = viewModel.totalPrice.value ?: 0
             if (historyItem != null) {
                 if (historyItem.snapUrl.isNullOrEmpty()) {
-//                createPayment(historyItem.id, historyItem.price)
+                startPaymentActivity(historyItem.id, totalPrice)
                 } else {
                     binding.nestedScrollView.visibility = View.GONE
                     binding.llActionBar.visibility = View.GONE
-                    binding.tvFlightNameReturn.visibility = View.GONE
+                    binding.tvFlightDestinationReturn.visibility = View.GONE
                     binding.cvTotalFlightDetails.visibility = View.GONE
-                   navigateToPayment(historyItem.snapUrl)
+                    loadPaymentWebView(historyItem.snapUrl)
                 }
             }
         }
-    }
-
-
-
-    private fun navigateToPayment(url : String) {
-        PaymentActivity.startActivity(this, url)
     }
 
 
@@ -142,21 +140,23 @@ class HistoryDetailActivity : AppCompatActivity() {
 
 
             tvPriceDetailsPassengers.text = getString(R.string.adultText, adultsText)
-            tvPriceDetailsPassengersChildern.text = getString(R.string.childernText, childrenText)
+            tvPriceDetailsPassengersChildren.text = getString(R.string.childernText, childrenText)
         }
     }
 
+    private fun startPaymentActivity(bookingId: Int, paymentAmount: Int) {
+        PaymentActivity.startActivity(this, bookingId, paymentAmount)
+    }
 
-//    private fun loadPaymentWebView(transactionToken: String) {
-//        val snapUrl = "https://app.sandbox.midtrans.com/snap/v4/redirection/$transactionToken"
-//        binding.webview.apply {
-//            visibility = View.VISIBLE
-//            settings.javaScriptEnabled = true
-//            webViewClient = WebViewClient()
-//            loadUrl(snapUrl)
-//        }
-//    }
-
+    private fun loadPaymentWebView(transactionToken: String) {
+        val snapUrl = "$transactionToken"
+        binding.webview.apply {
+            visibility = View.VISIBLE
+            settings.javaScriptEnabled = true
+            webViewClient = WebViewClient()
+            loadUrl(snapUrl)
+        }
+    }
     companion object {
         const val EXTRA_HISTORY_ITEM = "extra_history_item"
 

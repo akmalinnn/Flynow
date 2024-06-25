@@ -10,11 +10,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.km6.flynow.R
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.FragmentHistoryBinding
 import com.km6.flynow.presentation.choose_destination.adapter.AirportListAdapter
 import com.km6.flynow.presentation.history.historydetail.HistoryDetailActivity
 import com.km6.flynow.presentation.login.LoginActivity
+import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.utils.GridSpacingItemDecoration
 import com.km6.flynow.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,7 +24,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
-    private val viewModel: HistoryViewModel by viewModel()
+    private val historyViewModel: HistoryViewModel by viewModel()
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     private val productAdapter: HistoryAdapter by lazy {
         HistoryAdapter {
@@ -58,15 +61,17 @@ class HistoryFragment : Fragment() {
     }
 
     private fun getHistoryList() {
-        val token = viewModel.getToken()
+        val token = historyViewModel.getToken()
         if (token != null) {
-            viewModel.getHistory().observe(viewLifecycleOwner) { it ->
+            historyViewModel.getHistory().observe(viewLifecycleOwner) { it ->
                 it.proceedWhen(
                     doOnLoading = {
                         binding.rvHistory.isVisible = true
+                        binding.pbLoading.isVisible = true
                     },
                     doOnSuccess = {
                         binding.rvHistory.isVisible = true
+                        binding.pbLoading.isVisible = false
                         it.payload?.let { data -> bindHistoryList(data) }
                     },
                     doOnError = { error ->
@@ -75,11 +80,17 @@ class HistoryFragment : Fragment() {
                             "Error: ${error.message}",
                             Toast.LENGTH_SHORT
                         ).show()
+                        profileViewModel.logOut()
+                        startActivity(
+                            Intent(requireContext(), LoginActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                            },
+                        )
                     },
                     doOnEmpty = { error ->
                         Toast.makeText(
                             requireContext(),
-                            "Error Empty: ${error.message}",
+                            getString(R.string.anda_belum_memiliki_riwayat),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -93,7 +104,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun checkLoginStatus() {
-        val token = viewModel.getToken()
+        val token = historyViewModel.getToken()
         if (token == null) {
             showMustLoginFragment()
             setClickListeners()

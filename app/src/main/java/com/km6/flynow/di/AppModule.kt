@@ -10,8 +10,8 @@ import com.km6.flynow.data.datasource.destination_history.DestinationHistoryData
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDatabaseDataSource
 import com.km6.flynow.data.datasource.history.HistoryApiDataSource
 import com.km6.flynow.data.datasource.history.HistoryDataSource
+import com.km6.flynow.data.datasource.payment.PaymentApiDataSource
 import com.km6.flynow.data.datasource.payment.PaymentDataSource
-import com.km6.flynow.data.datasource.payment.PaymentDataSourceImpl
 import com.km6.flynow.data.repository.AirportRepository
 import com.km6.flynow.data.repository.AirportRepositoryImpl
 import com.km6.flynow.data.repository.AuthRepository
@@ -21,7 +21,6 @@ import com.km6.flynow.data.repository.DestinationHistoryRepositoryImpl
 import com.km6.flynow.data.repository.HistoryRepository
 import com.km6.flynow.data.repository.HistoryRepositoryImpl
 import com.km6.flynow.data.repository.PaymentRepository
-import com.km6.flynow.data.repository.PaymentRepositoryImpl
 
 import com.km6.flynow.data.repository.UserRepository
 import com.km6.flynow.data.repository.UserRepositoryImpl
@@ -80,7 +79,7 @@ object AppModule {
             single<AirportDataSource> {AirportApiDataSource(get())}
             single<HistoryDataSource> { HistoryApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
-            single<PaymentDataSource> { PaymentDataSourceImpl(get()) }
+            single<PaymentDataSource> { PaymentApiDataSource(get()) }
         }
 
     private val repositoryModule =
@@ -90,7 +89,7 @@ object AppModule {
             single<AirportRepository> { AirportRepositoryImpl(get())}
             single<HistoryRepository> { HistoryRepositoryImpl(get()) }
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
-            single<PaymentRepository> { PaymentRepositoryImpl(get()) }
+            single<PaymentRepository> { PaymentRepository(get()) }
         }
 
     private val viewModelModule =

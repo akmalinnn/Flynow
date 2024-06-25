@@ -8,13 +8,13 @@ import com.km6.flynow.data.source.network.model.login.LoginData
 data class PaymentResponse(
     @SerializedName("message")
     val message: String,
-//    @SerializedName("data")
-//    val data: PaymentData
+    @SerializedName("data")
+    val data: PaymentData
 )
 
-//data class PaymentData(
-//    @SerializedName("message")
-//    val token: String,
-//    @SerializedName("redirect_url")
-//    val snapUrl: String
-//)
+data class PaymentData(
+    @SerializedName("message")
+    val token: String,
+    @SerializedName("redirect_url")
+    val snapUrl: String
+)

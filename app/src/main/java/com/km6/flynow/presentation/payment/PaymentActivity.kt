@@ -1,6 +1,5 @@
 package com.km6.flynow.presentation.payment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -23,12 +22,13 @@ class PaymentActivity : AppCompatActivity() {
 
         webView = findViewById(R.id.web_view_payment)
         setupWebView()
+        val bookingId = intent.getIntExtra(BOOKING_ID, -1)
+        val paymentAmount = intent.getIntExtra(PAYMENT_AMOUNT, -1)
 
-        val paymentUrl = intent.getStringExtra(PAYMENT_URL)
-        if (paymentUrl != null) {
-            loadPaymentUrl(paymentUrl)
+        if (bookingId != -1 && paymentAmount != -1) {
+            initiatePayment(bookingId, paymentAmount)
         } else {
-            Toast.makeText(this, "Payment URL not provided", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Invalid payment details", Toast.LENGTH_SHORT).show()
             finish()
         }
     }
@@ -43,16 +43,31 @@ class PaymentActivity : AppCompatActivity() {
         }
     }
 
+    private fun initiatePayment(bookingId: Int, paymentAmount: Int) {
+        viewModel.createPayment(bookingId, paymentAmount).observe(this, Observer { result ->
+            result.fold(onSuccess = { response ->
+                val paymentUrl = response.data.snapUrl
+                loadPaymentUrl(paymentUrl)
+            }, onFailure = { error ->
+                Toast.makeText(this, "Failed to create payment: ${error.message}", Toast.LENGTH_LONG).show()
+                error.printStackTrace()
+            })
+        })
+    }
+
     private fun loadPaymentUrl(url: String) {
         webView.loadUrl(url)
     }
 
-    companion object {
-        private const val PAYMENT_URL = "PAYMENT_URL"
 
-        fun startActivity(context: Context, url: String) {
+    companion object {
+        private const val BOOKING_ID = "BOOKING_ID"
+        private const val PAYMENT_AMOUNT = "PAYMENT_AMOUNT"
+
+        fun startActivity(context: Context, bookingId: Int, paymentAmount: Int) {
             val intent = Intent(context, PaymentActivity::class.java).apply {
-                putExtra(PAYMENT_URL, url)
+                putExtra(BOOKING_ID, bookingId)
+                putExtra(PAYMENT_AMOUNT, paymentAmount)
             }
             context.startActivity(intent)
         }

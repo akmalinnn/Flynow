@@ -4,10 +4,19 @@ import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.km6.flynow.data.model.history.History
+import com.km6.flynow.data.repository.PaymentRepository
+import com.km6.flynow.data.source.network.model.payment.PaymentRequest
+import com.km6.flynow.data.source.network.model.payment.PaymentResponse
+import com.km6.flynow.utils.ResultWrapper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HistoryDetailViewModel(
-    private val extras: Bundle?
+    private val extras: Bundle?,
+    private val paymentRepository: PaymentRepository
 ) : ViewModel() {
 
     private val _historyItem = MutableLiveData<History?>()
@@ -18,6 +27,9 @@ class HistoryDetailViewModel(
 
     private val _totalChildrenPrice = MutableLiveData<Int>()
     val totalChildrenPrice: LiveData<Int> get() = _totalChildrenPrice
+
+    private val _totalBabyPrice = MutableLiveData<Int>()
+    val totalBabyPrice: LiveData<Int> get() = _totalBabyPrice
 
     private val _totalPrice = MutableLiveData<Int>()
     val totalPrice: LiveData<Int> get() = _totalPrice
@@ -35,15 +47,21 @@ class HistoryDetailViewModel(
 
             val totalAdults = (it.numAdults * price) + (it.numAdults * priceReturn)
             val totalChildren = (it.numChildren * price) + (it.numChildren * priceReturn)
-            val total = totalAdults + totalChildren
+            val totalBaby = (it.numBabies * price) + (it.numBabies * priceReturn)
+
+            val total = totalAdults + totalChildren + totalBaby
 
             _totalAdultPrice.value = totalAdults
             _totalChildrenPrice.value = totalChildren
+            _totalBabyPrice.value = totalBaby
             _totalPrice.value = total
         } ?: run {
             _totalAdultPrice.value = 0
             _totalChildrenPrice.value = 0
+            _totalBabyPrice.value = 0
             _totalPrice.value = 0
+
         }
     }
+
 }

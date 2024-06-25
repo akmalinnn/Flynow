@@ -42,8 +42,8 @@ class ChooseDestinationViewModel (
         }
     }
 
-    fun searchAirport(token: String, keyword: String? = null) =
-        airportRepository.searchAirport(token,keyword).asLiveData(Dispatchers.IO)
+    fun searchAirport(keyword: String? = null) =
+        airportRepository.searchAirport(keyword).asLiveData(Dispatchers.IO)
 
     fun getToken(): String? {
         return userRepository.getToken()

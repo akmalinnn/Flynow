@@ -16,7 +16,12 @@ interface HistoryRepository {
 class HistoryRepositoryImpl(private val historyDataSource: HistoryDataSource) : HistoryRepository {
     override fun getHistory(): Flow<ResultWrapper<List<History>>> {
         return proceedFlow {
-            historyDataSource.getHistory().data.toHistory()
+            val response = historyDataSource.getHistory()
+            if (response.message == "Success") {
+                historyDataSource.getHistory().data.toHistory()
+            } else {
+                throw Exception(response.message)
+            }
         }
     }
 }

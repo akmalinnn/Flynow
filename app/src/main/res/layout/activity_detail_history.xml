@@ -563,7 +563,7 @@
                 tools:text="IDR 9.550.000" />
 
             <TextView
-                android:id="@+id/tv_price_details_passengers_childern"
+                android:id="@+id/tv_price_details_passengers_children"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -573,15 +573,38 @@
                 tools:text="0 Children" />
 
             <TextView
-                android:id="@+id/tv_price_passengers_childern"
+                android:id="@+id/tv_price_passengers_children"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="16dp"
                 android:textAlignment="textEnd"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_price_details_passengers_childern"
+                app:layout_constraintTop_toTopOf="@+id/tv_price_details_passengers_children"
                 tools:text="IDR 9.550.000" />
+
+
+            <TextView
+                android:id="@+id/tv_price_details_passengers_babies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_price_details_passengers_children"
+                tools:text="0 Babies" />
+
+            <TextView
+                android:id="@+id/tv_price_passengers_babies"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="16dp"
+                android:textAlignment="textEnd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_price_details_passengers_babies"
+                tools:text="IDR 9.550.000" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
