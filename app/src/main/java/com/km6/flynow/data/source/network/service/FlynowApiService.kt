@@ -51,9 +51,9 @@ interface FlynowApiService {
 
     @GET("airports/search")
     suspend fun searchAirport(
-        @Header("Authorization") token: String,
         @Query("keyword") keyword: String? = null
     ): SearchAirportResponse
+
     @PUT("auth/verify-otp")
     suspend fun verifyOtp(
         @Body requestBody: VerifyOtpRequest
@@ -73,9 +73,9 @@ interface FlynowApiService {
     suspend fun getHistory(
     ): HistoryItemResponse
 
-    @GET("payment")
+    @POST("payment")
     suspend fun createPayment(
-        @Body requestBody: PaymentRequest
+        @Body paymentRequest: PaymentRequest
     ): PaymentResponse
 
 

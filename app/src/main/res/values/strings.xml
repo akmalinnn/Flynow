@@ -115,6 +115,7 @@
      <string name="price_label">Price: %d</string>
     <string name="childernText">%1$s</string>
     <string name="adultText">%1$s</string>
+    <string name="anda_belum_memiliki_riwayat">Anda belum memiliki riwayat</string>
 
 
 </resources>

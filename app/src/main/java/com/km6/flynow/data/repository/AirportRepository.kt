@@ -8,15 +8,14 @@ import com.km6.flynow.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
 interface AirportRepository {
-    fun searchAirport(token: String, keyword: String? = null) : Flow<ResultWrapper<List<Airport>>>
+    fun searchAirport(keyword: String? = null) : Flow<ResultWrapper<List<Airport>>>
 
 }
 
 class AirportRepositoryImpl (private val dataSource: AirportDataSource) : AirportRepository {
-    override fun searchAirport(token: String, keyword: String?): Flow<ResultWrapper<List<Airport>>> {
+    override fun searchAirport(keyword: String?): Flow<ResultWrapper<List<Airport>>> {
         return proceedFlow {
-            dataSource.searchAirport(token, keyword).data.toAirport()
+            dataSource.searchAirport(keyword).data.toAirport()
         }
     }
-
 }

@@ -154,7 +154,7 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
         val token = viewModel.getToken()
         if (token != null) {
             Log.d("Token", token)
-            viewModel.searchAirport(token, keyword).observe(viewLifecycleOwner) {
+            viewModel.searchAirport(keyword).observe(viewLifecycleOwner) {
                 it.proceedWhen(
                     doOnLoading = {
                         binding.layoutState.root.isVisible = true

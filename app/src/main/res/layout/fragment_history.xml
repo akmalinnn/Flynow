@@ -16,6 +16,23 @@
 <!--        app:layout_constraintTop_toTopOf="@+id/textView"-->
 <!--        android:background="@null"/>-->
 
+
+    <FrameLayout
+        android:id="@+id/fl_btn_loading_state"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:layout_marginTop="8dp">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </FrameLayout>
+
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
