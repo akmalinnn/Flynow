@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.1"
+agp = "8.5.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -30,7 +30,7 @@ view = "2.5.1"
 appIntro = "6.3.1"
 legacySupportV4 = "1.0.0"
 firebaseCrashlytics = "19.0.0"
-gradle = "8.1.0"
+gradle = "8.5.0"
 googleServices = "4.4.1"
 firebaseCrashlyticsGradle = "3.0.1"
 

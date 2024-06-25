@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.km6.flynow.data.model.Filter
 import com.km6.flynow.data.model.Flight
 import com.km6.flynow.data.model.Search
 import com.km6.flynow.databinding.ActivityFilterResultBinding
+import com.km6.flynow.presentation.filter.FilterFragment
+import com.km6.flynow.presentation.filter.OnFilterSelectedListener
 import com.km6.flynow.presentation.filter_result.adapter.FilterResultAdapter
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
 import com.km6.flynow.utils.proceedWhen
@@ -78,7 +81,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 //}
 
 
-class FilterResultActivity : AppCompatActivity() {
+class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
     private val binding: ActivityFilterResultBinding by lazy {
         ActivityFilterResultBinding.inflate(layoutInflater)
     }
@@ -106,6 +109,20 @@ class FilterResultActivity : AppCompatActivity() {
 
         setupListFlight()
         getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas.toString(), "price-asc")
+        setClickListener()
+    }
+
+    private fun setClickListener() {
+        binding.btnFilterButton.setOnClickListener{
+            chooseFilter()
+        }
+    }
+
+    private fun chooseFilter() {
+        val selectedPosition = viewModel.filterPosition
+        val dialog = FilterFragment.newInstance(selectedPosition)
+        dialog.setOnFilterSelectedListener(this)
+        dialog.show(supportFragmentManager, dialog.tag)
     }
 
     private fun getSearchFlight(
@@ -169,4 +186,11 @@ class FilterResultActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+    override fun onFilterSelected(filter: Filter, position: Int) {
+        viewModel.selectedFilter = filter
+        viewModel.filterPosition = position
+        binding.btnFilterSelectedButton.text = filter.desc
+    }
+
 }
