@@ -41,6 +41,7 @@ android {
     }
 
     buildFeatures {
+        dataBinding = true
         viewBinding = true
         buildConfig = true
     }
@@ -133,6 +134,9 @@ dependencies {
 
     // The view calendar library
     implementation (libs.view)
+
+    implementation(libs.groupie)
+    implementation(libs.groupie.viewbinding)
 
     testImplementation(libs.mockk.agent)
     androidTestImplementation(libs.mockk.android)
