@@ -1,10 +1,15 @@
 package com.km6.flynow.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.km6.flynow.data.model.Airport
 import com.km6.flynow.data.model.SeatClass
+import com.km6.flynow.data.repository.FavoriteFlightRepository
+import kotlinx.coroutines.Dispatchers
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val favoriteFlightRepository: FavoriteFlightRepository
+) : ViewModel() {
 
     var airportFrom: Airport? = null
     var airportTo: Airport? = null
@@ -27,4 +32,9 @@ class HomeViewModel : ViewModel() {
         this.babyCount = babyCount
         this.totalPassenger = totalPassenger
     }
+
+    fun getFavoriteFlight() =
+        favoriteFlightRepository.getFavoriteFlight().asLiveData(Dispatchers.IO)
+
+
 }

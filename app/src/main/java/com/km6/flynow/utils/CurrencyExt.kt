@@ -57,12 +57,13 @@ fun Int?.toIDRFormat(): String? {
     return try {
         val localeID = Locale("in", "ID")
         val numberFormat = NumberFormat.getCurrencyInstance(localeID)
-        val formattedValue = numberFormat.format(this)
-        formattedValue.replace("Rp", "IDR ")
-        formattedValue.replace(",00", "")
+        var formattedValue = numberFormat.format(this)
+        formattedValue = formattedValue.replace("Rp", "IDR ").replace(",00", "")
+        formattedValue
     } catch (e: Exception) {
         null
     }
 }
+
 
 
