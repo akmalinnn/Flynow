@@ -4,6 +4,7 @@ import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
+import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
 import com.km6.flynow.data.source.network.model.login.LoginResponse
@@ -91,6 +92,10 @@ interface FlynowApiService {
     suspend fun createPayment(
         @Body paymentRequest: PaymentRequest
     ): PaymentResponse
+
+    @GET("favorite-flights")
+    suspend fun getFavoriteFlights(
+    ): FavoriteFlightResponse
 
 
     companion object {

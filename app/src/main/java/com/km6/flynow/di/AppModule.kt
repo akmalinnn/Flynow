@@ -29,6 +29,7 @@ import com.km6.flynow.data.repository.NotificationDetailRepositoryImpl
 import com.km6.flynow.data.repository.NotificationRepository
 import com.km6.flynow.data.repository.NotificationRepositoryImpl
 import com.km6.flynow.data.repository.PaymentRepository
+import com.km6.flynow.presentation.home.favorite_flight.FavoriteDetailViewModel
 
 import com.km6.flynow.data.repository.UserRepository
 import com.km6.flynow.data.repository.UserRepositoryImpl
@@ -57,6 +58,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
+
+
+import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
+import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
+import com.km6.flynow.data.repository.FavoriteFlightRepository
+import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
 
 object AppModule {
     private val networkModule =
@@ -87,6 +94,7 @@ object AppModule {
             single<AuthDataSource> { AuthDataSourceImpl(get()) }
             single<AirportDataSource> {AirportApiDataSource(get())}
             single<HistoryDataSource> { HistoryApiDataSource(get()) }
+            single<FavoriteFlightDataSource> { FavoriteFlightApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
             single<NotificationDatasource> { NotificationApiDataSource(get()) }
@@ -99,6 +107,7 @@ object AppModule {
             single<UserRepository> { UserRepositoryImpl(get()) }
             single<AirportRepository> { AirportRepositoryImpl(get())}
             single<HistoryRepository> { HistoryRepositoryImpl(get()) }
+            single<FavoriteFlightRepository> { FavoriteFlightRepositoryImpl(get()) }
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
             single<PaymentRepository> { PaymentRepository(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
@@ -126,6 +135,7 @@ object AppModule {
             viewModelOf(::HistoryDetailViewModel)
             viewModelOf(::PaymentViewModel)
             viewModelOf(::NotificationDetailViewmodel)
+            viewModelOf(::FavoriteDetailViewModel)
         }
 
     val modules =

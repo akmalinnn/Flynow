@@ -117,6 +117,10 @@
     <string name="adultText">%1$s</string>
     <string name="anda_belum_memiliki_riwayat">Anda belum memiliki riwayat</string>
     <string name="detail_pesan">Detail Pesan</string>
+    <string name="destinasi_favorit">Destinasi Favorit</string>
+    <string name="mulai_dari">Mulai Dari</string>
+    <string name="mulai_dari_home">Mulai Dari</string>
+    <string name="discount">Discount: %1$s</string>
 
 
 </resources>
