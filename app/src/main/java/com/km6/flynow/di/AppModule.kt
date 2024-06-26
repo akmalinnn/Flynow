@@ -75,7 +75,7 @@ import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
 object AppModule {
     private val networkModule =
         module {
-            single<FlynowApiService> { FlynowApiService.invoke() }
+            single<FlynowApiService> { FlynowApiService.invoke(get()) }
         }
 
     private val localModule =

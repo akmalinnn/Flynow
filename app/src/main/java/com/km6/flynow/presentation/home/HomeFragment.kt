@@ -168,7 +168,7 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
             child = viewModel.childrenCount,
             baby = viewModel.babyCount,
             clas = viewModel.seatClass,
-            roundTrip = viewModel.roundTrip
+            roundTrip = viewModel.isRoundTrip
         )
         binding.layoutSearch.btnSearchButton.setOnClickListener {
             val intent = Intent(requireContext(), FilterResultActivity::class.java).apply {

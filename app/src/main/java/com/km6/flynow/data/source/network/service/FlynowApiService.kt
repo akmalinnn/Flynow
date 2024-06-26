@@ -3,7 +3,7 @@ package com.km6.flynow.data.source.network.service
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
 import com.km6.flynow.data.source.network.model.flight.FlightResponse
-import com.km6.flynow.data.model.HistoryItem
+//import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
 import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
