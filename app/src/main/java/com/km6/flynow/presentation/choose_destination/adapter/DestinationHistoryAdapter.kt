@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.km6.flynow.core.ViewHolderBinder
 import com.km6.flynow.data.model.DestinationHistory
 import com.km6.flynow.databinding.ItemDestinationResultBinding
-import com.refood.tastie.core.ViewHolderBinder
 
 class DestinationHistoryAdapter (private val destinationHistoryListener: DestinationHistoryListener? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val dataDiffer =

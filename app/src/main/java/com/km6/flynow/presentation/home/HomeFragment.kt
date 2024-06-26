@@ -1,4 +1,4 @@
-package com.km6.flynow.presentation.home
+    package com.km6.flynow.presentation.home
 
 import android.content.Intent
 import android.graphics.Color
@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import com.km6.flynow.R
 import com.km6.flynow.data.model.Airport
 import com.km6.flynow.data.model.FavoriteFlight
+import com.km6.flynow.data.model.Search
 import com.km6.flynow.data.model.SeatClass
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.FragmentHomeBinding
@@ -25,6 +26,7 @@ import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.choose_passanger.PassengerCountDataListener
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassFragment
 import com.km6.flynow.presentation.choose_seat_class.OnSeatClassSelectedListener
+import com.km6.flynow.presentation.filter_result.FilterResultActivity
 import com.km6.flynow.presentation.history.HistoryAdapter
 import com.km6.flynow.presentation.history.historydetail.HistoryDetailActivity
 import com.km6.flynow.presentation.home.adapter.FavoriteListAdapter
@@ -134,6 +136,7 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
         chooseSeatClass()
         swapAirport()
         switchListener()
+        search()
     }
 
     private fun switchListener() {
@@ -150,6 +153,28 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
         } else {
             binding.layoutSearch.sectionReturnDate.isClickable = false
             binding.layoutSearch.tvReturnValue.setTextColor(Color.GRAY)
+        }
+    }
+
+    private fun search() {
+
+        val searchParameters = Search(
+            da = viewModel.airportFrom,
+            aa = viewModel.airportTo,
+            dd = viewModel.departureDate.toString(),
+            rd = viewModel.returnDate.toString(),
+            totalPassenger = viewModel.totalPassenger,
+            adult = viewModel.adultCount,
+            child = viewModel.childrenCount,
+            baby = viewModel.babyCount,
+            clas = viewModel.seatClass,
+            roundTrip = viewModel.isRoundTrip
+        )
+        binding.layoutSearch.btnSearchButton.setOnClickListener {
+            val intent = Intent(requireContext(), FilterResultActivity::class.java).apply {
+                putExtra("SEARCH_PARAMS", searchParameters)
+            }
+            startActivity(intent)
         }
     }
 

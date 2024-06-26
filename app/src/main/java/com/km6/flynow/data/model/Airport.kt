@@ -1,5 +1,9 @@
 package com.km6.flynow.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Airport(
     val id: Int,
     val airportCode: String,
@@ -9,4 +13,4 @@ data class Airport(
     val deletedAt: String?,
     val createdAt: String,
     val updatedAt: String
-)
+): Parcelable

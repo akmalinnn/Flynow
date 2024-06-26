@@ -24,7 +24,7 @@
         android:orientation="vertical"
         tools:listitem="@layout/item_seat_class"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_marginHorizontal="16dp"/>
+        />
 
     <Button
         android:id="@+id/btn_save"

@@ -7,12 +7,11 @@
     tools:context=".presentation.filter.FilterFragment">
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:scaleType="centerCrop"
-            android:layout_margin="8dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rv_list_filter"
+            app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/ic_close" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -20,15 +19,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_close"
+            android:layout_marginTop="16dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toTopOf="@id/btn_filter_button"
             tools:listitem="@layout/item_filter" />
 
         <Button
             android:id="@+id/btn_filter_button"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
             android:text="@string/Choose"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_list_filter"
+            android:backgroundTint="@color/md_theme_primary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

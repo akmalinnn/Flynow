@@ -1,20 +1,13 @@
 package com.km6.flynow.presentation.choose_seat_class
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.km6.flynow.R
 import com.km6.flynow.data.model.SeatClass
-import com.km6.flynow.databinding.FragmentChooseDestinationBinding
 import com.km6.flynow.databinding.FragmentChooseSeatClassBinding
-import com.km6.flynow.presentation.choose_destination.ChooseDestinationFragment
-import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
-import com.km6.flynow.presentation.choose_destination.DestinationSelectionListener
 import com.km6.flynow.presentation.choose_seat_class.adapter.SeatClassAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -57,7 +50,10 @@ class ChooseSeatClassFragment : BottomSheetDialogFragment() {
             if (selectedPosition != null && selectedPosition >= 0) {
                 val selectedSeatClass = viewModel.options.value?.get(selectedPosition)
                 if (selectedSeatClass != null) {
-                    seatClassSelectionListener?.onSeatClassSelected(selectedSeatClass, selectedPosition)
+                    seatClassSelectionListener?.onSeatClassSelected(
+                        selectedSeatClass,
+                        selectedPosition
+                    )
                     dismiss()
                 }
             }

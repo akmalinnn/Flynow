@@ -2,6 +2,8 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.source.network.model.flight.FlightResponse
+//import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
 import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
@@ -53,6 +55,22 @@ interface FlynowApiService {
         @Part("phoneNumber") phoneNumber: RequestBody,
         @Part image: MultipartBody.Part
     ): RegisterResponse
+
+    @GET("flight")
+    suspend fun getFlight(): FlightResponse
+
+    @GET("flight/search")
+    suspend fun searchFlight(
+        @Query("da") da : String? = null,
+        @Query("aa") aa : String? = null,
+        @Query("dd") dd : String? = null,
+        @Query("rd") rd : String? = null,
+        @Query("adult") adult : String? = null,
+        @Query("child") child : String? = null,
+        @Query("baby") baby : String? = null,
+        @Query("class") clas : String? = null,
+        @Query("sort") sort : String? = null
+    ) : FlightResponse
 
     @GET("airports/search")
     suspend fun searchAirport(
