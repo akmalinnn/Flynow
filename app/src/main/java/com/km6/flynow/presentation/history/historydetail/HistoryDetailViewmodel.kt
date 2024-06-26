@@ -16,7 +16,6 @@ import kotlinx.coroutines.withContext
 
 class HistoryDetailViewModel(
     private val extras: Bundle?,
-    private val paymentRepository: PaymentRepository
 ) : ViewModel() {
 
     private val _historyItem = MutableLiveData<History?>()

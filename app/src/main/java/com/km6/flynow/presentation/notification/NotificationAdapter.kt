@@ -1,45 +1,81 @@
 package com.km6.flynow.presentation.notification
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.km6.flynow.R // Replace with your actual R class import
-import com.km6.flynow.data.model.Notification // Replace with your actual Notification model
+import com.km6.flynow.R
+import com.km6.flynow.data.model.notification.Notification
+import com.km6.flynow.databinding.ItemNotificationBinding
+import com.km6.flynow.utils.toCustomDateFormat
+import com.km6.flynow.utils.toCustomTimeFormat
 
-class NotificationAdapter(private val notifications: List<Notification>) : RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
+class NotificationAdapter(private val itemClick: (Notification) -> Unit) :
+    RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_notification, parent, false)
-        return NotificationViewHolder(view)
+    private val dataDiffer =
+        AsyncListDiffer(
+            this,
+            object : DiffUtil.ItemCallback<Notification>() {
+                override fun areItemsTheSame(
+                    oldItem: Notification,
+                    newItem: Notification,
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
+
+                override fun areContentsTheSame(
+                    oldItem: Notification,
+                    newItem: Notification,
+                ): Boolean {
+                    return oldItem.hashCode() == newItem.hashCode()
+                }
+            },
+        )
+
+    fun submitData(data: List<Notification>) {
+        dataDiffer.submitList(data)
     }
 
-    override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        val notification = notifications[position]
-        holder.bind(notification)
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): NotificationViewHolder {
+        val binding =
+            ItemNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return NotificationViewHolder(binding, itemClick)
     }
 
-    override fun getItemCount(): Int {
-        return notifications.size
+
+    override fun onBindViewHolder(
+        holder: NotificationViewHolder,
+        position: Int,
+    ) {
+        holder.bindView(dataDiffer.currentList[position])
     }
 
-    class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val iconImageView: ImageView = itemView.findViewById(R.id.iv_icon)
-        private val titleTextView: TextView = itemView.findViewById(R.id.tv_title)
-        private val dateTextView: TextView = itemView.findViewById(R.id.tv_date)
-        private val messageTextView: TextView = itemView.findViewById(R.id.tv_message)
-        private val additionalTextView: TextView = itemView.findViewById(R.id.tv_additional)
+    override fun getItemCount(): Int = dataDiffer.currentList.size
 
-        fun bind(notification: Notification) {
-            titleTextView.text = notification.title
-            dateTextView.text = notification.date
-            messageTextView.text = notification.message
-            additionalTextView.text = notification.additionalInfo
+    class NotificationViewHolder(
+        private val binding: ItemNotificationBinding,
+        val itemClick: (Notification) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(item: Notification) {
 
-            // Replace ic_tab_notification with actual drawable resource based on notification type
-            iconImageView.setImageResource(R.drawable.ic_tab_notification)
+
+            binding.tvTitle.text = item.type
+            binding.tvMessage.text = item.message
+            binding.tvTime.text = item.createdAt.toCustomTimeFormat()
+
+            if (item.isRead == true) {
+                binding.cvNotification.background = ContextCompat.getDrawable(
+                    binding.root.context,
+                    R.drawable.bg_status_notification_read
+                )
+            }
+
+            itemView.setOnClickListener { itemClick(item) }
         }
     }
 }

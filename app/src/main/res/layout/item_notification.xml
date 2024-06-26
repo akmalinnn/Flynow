@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/cv_notification"
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="8dp"
     android:layout_marginTop="4dp"
@@ -35,37 +36,28 @@
             tools:text="Promosi" />
 
         <TextView
-            android:id="@+id/tv_date"
+            android:id="@+id/tv_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_message"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="20 Maret, 14:04" />
+            tools:text="4:04" />
+
 
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:maxLines="3"
+            android:layout_marginVertical="8dp"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:text="Dapatkan Potongan 50% Tiket!" />
-
-        <TextView
-            android:id="@+id/tv_additional"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@id/tv_message"
-            tools:text="Syarat dan Ketentuan berlaku!" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="Dapatkan Potongan 50% Tiket! arwgewGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGEW" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

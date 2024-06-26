@@ -72,7 +72,7 @@
     <string name="accountSettings">Pengaturan Akun</string>
     <string name="edit_profile">Ubah Profile</string>
     <string name="logout_account">Keluar</string>
-    <string name="notification_tittle_page">Notifikasi\n</string>
+    <string name="notification_tittle_page">Notifikasi</string>
     <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="app_version">version:0.0.1</string>
     <string name="text_title_flight_details">Rincian Penerbangan</string>
@@ -116,6 +116,7 @@
     <string name="childernText">%1$s</string>
     <string name="adultText">%1$s</string>
     <string name="anda_belum_memiliki_riwayat">Anda belum memiliki riwayat</string>
+    <string name="detail_pesan">Detail Pesan</string>
 
 
 </resources>
