@@ -1,48 +1,75 @@
 package com.km6.flynow.presentation.checkout.checkout_penumpang
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
-import com.km6.flynow.R
-import com.km6.flynow.databinding.ActivityBiodataPemesanBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.km6.flynow.data.model.BioPenumpang
 import com.km6.flynow.databinding.ActivityBiodataPenumpangBinding
+import com.km6.flynow.presentation.checkout.chooseseat.ChooseSeatActivity
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.GroupieViewHolder
 
 class BiodataPenumpangActivity : AppCompatActivity() {
     private val binding: ActivityBiodataPenumpangBinding by lazy {
         ActivityBiodataPenumpangBinding.inflate(layoutInflater)
     }
-
+    private val bioAdapter = GroupAdapter<GroupieViewHolder>()
+    private val items = mutableListOf<PassengerItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        setHaveFamilyName()
+        setRecyclerView()
+        setClick()
+//        val numAdult = intent.getIntExtra("numAdult", 0)
+//        val numChild = intent.getIntExtra("numChild", 0)
+//        val numBaby = intent.getIntExtra("numBaby", 0)
+
+        addPassengerForms(1, 0, 0)
+//        addPassengerForms(numAdult, numChild, numBaby)
     }
-//    private fun setHaveFamilyName() {
-//        with(binding.itemFormBiodataPenumpang) {
-//            binding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-//                if (isChecked) {
-//                    binding.tvFullName.isVisible = true
-//                    binding.tilFullName.isVisible = true
-//                    binding.tvFamilyName.isVisible = true
-//                    binding.tilFamilyName.isVisible = true
-//                    binding.tvNoTelp.isVisible = true
-//                    binding.tilNoTelp.isVisible = true
-//                    binding.tvEmail.isVisible = true
-//                    binding.tilEmail.isVisible = true
-//                } else {
-//                    binding.tvFullName.isVisible = true
-//                    binding.tilFullName.isVisible = true
-//                    binding.tvFamilyName.isVisible = false
-//                    binding.tilFamilyName.isVisible = false
-//                    binding.tvNoTelp.isVisible = true
-//                    binding.tilNoTelp.isVisible = true
-//                    binding.tvEmail.isVisible = true
-//                    binding.tilEmail.isVisible = true
-//                }
-//            }
-//        }
-//    }
+
+    private fun addPassengerForms(numAdult: Int, numChild: Int, numBaby: Int) {
+        for (i in 0 until numAdult) {
+            items.add(PassengerItem(BioPenumpang(type = "Adult")))
+        }
+        for (i in 0 until numChild) {
+            items.add(PassengerItem(BioPenumpang(type = "Child")))
+        }
+        for (i in 0 until numBaby) {
+            items.add(PassengerItem(BioPenumpang(type = "Baby")))
+        }
+        bioAdapter.addAll(items)
+    }
+
+    private fun collectPassengerData(): List<BioPenumpang>? {
+        val passengerList = mutableListOf<BioPenumpang>()
+        items.forEach {
+            if (!it.validateForm()) {
+                return null
+            }
+            passengerList.add(it.getPassengerData())
+        }
+        return passengerList
+    }
+
+    private fun setClick() {
+        binding.btnToChooseSeat.setOnClickListener {
+            val passengerList = collectPassengerData()
+            if (passengerList != null) {
+                val intent = ChooseSeatActivity.newIntent(this, ArrayList(passengerList))
+                startActivity(intent)
+            }
+        }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
+    private fun setRecyclerView() {
+        binding.rvFormPassenger.apply {
+            layoutManager = LinearLayoutManager(this@BiodataPenumpangActivity)
+            adapter = bioAdapter
+        }
+    }
+
 }

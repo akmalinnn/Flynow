@@ -25,6 +25,7 @@ mockk = "1.13.10"
 coroutine-test = "1.7.2"
 turbine = "1.0.0"
 core-testing = "2.2.0"
+groupie = "2.10.1"
 view = "2.5.1"
 
 appIntro = "6.3.1"
@@ -94,6 +95,11 @@ firebase-crashlytics-gradle = { group = "com.google.firebase", name = "firebase-
 
 #calendar layout
 view = { module = "com.kizitonwose.calendar:view", version.ref = "view" }
+
+# Grouoie
+groupie = { group = "com.github.lisawray.groupie", name = "groupie", version.ref = "groupie" }
+groupie-viewbinding = { group = "com.github.lisawray.groupie", name = "groupie-viewbinding", version.ref = "groupie" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
