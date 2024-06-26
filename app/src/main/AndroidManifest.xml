@@ -59,6 +59,10 @@
             android:name=".presentation.payment.PaymentActivity"
             android:exported="true"/>
 
+        <activity
+            android:name=".presentation.notification.notification_detail.NotificationDetailActivity"
+            android:exported="true"/>
+
       
         <activity
             android:name=".presentation.main.MainActivity"

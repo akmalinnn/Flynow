@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.km6.flynow.R
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.FragmentHistoryBinding
-import com.km6.flynow.presentation.choose_destination.adapter.AirportListAdapter
 import com.km6.flynow.presentation.history.historydetail.HistoryDetailActivity
 import com.km6.flynow.presentation.login.LoginActivity
 import com.km6.flynow.presentation.profile.ProfileViewModel

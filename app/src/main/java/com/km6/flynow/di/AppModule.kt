@@ -10,8 +10,12 @@ import com.km6.flynow.data.datasource.destination_history.DestinationHistoryData
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDatabaseDataSource
 import com.km6.flynow.data.datasource.history.HistoryApiDataSource
 import com.km6.flynow.data.datasource.history.HistoryDataSource
+import com.km6.flynow.data.datasource.notification.NotificationApiDataSource
 import com.km6.flynow.data.datasource.payment.PaymentApiDataSource
 import com.km6.flynow.data.datasource.payment.PaymentDataSource
+import com.km6.flynow.data.datasource.notification.NotificationDatasource
+import com.km6.flynow.data.datasource.notification.NotificationDetailApiDataSource
+import com.km6.flynow.data.datasource.notification.NotificationDetailDatasource
 import com.km6.flynow.data.repository.AirportRepository
 import com.km6.flynow.data.repository.AirportRepositoryImpl
 import com.km6.flynow.data.repository.AuthRepository
@@ -20,6 +24,10 @@ import com.km6.flynow.data.repository.DestinationHistoryRepository
 import com.km6.flynow.data.repository.DestinationHistoryRepositoryImpl
 import com.km6.flynow.data.repository.HistoryRepository
 import com.km6.flynow.data.repository.HistoryRepositoryImpl
+import com.km6.flynow.data.repository.NotificationDetailRepository
+import com.km6.flynow.data.repository.NotificationDetailRepositoryImpl
+import com.km6.flynow.data.repository.NotificationRepository
+import com.km6.flynow.data.repository.NotificationRepositoryImpl
 import com.km6.flynow.data.repository.PaymentRepository
 
 import com.km6.flynow.data.repository.UserRepository
@@ -42,6 +50,7 @@ import com.km6.flynow.presentation.otp.OtpViewModel
 import com.km6.flynow.presentation.payment.PaymentViewModel
 import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.presentation.register.RegisterViewModel
+import com.km6.flynow.presentation.notification.notification_detail.NotificationDetailViewmodel
 import com.km6.flynow.utils.SharedPreferenceUtils
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -80,6 +89,8 @@ object AppModule {
             single<HistoryDataSource> { HistoryApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
+            single<NotificationDatasource> { NotificationApiDataSource(get()) }
+            single<NotificationDetailDatasource> { NotificationDetailApiDataSource(get()) }
         }
 
     private val repositoryModule =
@@ -90,6 +101,8 @@ object AppModule {
             single<HistoryRepository> { HistoryRepositoryImpl(get()) }
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
             single<PaymentRepository> { PaymentRepository(get()) }
+            single<NotificationRepository> { NotificationRepositoryImpl(get()) }
+            single<NotificationDetailRepository> { NotificationDetailRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -112,6 +125,7 @@ object AppModule {
             viewModelOf(::ForgotPasswordViewModel)
             viewModelOf(::HistoryDetailViewModel)
             viewModelOf(::PaymentViewModel)
+            viewModelOf(::NotificationDetailViewmodel)
         }
 
     val modules =

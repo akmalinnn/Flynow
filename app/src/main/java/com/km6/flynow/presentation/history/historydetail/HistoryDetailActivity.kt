@@ -4,24 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.km6.flynow.R
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.ActivityDetailHistoryBinding
 import com.km6.flynow.presentation.payment.PaymentActivity
-import com.km6.flynow.presentation.payment.PaymentViewModel
-import com.km6.flynow.utils.ResultWrapper
-import com.km6.flynow.utils.proceedWhen
 import com.km6.flynow.utils.toCustomDateFormat
 import com.km6.flynow.utils.toCustomTimeFormat
 import com.km6.flynow.utils.toIDRFormat
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -90,6 +83,21 @@ class HistoryDetailActivity : AppCompatActivity() {
 
     private fun bindHistoryItem(historyItem: History) {
         with(binding) {
+
+            when (historyItem.paymentStatus) {
+                "paid" -> binding.tvIssued.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history)
+
+                "pending" -> binding.tvIssued.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_pending)
+
+                "Issue!" -> binding.tvIssued.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
+
+                else -> binding.tvIssued.background =
+                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
+            }
+
             val destinationText =
                 "${historyItem.airportDepartureCity} -> ${historyItem.airportArrivalCity}"
             tvFlightDestination.text = destinationText
@@ -131,6 +139,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             if (historyItem.returnFlightId.isNullOrEmpty()) {
                 cvSectionCheckoutReturn.visibility = View.GONE
                 tvFlightNameReturn.visibility = View.GONE
+                binding.tvFlightDestinationReturn.visibility = View.GONE
             } else {
                 cvSectionCheckoutReturn.visibility = View.VISIBLE
             }
