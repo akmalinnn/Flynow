@@ -13,7 +13,7 @@ data class Flight(
     val airlineId: Int?,
     val departureTime: String?,
     val arrivalTime: String?,
-    val price: Double?,
+    val price: Int?,
     val flightClass: String?,
     val information: String?,
     val deletedAt: String?,

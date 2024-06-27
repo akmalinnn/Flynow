@@ -123,7 +123,7 @@
     <string name="discount">Discount: %1$s</string>
     <string name="tv_depature">Keberangkatan</string>
     <string name="tv_arrival">Kepulangan</string>
-    <string name="depature_destination"><![CDATA[{%1$s} -> {%2$s}]]></string>
+    <string name="depature_destination"><![CDATA[%1$s -> %2$s]]></string>
     <string name="terminal">%1$s - Terminal %2$s</string>
 
 

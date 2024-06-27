@@ -4,6 +4,8 @@ import com.km6.flynow.presentation.notification.NotificationViewModel
 import android.content.SharedPreferences
 import com.km6.flynow.data.datasource.AuthDataSource
 import com.km6.flynow.data.datasource.AuthDataSourceImpl
+import com.km6.flynow.data.datasource.DetailFlightDataSource
+import com.km6.flynow.data.datasource.DetailFlightDataSourceImpl
 import com.km6.flynow.data.datasource.FlightApiDataSource
 import com.km6.flynow.data.datasource.FlightDataSource
 import com.km6.flynow.data.datasource.airport.AirportApiDataSource
@@ -69,6 +71,8 @@ import org.koin.dsl.module
 
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
+import com.km6.flynow.data.repository.DetailFlightRepository
+import com.km6.flynow.data.repository.DetailFlightRepositoryImpl
 import com.km6.flynow.data.repository.FavoriteFlightRepository
 import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
@@ -107,6 +111,7 @@ object AppModule {
             single<FavoriteFlightDataSource> { FavoriteFlightApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
+            single<DetailFlightDataSource> { DetailFlightDataSourceImpl(get()) }
             single<NotificationDatasource> { NotificationApiDataSource(get()) }
             single<NotificationDetailDatasource> { NotificationDetailApiDataSource(get()) }
         }
@@ -121,6 +126,7 @@ object AppModule {
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
             single<FlightRepository> { FlightRepositoryImpl(get()) }
             single<PaymentRepository> { PaymentRepository(get()) }
+            single<DetailFlightRepository> { DetailFlightRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<NotificationDetailRepository> { NotificationDetailRepositoryImpl(get()) }
         }

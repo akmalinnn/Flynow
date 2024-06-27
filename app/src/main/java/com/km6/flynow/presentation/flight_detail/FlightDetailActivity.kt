@@ -8,6 +8,7 @@ import com.km6.flynow.data.model.Flight
 import com.km6.flynow.databinding.ActivityFlightDetailBinding
 import com.km6.flynow.utils.getFormattedDate
 import com.km6.flynow.utils.proceedWhen
+import com.km6.flynow.utils.toIDRFormat
 import com.km6.flynow.utils.toTimeFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -56,6 +57,8 @@ class FlightDetailActivity : AppCompatActivity() {
                                 tvReturnTime.text = departureFlight.arrivalTime.toTimeFormat()
                                 tvReturnDate.text = departureFlight.arrivalTime?.getFormattedDate()
                                 tvAirportReturn.text = departureFlight.arrivalairportName
+                                binding.tvTotalPrice.text = departureFlight.price.toIDRFormat()
+
                             }
                         } else if (id == returnFlight?.id) {
                             binding.layoutArrivalFlight.tvDestination.text = getString(R.string.depature_destination, returnFlight?.depaturecity, returnFlight?.arrivalcity)
@@ -74,6 +77,7 @@ class FlightDetailActivity : AppCompatActivity() {
                                 tvReturnTime.text = returnFlight?.arrivalTime.toTimeFormat()
                                 tvReturnDate.text = returnFlight?.arrivalTime?.getFormattedDate()
                                 tvAirportReturn.text = returnFlight?.arrivalairportName
+                                binding.tvTotalPrice.text = departureFlight.price.toIDRFormat()
                             }
                         }
                     }
