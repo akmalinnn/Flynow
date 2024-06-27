@@ -151,56 +151,54 @@ class ChooseDestinationFragment : BottomSheetDialogFragment() {
     }
 
     private fun getAirportList(keyword: String? = null) {
-        val token = viewModel.getToken()
-        if (token != null) {
-            Log.d("Token", token)
-            viewModel.searchAirport(keyword).observe(viewLifecycleOwner) {
-                it.proceedWhen(
-                    doOnLoading = {
-                        binding.layoutState.root.isVisible = true
-                        binding.layoutState.pbLoading.isVisible = true
-                        binding.layoutState.tvError.isVisible = false
-                        binding.rvListDestination.isVisible = false
-                        binding.rvAirport.isVisible = false
-                        binding.tvRecentSearch.isVisible = false
-                        binding.rvListDestination.isVisible = false
-                        binding.tvDelete.isVisible = false
-                    },
-                    doOnSuccess = {
-                        binding.layoutState.root.isVisible = false
-                        binding.layoutState.pbLoading.isVisible = false
-                        binding.layoutState.tvError.isVisible = false
-                        binding.tvRecentSearch.isVisible = false
-                        binding.rvListDestination.isVisible = false
-                        binding.tvDelete.isVisible = false
-                        binding.rvAirport.isVisible = true
-                        it.payload?.let { data ->
-                            (binding.rvAirport.adapter as? AirportListAdapter)?.submitData(data)
-                        }
-                    },
-                    doOnEmpty = {
-                        binding.layoutState.root.isVisible = true
-                        binding.layoutState.pbLoading.isVisible = false
-                        binding.layoutState.tvError.isVisible = true
-                        binding.layoutState.tvError.text = "Lokasi Tidak Ditemukan"
-                        binding.tvRecentSearch.isVisible = false
-                        binding.rvListDestination.isVisible = false
-                        binding.rvAirport.isVisible = false
-                        binding.tvDelete.isVisible = false
-                    },
-                    doOnError = {
-                        binding.layoutState.root.isVisible = true
-                        binding.layoutState.pbLoading.isVisible = false
-                        binding.layoutState.tvError.isVisible = true
-                        binding.layoutState.tvError.text = it.exception.toString()
-                        binding.tvRecentSearch.isVisible = false
-                        binding.rvListDestination.isVisible = false
-                        binding.rvAirport.isVisible = false
-                        binding.tvDelete.isVisible = false
+
+        viewModel.searchAirport(keyword).observe(viewLifecycleOwner) {
+            it.proceedWhen(
+                doOnLoading = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = true
+                    binding.layoutState.tvError.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.rvAirport.isVisible = false
+                    binding.tvRecentSearch.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.tvDelete.isVisible = false
+                },
+                doOnSuccess = {
+                    binding.layoutState.root.isVisible = false
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = false
+                    binding.tvRecentSearch.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.tvDelete.isVisible = false
+                    binding.rvAirport.isVisible = true
+                    it.payload?.let { data ->
+                        (binding.rvAirport.adapter as? AirportListAdapter)?.submitData(data)
                     }
-                )
-            }
+                },
+                doOnEmpty = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.text = "Lokasi Tidak Ditemukan"
+                    binding.tvRecentSearch.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.rvAirport.isVisible = false
+                    binding.tvDelete.isVisible = false
+                },
+                doOnError = {
+                    binding.layoutState.root.isVisible = true
+                    binding.layoutState.pbLoading.isVisible = false
+                    binding.layoutState.tvError.isVisible = true
+                    binding.layoutState.tvError.text = it.exception.toString()
+                    binding.tvRecentSearch.isVisible = false
+                    binding.rvListDestination.isVisible = false
+                    binding.rvAirport.isVisible = false
+                    binding.tvDelete.isVisible = false
+                }
+            )
         }
+
     }
 
     private fun showRecentSearch() {
