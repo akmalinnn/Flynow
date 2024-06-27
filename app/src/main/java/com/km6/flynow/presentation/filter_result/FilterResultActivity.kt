@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.km6.flynow.R
 import com.km6.flynow.data.model.Filter
 import com.km6.flynow.data.model.Flight
 import com.km6.flynow.data.model.Search
@@ -108,12 +109,12 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
 
 
         setupListFlight()
-        getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas.toString(), "price-asc")
+        getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas?.name?.lowercase(), "price-asc")
         setClickListener()
     }
 
     private fun setClickListener() {
-        binding.btnFilterButton.setOnClickListener{
+        binding.btnFilterSelectedButton.setOnClickListener{
             chooseFilter()
         }
     }
@@ -157,6 +158,11 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
             adapter = filterResultAdapter
             layoutManager = LinearLayoutManager(this@FilterResultActivity, LinearLayoutManager.VERTICAL, false)
         }
+        binding.layoutHeader.tvFlightDeparture.text = searchParams?.da?.airportCode
+        binding.layoutHeader.tvFlightDestination.text = searchParams?.aa?.airportCode
+        binding.layoutHeader.tvSeatValue.text = searchParams?.clas?.name
+        binding.layoutHeader.tvPassengerValue.text =
+            getString(R.string.passenger_value, searchParams?.totalPassenger.toString())
     }
 
     private fun bindFlight(data: List<Flight>?) {
@@ -171,7 +177,7 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
             if (selectedDepartureFlight == null) {
                 // Stage 1: Departure flight selected, store it and load return flights
                 selectedDepartureFlight = flight
-                getSearchFlight(flight.arrivalairportName, flight.depatureairportName, flight.arrivalTime, flight.arrivalTime, "1", "1", "0", "economy", "price-asc")
+                getSearchFlight(  searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas?.name?.lowercase(), "price-asc")
             } else {
                 // Stage 2: Return flight selected, navigate to detail with both flights
                 navigateToDetail(selectedDepartureFlight!!, flight)
@@ -183,6 +189,7 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
         val intent = Intent(this, FlightDetailActivity::class.java).apply {
             putExtra("DEPARTURE_FLIGHT", departureFlight)
             putExtra("RETURN_FLIGHT", returnFlight)
+            putExtra("ROUND_TRIP", searchParams?.roundTrip)
         }
         startActivity(intent)
     }
