@@ -24,6 +24,5 @@ class FilterResultViewModel(
                      baby: String? = null,
                      clas: String? = null,
                      sort: String? = null) = flightRepository.searchFlight(da,aa,dd,rd,adult, child, baby, clas, sort).asLiveData(Dispatchers.IO)
-    fun getFlights() = flightRepository.getFlight().asLiveData(Dispatchers.IO)
 
 }

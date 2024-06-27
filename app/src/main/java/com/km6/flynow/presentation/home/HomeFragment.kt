@@ -34,6 +34,7 @@ import com.km6.flynow.presentation.home.favorite_flight.FavoriteDetailActivity
 import com.km6.flynow.presentation.login.LoginActivity
 import com.km6.flynow.utils.GridSpacingItemDecoration
 import com.km6.flynow.utils.getFormattedDate
+import com.km6.flynow.utils.getIsoFormattedDate
 import com.km6.flynow.utils.proceedWhen
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Date
@@ -158,19 +159,19 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
 
     private fun search() {
 
-        val searchParameters = Search(
-            da = viewModel.airportFrom,
-            aa = viewModel.airportTo,
-            dd = viewModel.departureDate.toString(),
-            rd = viewModel.returnDate.toString(),
-            totalPassenger = viewModel.totalPassenger,
-            adult = viewModel.adultCount,
-            child = viewModel.childrenCount,
-            baby = viewModel.babyCount,
-            clas = viewModel.seatClass,
-            roundTrip = viewModel.isRoundTrip
-        )
         binding.layoutSearch.btnSearchButton.setOnClickListener {
+            val searchParameters = Search(
+                da = viewModel.airportFrom,
+                aa = viewModel.airportTo,
+                dd = viewModel.departureDate.getIsoFormattedDate(),
+                rd = viewModel.returnDate.getIsoFormattedDate(),
+                totalPassenger = viewModel.totalPassenger,
+                adult = viewModel.adultCount,
+                child = viewModel.childrenCount,
+                baby = viewModel.babyCount,
+                clas = viewModel.seatClass,
+                roundTrip = viewModel.isRoundTrip
+            )
             val intent = Intent(requireContext(), FilterResultActivity::class.java).apply {
                 putExtra("SEARCH_PARAMS", searchParameters)
             }

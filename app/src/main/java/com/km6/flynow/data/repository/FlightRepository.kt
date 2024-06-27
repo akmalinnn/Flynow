@@ -10,16 +10,13 @@ import com.km6.flynow.utils.proceedFlow
 import kotlinx.coroutines.flow.Flow
 
 interface FlightRepository {
-    fun getFlight(): Flow<ResultWrapper<List<Flight>>>
+
     fun searchFlight(da : String?, aa : String?, dd : String?, rd : String?, adult : String?, child : String?, baby : String?, clas : String?, sort : String?): Flow<ResultWrapper<Pair<List<Flight>,List<Flight>>>>
 }
 
 class FlightRepositoryImpl(
     private val dataSource: FlightDataSource,
 ) : FlightRepository{
-    override fun getFlight(): Flow<ResultWrapper<List<Flight>>> {
-        return proceedFlow { dataSource.getFlight().data?.departureFlights.toDepartureFlights() ; dataSource.getFlight().data?.returnFlights.toReturnFlights() }
-    }
 
     override fun searchFlight(
         da: String?,

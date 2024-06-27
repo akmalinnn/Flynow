@@ -56,8 +56,10 @@ interface FlynowApiService {
         @Part image: MultipartBody.Part
     ): RegisterResponse
 
-    @GET("flight")
-    suspend fun getFlight(): FlightResponse
+    @GET("flight/{id}")
+    suspend fun getFlight(
+        @Path("id") id: Int
+    ): FlightResponse
 
     @GET("flight/search")
     suspend fun searchFlight(
