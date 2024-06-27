@@ -71,6 +71,8 @@ import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
 import com.km6.flynow.data.repository.FavoriteFlightRepository
 import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
+import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
+import com.km6.flynow.presentation.flight_detail.FlightDetailViewModel
 
 object AppModule {
     private val networkModule =
@@ -142,6 +144,7 @@ object AppModule {
             viewModelOf(::OtpViewModel)
             viewModelOf(::ForgotPasswordViewModel)
             viewModelOf(::FilterResultViewModel)
+            viewModelOf(::FlightDetailViewModel)
             viewModelOf(::HistoryDetailViewModel)
             viewModelOf(::PaymentViewModel)
             viewModelOf(::NotificationDetailViewmodel)

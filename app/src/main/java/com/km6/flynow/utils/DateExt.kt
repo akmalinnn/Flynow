@@ -24,6 +24,14 @@ fun Long.getFormattedDate() : String {
     return getFormattedDate(year, month, dayOfMonth)
 }
 
+fun String.getFormattedDate(format: String = "yyyy-MM-dd"): String {
+    val timeInMillis = this.toLongOrNull() ?: return "Invalid date"
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = timeInMillis
+    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
+    return dateFormat.format(calendar.time)
+}
+
 fun getIsoFormattedDate(year: Int, month: Int, dayOfMonth: Int): String {
     val calendar = Calendar.getInstance()
     calendar.set(year, month, dayOfMonth, 0, 0, 0)
