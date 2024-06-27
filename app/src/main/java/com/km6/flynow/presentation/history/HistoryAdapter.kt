@@ -17,67 +17,81 @@ import com.km6.flynow.utils.toIDRFormat
 class HistoryAdapter(private val itemClick: (History) -> Unit) :
     RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
-    private val dataDiffer =
-        AsyncListDiffer(
-            this,
-            object : DiffUtil.ItemCallback<History>() {
-                override fun areItemsTheSame(
-                    oldItem: History,
-                    newItem: History,
-                ): Boolean {
-                    return oldItem.id == newItem.id
-                }
+    private val dataDiffer = AsyncListDiffer(this, object : DiffUtil.ItemCallback<History>() {
+        override fun areItemsTheSame(
+            oldItem: History,
+            newItem: History
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
 
-                override fun areContentsTheSame(
-                    oldItem: History,
-                    newItem: History,
-                ): Boolean {
-                    return oldItem.hashCode() == newItem.hashCode()
-                }
-            },
-        )
+        override fun areContentsTheSame(
+            oldItem: History,
+            newItem: History
+        ): Boolean {
+            return oldItem == newItem
+        }
+    })
+
+    private var fullList: List<History> = listOf()
 
     fun submitData(data: List<History>) {
+        fullList = data
         dataDiffer.submitList(data)
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup, viewType: Int
-    ): HistoryViewHolder {
-        val binding = ItemHistoryTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    fun filter(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullList
+        } else {
+            fullList.filter {
+                it.bookingCode.contains(query, ignoreCase = true) ||
+                        it.airportDepartureCity.contains(query, ignoreCase = true) ||
+                        it.airportArrivalCity.contains(query, ignoreCase = true)
+            }
+        }
+        dataDiffer.submitList(filteredList)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
+        val binding =
+            ItemHistoryTripBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryViewHolder(binding, itemClick)
     }
 
-
-    override fun onBindViewHolder(
-        holder: HistoryViewHolder,
-        position: Int,
-    ) {
+    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
         holder.bindView(dataDiffer.currentList[position])
     }
-
-
 
     override fun getItemCount(): Int = dataDiffer.currentList.size
 
     class HistoryViewHolder(
         private val binding: ItemHistoryTripBinding,
-        val itemClick: (History) -> Unit,
-    ) : RecyclerView.ViewHolder(binding.root) {
+        val itemClick: (History) -> Unit
+    ) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: History) {
-
             when (item.paymentStatus) {
                 "paid" -> binding.status.background =
                     ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history)
 
                 "pending" -> binding.status.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_pending)
+                    ContextCompat.getDrawable(
+                        binding.root.context,
+                        R.drawable.bg_status_history_pending
+                    )
 
                 "Issue!" -> binding.status.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
+                    ContextCompat.getDrawable(
+                        binding.root.context,
+                        R.drawable.bg_status_history_issue
+                    )
 
                 else -> binding.status.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
+                    ContextCompat.getDrawable(
+                        binding.root.context,
+                        R.drawable.bg_status_history_issue
+                    )
             }
 
             binding.tvCodeBooking.text = item.bookingCode
@@ -89,20 +103,16 @@ class HistoryAdapter(private val itemClick: (History) -> Unit) :
             binding.tvTimeArrival.text = item.arrivalTime.toCustomTimeFormat()
             binding.tvClassType.text = item.flightClass
             binding.tvPrice.text = item.price.toIDRFormat()
-
             binding.status.text = item.paymentStatus
 
-            val estimatedTime =
-                item.departureTime.toCustomTimeFormat()
-                    ?.let { item.arrivalTime.toCustomTimeFormat()
-                        ?.let { it1 -> calculateEstimatedTime(it, it1) } }
+            val estimatedTime = item.departureTime.toCustomTimeFormat()?.let { departureTime ->
+                item.arrivalTime.toCustomTimeFormat()?.let { arrivalTime ->
+                    calculateEstimatedTime(departureTime, arrivalTime)
+                }
+            }
             binding.tvEstimatedTime.text = estimatedTime
 
             itemView.setOnClickListener { itemClick(item) }
-            }
         }
     }
-
-
-
-
+}

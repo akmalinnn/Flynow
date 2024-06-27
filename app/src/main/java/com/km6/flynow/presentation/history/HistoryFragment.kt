@@ -44,6 +44,7 @@ class HistoryFragment : Fragment() {
         checkLoginStatus()
         setupListProduct()
         getHistoryList()
+        setupSearch()
     }
 
     private fun setupListProduct() {
@@ -120,6 +121,22 @@ class HistoryFragment : Fragment() {
             )
         }
     }
+
+    private fun setupSearch() {
+        binding.searchContent.historySearch.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { productAdapter.filter(it) }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { productAdapter.filter(it) }
+                return true
+            }
+        })
+    }
+
+
 
     private fun navigateToDetailActivity(historyItem: History) {
         val intent = Intent(requireContext(), HistoryDetailActivity::class.java).apply {

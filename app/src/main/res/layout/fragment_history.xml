@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.history.HistoryFragment">
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/ib_search_history"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:src="@drawable/ic_find_temp"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/textView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/textView"-->
-<!--        android:background="@null"/>-->
-
 
     <FrameLayout
         android:id="@+id/fl_btn_loading_state"
@@ -32,7 +22,6 @@
             android:visibility="gone" />
     </FrameLayout>
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -46,6 +35,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <include
+        android:id="@+id/search_content"
+        layout="@layout/item_search_history"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"/>
 
 
     <!-- RecyclerView below the TextView -->
@@ -59,10 +59,9 @@
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:layout_constraintTop_toBottomOf="@id/search_content"
         tools:listitem="@layout/item_history_trip" />
 
-    <!-- Included layout for login prompt -->
     <include
         android:id="@+id/layout_must_login"
         layout="@layout/fragment_must_login"
