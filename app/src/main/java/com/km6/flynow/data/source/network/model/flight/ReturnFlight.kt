@@ -33,7 +33,7 @@ data class ReturnFlight(
     @SerializedName("information")
     val information: String?,
     @SerializedName("price")
-    val price: Double?,
+    val price: Int?,
     @SerializedName("terminal")
     val terminal: String?,
     @SerializedName("updatedAt")
