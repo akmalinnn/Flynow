@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:background="@drawable/bg_card"
     app:cardCornerRadius="8dp"
@@ -42,10 +42,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_title"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:focusableInTouchMode="true"
             app:boxCornerRadiusBottomEnd="4dp"
             app:boxCornerRadiusBottomStart="4dp"
             app:boxCornerRadiusTopEnd="4dp"
@@ -54,12 +56,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title">
 
-            <Spinner
-                android:id="@+id/spinner_title"
+            <AutoCompleteTextView
+                android:id="@+id/autocomplete_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/title_options"
-                android:paddingBottom="24dp" />
+                android:hint="@string/text_auto_complete"
+                android:inputType="none"
+                android:paddingBottom="16dp"
+                android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,14 +114,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/til_full_name" />
 
-        <Switch
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/switch_button"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:checked="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_full_name"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            app:layout_constraintTop_toBottomOf="@id/til_full_name" />
 
         <TextView
             android:id="@+id/tv_family_name"
@@ -236,7 +241,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/text_ktp_paspor"
+            android:text="@string/text_pilih_doc"
             android:textColor="@color/md_theme_primary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -245,6 +250,46 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_ktp_paspor"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:focusableInTouchMode="true"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_ktp_paspor">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoComplete_ktp_paspor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_auto_ktp_paspor"
+                android:inputType="none"
+                android:paddingBottom="16dp"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_no_ktp_paspor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/text_no_ktp_paspor"
+            android:textColor="@color/md_theme_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_ktp_paspor" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_no_ktp_paspor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -255,14 +300,14 @@
             app:boxCornerRadiusTopStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_ktp_paspor">
+            app:layout_constraintTop_toBottomOf="@id/tv_no_ktp_paspor">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_ktp_paspor"
+                android:id="@+id/et_no_ktp_paspor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/text_til_ktp_paspor"
-                android:inputType="text"
+                android:hint="@string/text_til_no_ktp_paspor"
+                android:inputType="number"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -278,10 +323,50 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_ktp_paspor" />
+            app:layout_constraintTop_toBottomOf="@id/til_no_ktp_paspor" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_negara_penerbit"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:focusableInTouchMode="true"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_negara_penerbit">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoComplete_negara_penerbit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text_auto_negara_penerbit"
+                android:inputType="none"
+                android:paddingBottom="16dp"
+                android:textSize="16sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_exp_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/text_exp_date"
+            android:textColor="@color/md_theme_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_negara_penerbit" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_exp_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -292,14 +377,15 @@
             app:boxCornerRadiusTopStart="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_negara_penerbit">
+            app:layout_constraintTop_toBottomOf="@id/tv_exp_date">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_negara_penerbit"
+                android:id="@+id/et_exp_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/text_til_negara_penerbit"
-                android:inputType="text"
+                android:drawableEnd="@drawable/ic_date"
+                android:hint="@string/text_til_exp_date"
+                android:inputType="date"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

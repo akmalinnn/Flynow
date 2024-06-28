@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".presentation.checkout_pemesan.BiodataPemesanActivity">
+    tools:context=".presentation.checkout.checkout_pemesan.BiodataPemesanActivity">
 
     <LinearLayout
         android:id="@+id/ll_action_bar"
@@ -24,7 +24,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
             android:src="@drawable/ic_back"
-            tools:tint="@color/white" />
+            tools:tint="@color/white"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/tv_title_toolbar"
@@ -62,7 +63,7 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Data Diri Pemesan" />
+                android:text="@string/text_title_form_pemesan" />
 
             <TextView
                 android:id="@+id/tv_full_name"
@@ -111,14 +112,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_full_name" />
 
-            <Switch
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/switch_button"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
+                android:checked="true"
                 android:layout_marginEnd="16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_full_name"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+                android:buttonTintMode="@color/md_theme_primary"
+                app:layout_constraintTop_toBottomOf="@id/til_full_name" />
 
             <TextView
                 android:id="@+id/tv_family_name"

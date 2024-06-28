@@ -41,6 +41,7 @@ android {
     }
 
     buildFeatures {
+        dataBinding = true
         viewBinding = true
         buildConfig = true
     }
@@ -131,8 +132,10 @@ dependencies {
     implementation ("com.google.android.material:material:1.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
-    // The view calendar library
     implementation (libs.view)
+
+    implementation(libs.groupie)
+    implementation(libs.groupie.viewbinding)
 
     testImplementation(libs.mockk.agent)
     androidTestImplementation(libs.mockk.android)
