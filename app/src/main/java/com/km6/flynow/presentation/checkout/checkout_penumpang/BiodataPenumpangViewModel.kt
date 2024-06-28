@@ -8,5 +8,5 @@ class BiodataPenumpangViewModel(
     extras: Bundle?,
     private val preference: UserPreference,
 ) : ViewModel() {
-    val userId = preference.getUserID()
+    val userId = preference.getUserData()
 }

@@ -3,15 +3,18 @@ package com.km6.flynow.presentation.checkout.checkout_pemesan
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.km6.flynow.databinding.ActivityBiodataPemesanBinding
 import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangActivity
+import com.km6.flynow.presentation.home.HomeViewModel
 
 class BiodataPemesanActivity : AppCompatActivity() {
     private val binding: ActivityBiodataPemesanBinding by lazy {
         ActivityBiodataPemesanBinding.inflate(layoutInflater)
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +67,11 @@ class BiodataPemesanActivity : AppCompatActivity() {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
             },
         )
+
+
     }
+
+
 
     private fun setFamilyName() {
         binding.switchButton.setOnCheckedChangeListener { _, isChecked ->

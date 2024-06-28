@@ -1,10 +1,13 @@
 package com.km6.flynow.presentation.home
 
+import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.km6.flynow.data.model.Airport
 import com.km6.flynow.data.model.SeatClass
 import com.km6.flynow.data.repository.FavoriteFlightRepository
+import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangActivity
 import kotlinx.coroutines.Dispatchers
 
 class HomeViewModel(

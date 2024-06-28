@@ -46,13 +46,13 @@ class PassengerItem(private val bio: BioPenumpang) :
         viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
             setLastNameVisibility(viewBinding, isChecked)
         }
-        if (bio.lastName != null) {
-            viewBinding.etFamilyName.visibility = View.VISIBLE
-            viewBinding.tilFamilyName.visibility = View.VISIBLE
-        } else {
-            viewBinding.etFamilyName.visibility = View.GONE
-            viewBinding.tilFamilyName.visibility = View.GONE
-        }
+//        if (bio.lastName != null) {
+//            viewBinding.etFamilyName.visibility = View.VISIBLE
+//            viewBinding.tilFamilyName.visibility = View.VISIBLE
+//        } else {
+//            viewBinding.etFamilyName.visibility = View.GONE
+//            viewBinding.tilFamilyName.visibility = View.GONE
+//        }
 
         // Set up birthDate
         viewBinding.etDate.setOnClickListener {
@@ -391,7 +391,7 @@ class PassengerItem(private val bio: BioPenumpang) :
         return BioPenumpang(
             type = bio.type,
             firstName = binding.etFullName.text.toString(),
-            lastName = binding.etFamilyName.text.toString(),
+//            lastName = binding.etFamilyName.text.toString(),
             dateOfBirth = binding.etDate.text.toString(),
             nationality = binding.etNationality.text.toString(),
             docType = binding.autoCompleteKtpPaspor.text.toString(),

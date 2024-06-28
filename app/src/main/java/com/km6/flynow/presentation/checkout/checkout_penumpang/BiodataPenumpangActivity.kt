@@ -20,12 +20,14 @@ class BiodataPenumpangActivity : AppCompatActivity() {
         setContentView(binding.root)
         setRecyclerView()
         setClick()
+//
 //        val numAdult = intent.getIntExtra("numAdult", 0)
 //        val numChild = intent.getIntExtra("numChild", 0)
 //        val numBaby = intent.getIntExtra("numBaby", 0)
 
         addPassengerForms(1, 0, 0)
 //        addPassengerForms(numAdult, numChild, numBaby)
+
     }
 
     private fun addPassengerForms(numAdult: Int, numChild: Int, numBaby: Int) {
@@ -56,7 +58,7 @@ class BiodataPenumpangActivity : AppCompatActivity() {
         binding.btnToChooseSeat.setOnClickListener {
             val passengerList = collectPassengerData()
             if (passengerList != null) {
-                val intent = ChooseSeatActivity.newIntent(this, ArrayList(passengerList))
+//                val intent = ChooseSeatActivity.Intent(this, ArrayList(passengerList))
                 startActivity(intent)
             }
         }

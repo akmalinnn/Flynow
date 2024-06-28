@@ -12,7 +12,7 @@ data class BioPenumpangList(
 data class BioPenumpang(
     val type: String, // "Adult", "Child", "Baby"
     var firstName: String = "",
-    var lastName: String? = null,
+//    var lastName: String? = null,
     var dateOfBirth: String = "",
     var nationality: String = "",
     var docNumber: String = "",

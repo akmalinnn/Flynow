@@ -52,6 +52,8 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
         }
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -376,6 +378,7 @@ class HomeFragment : Fragment(), DestinationSelectionListener, OnDateSelectedLis
     private fun navigateToDetailActivity(historyItem: FavoriteFlight) {
         val intent = Intent(requireContext(), FavoriteDetailActivity::class.java).apply {
             putExtra(FavoriteDetailActivity.EXTRA_FAVORITE_FLIGHT_ITEM, historyItem)
+
         }
         startActivity(intent)
     }
