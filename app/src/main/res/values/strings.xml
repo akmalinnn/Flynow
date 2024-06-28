@@ -72,7 +72,7 @@
     <string name="accountSettings">Pengaturan Akun</string>
     <string name="edit_profile">Ubah Profile</string>
     <string name="logout_account">Keluar</string>
-    <string name="notification_tittle_page">Notifikasi\n</string>
+    <string name="notification_tittle_page">Notifikasi</string>
     <string name="must_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="app_version">version:0.0.1</string>
     <string name="text_title_flight_details">Rincian Penerbangan</string>
@@ -138,6 +138,7 @@
     <string name="tv_arrival">Kepulangan</string>
     <string name="depature_destination"><![CDATA[%1$s -> %2$s]]></string>
     <string name="terminal">%1$s - Terminal %2$s</string>
+    <string name="pending">Pending</string>
 
 
 </resources>

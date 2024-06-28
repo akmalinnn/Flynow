@@ -2,7 +2,9 @@ package com.km6.flynow.presentation.history
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getString
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -71,27 +73,47 @@ class HistoryAdapter(private val itemClick: (History) -> Unit) :
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindView(item: History) {
+            binding.status.text = item.paymentStatus ?: "pending"
+
             when (item.paymentStatus) {
-                "paid" -> binding.status.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history)
+                "paid" -> {
+                    binding.status.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history
+                        )
 
-                "pending" -> binding.status.background =
-                    ContextCompat.getDrawable(
-                        binding.root.context,
-                        R.drawable.bg_status_history_pending
-                    )
+                    binding.status.text = item.paymentStatus
+                }
 
-                "Issue!" -> binding.status.background =
-                    ContextCompat.getDrawable(
-                        binding.root.context,
-                        R.drawable.bg_status_history_issue
-                    )
 
-                else -> binding.status.background =
-                    ContextCompat.getDrawable(
-                        binding.root.context,
-                        R.drawable.bg_status_history_issue
-                    )
+                "" -> {
+                    binding.status.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history_pending
+                        )
+                    binding.status.text = item.paymentStatus
+                }
+
+
+                "expired" -> {
+                    binding.status.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history_issue
+                        )
+                    binding.status.text = item.paymentStatus
+                }
+
+                else -> {
+                    binding.status.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history_pending
+                        )
+                    binding.status.text = item.paymentStatus ?: "pending"
+                }
             }
 
             binding.tvCodeBooking.text = item.bookingCode
@@ -103,7 +125,7 @@ class HistoryAdapter(private val itemClick: (History) -> Unit) :
             binding.tvTimeArrival.text = item.arrivalTime.toCustomTimeFormat()
             binding.tvClassType.text = item.flightClass
             binding.tvPrice.text = item.price.toIDRFormat()
-            binding.status.text = item.paymentStatus
+
 
             val estimatedTime = item.departureTime.toCustomTimeFormat()?.let { departureTime ->
                 item.arrivalTime.toCustomTimeFormat()?.let { arrivalTime ->
@@ -114,5 +136,6 @@ class HistoryAdapter(private val itemClick: (History) -> Unit) :
 
             itemView.setOnClickListener { itemClick(item) }
         }
+
     }
 }
