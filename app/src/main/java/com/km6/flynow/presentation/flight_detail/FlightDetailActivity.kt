@@ -15,12 +15,12 @@ import com.km6.flynow.presentation.login.LoginActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import com.km6.flynow.data.model.Flight
-import com.km6.flynow.databinding.ActivityFlightDetailBinding
 import com.km6.flynow.utils.getFormattedDate
 import com.km6.flynow.utils.proceedWhen
 import com.km6.flynow.utils.toIDRFormat
 import com.km6.flynow.utils.toTimeFormat
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class FlightDetailActivity : AppCompatActivity() {
     private val binding: ActivityFlightDetailBinding by lazy {
@@ -45,6 +45,19 @@ class FlightDetailActivity : AppCompatActivity() {
 //            } else {
                 navigateToBiodataPemesan()
             }
+        }
+
+    private fun navigateToBiodataPemesan() {
+        startActivity(
+            Intent(this, BiodataPemesanActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+        )
+    }
+        setContentView(binding.root)
+        setClickListener()
+    }
+
         setContentView(binding.root)
 
         departureFlight = intent.getParcelableExtra("DEPARTURE_FLIGHT")!!
