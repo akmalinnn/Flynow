@@ -125,6 +125,7 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
             putExtra("DEPARTURE_FLIGHT", departureFlight)
             putExtra("RETURN_FLIGHT", returnFlight)
             putExtra("ROUND_TRIP", searchParams?.roundTrip)
+            putExtra("SEARCH_PARAMS", searchParams)
         }
         startActivity(intent)
     }

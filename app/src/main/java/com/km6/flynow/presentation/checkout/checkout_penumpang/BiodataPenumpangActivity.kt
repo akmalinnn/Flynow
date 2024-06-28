@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.km6.flynow.data.model.BioPenumpang
+import com.km6.flynow.data.model.Search
 import com.km6.flynow.databinding.ActivityBiodataPenumpangBinding
 import com.km6.flynow.presentation.checkout.chooseseat.ChooseSeatActivity
 import com.xwray.groupie.GroupAdapter
@@ -13,6 +14,9 @@ class BiodataPenumpangActivity : AppCompatActivity() {
     private val binding: ActivityBiodataPenumpangBinding by lazy {
         ActivityBiodataPenumpangBinding.inflate(layoutInflater)
     }
+
+    private var searchParams: Search? = null
+
     private val bioAdapter = GroupAdapter<GroupieViewHolder>()
     private val items = mutableListOf<PassengerItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,12 +24,14 @@ class BiodataPenumpangActivity : AppCompatActivity() {
         setContentView(binding.root)
         setRecyclerView()
         setClick()
+
+        searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 //
 //        val numAdult = intent.getIntExtra("numAdult", 0)
 //        val numChild = intent.getIntExtra("numChild", 0)
 //        val numBaby = intent.getIntExtra("numBaby", 0)
 
-        addPassengerForms(1, 0, 0)
+        addPassengerForms(searchParams?.adult ?: 0 , searchParams?.child ?:0, searchParams?.baby ?:0)
 //        addPassengerForms(numAdult, numChild, numBaby)
 
     }

@@ -16,6 +16,7 @@ import com.km6.flynow.presentation.login.LoginActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import com.km6.flynow.data.model.Flight
+import com.km6.flynow.data.model.Search
 import com.km6.flynow.data.source.network.model.flight.DepartureFlight
 import com.km6.flynow.data.source.network.model.flight.ReturnFlight
 import com.km6.flynow.utils.getFormatDate
@@ -37,6 +38,7 @@ class FlightDetailActivity : AppCompatActivity() {
     private lateinit var departureFlight: Flight
     private var returnFlight: Flight? = null
     private var roundTrip: Boolean = false
+    private var searchParams: Search? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +50,9 @@ class FlightDetailActivity : AppCompatActivity() {
         returnFlight = intent.getParcelableExtra("RETURN_FLIGHT")
         Log.d("returnFlight", "onCreate: $returnFlight")
         roundTrip = intent.getBooleanExtra("ROUND_TRIP", false)
+
+        searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
+
 
 
         // Display flight details
@@ -136,6 +141,7 @@ class FlightDetailActivity : AppCompatActivity() {
         startActivity(
             Intent(this, BiodataPemesanActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("SEARCH_PARAMS", searchParams)
             }
         )
     }
