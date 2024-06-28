@@ -88,6 +88,7 @@ class FlightDetailActivity : AppCompatActivity() {
                                 binding.tvTotalPrice.text = departureFlight.price.toIDRFormat()
 
                             }
+
                         } else if (id == returnFlight?.id) {
                             binding.layoutArrivalFlight.tvDestination.text = getString(
                                 R.string.depature_destination,
