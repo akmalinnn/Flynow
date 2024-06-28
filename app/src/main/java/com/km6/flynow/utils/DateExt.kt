@@ -24,12 +24,30 @@ fun Long.getFormattedDate() : String {
     return getFormattedDate(year, month, dayOfMonth)
 }
 
-fun String.getFormattedDate(format: String = "yyyy-MM-dd"): String {
+fun String.getFormattedDate(): String {
     val timeInMillis = this.toLongOrNull() ?: return "Invalid date"
-    val calendar = Calendar.getInstance()
-    calendar.timeInMillis = timeInMillis
-    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
-    return dateFormat.format(calendar.time)
+    val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    val date = Date(timeInMillis)
+    return sdf.format(date)
+}
+
+fun String.getFormatDate(): String {
+    val timeInMillis = this.toLongOrNull() ?: return "Invalid date"
+    val sdf = SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault())
+    val date = Date(timeInMillis)
+    return sdf.format(date)
+}
+
+fun String.getTime(): String {
+    return try {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+        val outputFormat = SimpleDateFormat("HH:mm:ss", Locale("in", "ID"))
+        val date: Date = inputFormat.parse(this)
+        outputFormat.format(date)
+    } catch (e: Exception) {
+        "Invalid time"
+    }
 }
 
 fun getIsoFormattedDate(year: Int, month: Int, dayOfMonth: Int): String {
