@@ -8,6 +8,7 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import coil.load
 import com.km6.flynow.R
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.ActivityDetailHistoryBinding
@@ -110,6 +111,7 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvTakeOffDate.text = historyItem.departureTime.toCustomDateFormat()
             tvAirportOrigin.text = historyItem.airportDepartureName
             tvFlightCode.text = historyItem.flightCode
+            ivLogo.setImageResource(R.drawable.ic_airline)
 
             val flightClass = "${historyItem.airlineDepartureName} - ${historyItem.flightClass}"
             tvFlightName.text = flightClass
@@ -117,6 +119,11 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvLandingDate.text = historyItem.arrivalTime.toCustomDateFormat()
             tvNamePassenger.text = passengerNames
             tvAirportDestination.text = historyItem.airportArrivalName
+            ivLogo.load(historyItem.airlineLogo) {
+                crossfade(true)
+                error(R.mipmap.ic_launcher)
+            }
+
 
             // Return flight details
             val destinationTextReturn =
@@ -150,6 +157,10 @@ class HistoryDetailActivity : AppCompatActivity() {
 
             tvPriceDetailsPassengers.text = getString(R.string.adultText, adultsText)
             tvPriceDetailsPassengersChildren.text = getString(R.string.childernText, childrenText)
+            ivLogoReturn.load(historyItem.airlineLogo) {
+                crossfade(true)
+                error(R.mipmap.ic_launcher)
+            }
         }
     }
 
