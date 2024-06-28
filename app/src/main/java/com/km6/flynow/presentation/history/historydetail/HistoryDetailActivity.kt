@@ -84,19 +84,35 @@ class HistoryDetailActivity : AppCompatActivity() {
 
     private fun bindHistoryItem(historyItem: History) {
         with(binding) {
+            val paymentStatus = historyItem.paymentStatus
 
-            when (historyItem.paymentStatus) {
-                "paid" -> binding.tvIssued.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history)
+            when (paymentStatus) {
+                "paid" -> {
+                    binding.tvIssued.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history
+                        )
+                    binding.tvIssued.text = historyItem.paymentStatus
+                }
 
-                "pending" -> binding.tvIssued.background =
+                "" -> { binding.tvIssued.background =
                     ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_pending)
+                    binding.tvIssued.text = binding.root.context.getString(R.string.pending)
+                }
+                "expired" -> {
+                    binding.tvIssued.background =
+                        ContextCompat.getDrawable(
+                            binding.root.context,
+                            R.drawable.bg_status_history_issue
+                        )
+                    binding.tvIssued.text = historyItem.paymentStatus
+                }
+                else -> {
+                    tvIssued.background = ContextCompat.getDrawable(root.context, R.drawable.bg_status_history_pending)
+                    binding.tvIssued.text = binding.root.context.getString(R.string.pending)
+                }
 
-                "Issue!" -> binding.tvIssued.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
-
-                else -> binding.tvIssued.background =
-                    ContextCompat.getDrawable(binding.root.context, R.drawable.bg_status_history_issue)
             }
 
             val destinationText =
@@ -105,7 +121,6 @@ class HistoryDetailActivity : AppCompatActivity() {
 
             val passengerNames = historyItem.passengerName.joinToString(", ")
 
-            tvIssued.text = historyItem.paymentStatus
             tvNumberBookingCode.text = historyItem.bookingCode
             tvTakeOffTime.text = historyItem.departureTime.toCustomTimeFormat()
             tvTakeOffDate.text = historyItem.departureTime.toCustomDateFormat()
