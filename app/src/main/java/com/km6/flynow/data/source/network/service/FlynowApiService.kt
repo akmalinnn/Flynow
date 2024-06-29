@@ -2,11 +2,13 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.model.Booking
 import com.km6.flynow.data.model.Response
 import com.km6.flynow.data.source.network.model.flight.FlightResponse
 //import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
+import com.km6.flynow.data.source.network.model.booking.BookingResponse
 import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
@@ -124,6 +126,10 @@ interface FlynowApiService {
         @Path("id") id: Int?,
     ): Response<List<SeatData>?>
 
+    @POST("booking")
+    suspend fun createBooking(
+        @Body bookingRequest: Booking
+    ): BookingResponse
 
 
     companion object {

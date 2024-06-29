@@ -31,17 +31,16 @@ class PassengerItem(private val bio: Passenger) :
         viewBinding.tvTitleFormPassenger.text = "Passenger ${position + 1} - ${bio.passengerType}"
 
         // Set up AutoCompleteTitle
-        val items = listOf("Mr.", "Mrs.", "Miss ")
-        val autoComplete = viewBinding.autocompleteTitle
-        val adapter = ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, items)
+        val titles = listOf("Mr.", "Mrs.", "Miss")
+        val autoCompleteTitle = viewBinding.autocompleteTitle
+        val titleAdapter = ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, titles)
 
-        autoComplete.setAdapter(adapter)
-        autoComplete.onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
-                    .show()
-            }
+        autoCompleteTitle.setAdapter(titleAdapter)
+        autoCompleteTitle.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            val selectedTitle = adapterView.getItemAtPosition(i) as String
+            viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
+            Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
+        }
 //
 //        setLastNameVisibility(viewBinding, false)
 //        viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
@@ -60,8 +59,10 @@ class PassengerItem(private val bio: Passenger) :
             showBirthDate(viewBinding)
         }
 
+
+
         // Set up AutoCompleteDocument
-        val itemDoc = listOf("KTP", "Paspor", "Kartu Keluarga")
+        val itemDoc = DocumentType.entries.map { it. displayName }
         val autoCompleteDoc = viewBinding.autoCompleteKtpPaspor
         val adapterdoc =
             ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, itemDoc)
@@ -301,7 +302,7 @@ class PassengerItem(private val bio: Passenger) :
                 binding.root.context,
                 { _, selectedYear, selectedMonth, selectedDay ->
                     // Set the selected date to the input
-                    val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                    val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
                     binding.etDate.setText(selectedDate)
                 },
                 year,
@@ -322,7 +323,7 @@ class PassengerItem(private val bio: Passenger) :
                 binding.root.context,
                 { _, selectedYear, selectedMonth, selectedDay ->
                     // Set the selected date to the input
-                    val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                    val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
                     binding.etExpDate.setText(selectedDate)
                 },
                 year,
@@ -330,21 +331,6 @@ class PassengerItem(private val bio: Passenger) :
                 day,
             )
         dateExp.show()
-    }
-
-    private fun setLastNameVisibility(
-        viewBinding: ItemFormBiodataPenumpangBinding,
-        isVisible: Boolean
-    ) {
-        if (isVisible) {
-            viewBinding.tvFamilyName.visibility = View.VISIBLE
-            viewBinding.etFamilyName.visibility = View.VISIBLE
-            viewBinding.tilFamilyName.visibility = View.VISIBLE
-        } else {
-            viewBinding.tvFamilyName.visibility = View.GONE
-            viewBinding.etFamilyName.visibility = View.GONE
-            viewBinding.tilFamilyName.visibility = View.GONE
-        }
     }
     
     fun validateForm(): Boolean {
@@ -403,3 +389,8 @@ class PassengerItem(private val bio: Passenger) :
     }
 }
 
+enum class DocumentType(val displayName: String) {
+    KTP("ktp"),
+    Paspor("paspor"),
+    Kartu_Keluarga("kartu_keluarga");
+}

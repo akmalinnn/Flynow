@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Booking(
     val departureFlightId: Int?,
-    val returnFlightId: Int?,
+    var returnFlightId: Int?,
     val numAdults: Int,
     val numChildren: Int,
     val numBabies: Int,
@@ -29,6 +29,6 @@ data class Passenger(
 @Parcelize
 data class SeatPayloads(
     var departureSeats: List<String>?,
-    val returnSeats: List<String>?
+    var returnSeats: List<String>?
 ) : Parcelable
 

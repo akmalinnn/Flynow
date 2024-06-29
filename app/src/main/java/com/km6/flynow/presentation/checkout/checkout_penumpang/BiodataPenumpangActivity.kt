@@ -44,13 +44,13 @@ class BiodataPenumpangActivity : AppCompatActivity() {
 
     private fun addPassengerForms(numAdult: Int, numChild: Int, numBaby: Int) {
         for (i in 0 until numAdult) {
-            items.add(PassengerItem(Passenger(passengerType = "Adult")))
+            items.add(PassengerItem(Passenger(passengerType = "adult")))
         }
         for (i in 0 until numChild) {
-            items.add(PassengerItem(Passenger(passengerType = "Child")))
+            items.add(PassengerItem(Passenger(passengerType = "child")))
         }
         for (i in 0 until numBaby) {
-            items.add(PassengerItem(Passenger(passengerType = "Baby")))
+            items.add(PassengerItem(Passenger(passengerType = "baby")))
         }
         bioAdapter.addAll(items)
     }

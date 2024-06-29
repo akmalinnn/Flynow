@@ -20,7 +20,6 @@ class BiodataPemesanActivity : AppCompatActivity() {
     }
 
     private var searchParams: Search? = null
-    private var flight: Flight? = null
     private var booking: Booking? = null
 
 
@@ -28,7 +27,6 @@ class BiodataPemesanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setClickListener()
-        setFamilyName()
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
         booking = intent.getParcelableExtra("BOOKING")
     }
@@ -82,16 +80,6 @@ class BiodataPemesanActivity : AppCompatActivity() {
         )
     }
 
-
-
-
-    private fun setFamilyName() {
-        binding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-            binding.tvFamilyName.isVisible = isChecked
-            binding.tilFamilyName.isVisible = isChecked
-            binding.etFamilyName.isVisible = isChecked
-        }
-    }
 
     companion object {
         fun startActivity(

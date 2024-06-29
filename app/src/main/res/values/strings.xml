@@ -85,7 +85,7 @@
     <string name="text_family_name">Nama Keluarga</string>
     <string name="text_til_family_name">Masukkan Nama Keluarga</string>
     <string name="text_date">Tanggal Lahir</string>
-    <string name="text_til_date">dd/mm/yyyy</string>
+    <string name="text_til_date">yyyy-mm-dd</string>
     <string name="text_nationality">Kewarganegaraan</string>
     <string name="text_til_nationality">Masukkan Kewarganegaraan</string>
     <string name="text_no_ktp_paspor">No. KTP/Paspor/KK</string>
@@ -108,7 +108,7 @@
     <string name="text_no_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="text_login">Masuk</string>
     <string name="text_pilih_doc">Pilih Dokumen</string>
-    <string name="text_til_exp_date">dd/mm/yyyy</string>
+    <string name="text_til_exp_date">yyyy/mm/dd</string>
     <string name="text_exp_date">Berlaku Sampai</string>
     <string name="text_auto_complete">Pilih Title Anda</string>
     <string name="text_auto_ktp_paspor">Pilih Dokumen Anda</string>

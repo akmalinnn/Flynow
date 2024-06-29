@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.viewModelScope
 import com.km6.flynow.R
 import com.km6.flynow.data.model.Booking
 import com.km6.flynow.data.model.Flight
@@ -16,6 +17,7 @@ import com.km6.flynow.data.model.Search
 import com.km6.flynow.data.model.SeatPayloads
 import com.km6.flynow.data.source.network.model.history.Seat
 import com.km6.flynow.data.source.network.model.seat.SeatData
+import com.km6.flynow.presentation.checkout.checkout_detail.CheckoutDetailActivity
 import com.km6.flynow.presentation.checkout.checkout_penumpang.PassengerItem
 import com.km6.flynow.utils.proceedWhen
 import com.xwray.groupie.GroupAdapter
@@ -23,6 +25,7 @@ import com.xwray.groupie.GroupieViewHolder
 import dev.jahidhasanco.seatbookview.SeatBookView
 import dev.jahidhasanco.seatbookview.SeatClickListener
 import dev.jahidhasanco.seatbookview.SeatLongClickListener
+import kotlinx.coroutines.launch
 import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,8 +39,8 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     }
 
     private lateinit var seatBookView: SeatBookView
+    private lateinit var seatBookViewReturn: SeatBookView
     private lateinit var passengers: ArrayList<Passenger>
-
 
     private var searchParams: Search? = null
     private var booking: Booking? = null
@@ -73,10 +76,9 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
         getSeat()
 
-
+        getSeatReturn()
 
         setClickListener()
-        Log.d("Passenger Data List", "onCreate: ${passengers}}")
     }
 
     private fun getSeat() {
@@ -90,8 +92,31 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                         }
                     },
                     doOnError = {
-    //                    showAlertDialog(it.exception?.message.orEmpty())
                     },
+                )
+            }
+        }
+    }
+
+    private fun getSeatReturn() {
+        booking?.returnFlightId?.let {
+            viewModel.getSeat(it).observe(this) { it ->
+                it.proceedWhen(
+                    doOnSuccess = {
+                        it.payload?.let { seat ->
+                            setSeatViewReturn(seat)
+                            viewModel.seat.value = seat
+                        }
+                    },
+                    doOnError = {
+
+                    },
+
+                    doOnEmpty = {
+                    binding.layoutChooseSeatReturn.visibility = View.GONE
+                    booking?.seatPayloads?.returnSeats = null
+                        booking?.returnFlightId = null
+                    }
                 )
             }
         }
@@ -100,13 +125,13 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
     private fun setSeatView(seats: List<SeatData>) {
         val newSeats = generateSeatsString(viewModel.capacity, seats)
-        seatBookView = findViewById(R.id.layoutSeat)
+        seatBookView = findViewById(R.id.layout_chooseSeat)
         seatBookView.setSeatsLayoutString(newSeats)
             .isCustomTitle(true)
             .setCustomTitle(title)
             .setSeatLayoutPadding(2)
             .setSelectSeatLimit(searchParams?.totalPassenger!!)
-            .setSeatSizeBySeatsColumnAndLayoutWidth(7, -1)
+            .setSeatSizeBySeatsColumnAndLayoutWidth(8, -1)
 
         seatBookView.show()
 
@@ -127,11 +152,80 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         )
     }
 
+
+    private fun setSeatViewReturn(seats: List<SeatData>) {
+        val newSeats = generateSeatsStringReturn(viewModel.capacity, seats)
+        seatBookViewReturn = findViewById(R.id.layout_chooseSeat_return)
+        seatBookViewReturn.setSeatsLayoutString(newSeats)
+            .isCustomTitle(true)
+            .setCustomTitle(title)
+            .setSeatLayoutPadding(2)
+            .setSelectSeatLimit(searchParams?.totalPassenger!!)
+            .setSeatSizeBySeatsColumnAndLayoutWidth(8, -1)
+
+        seatBookViewReturn.show()
+
+        seatBookViewReturn.setSeatClickListener(
+            object : SeatClickListener {
+                override fun onAvailableSeatClick(
+                    selectedIdList: List<Int>,
+                    view: View,
+                ) {
+                }
+
+                override fun onBookedSeatClick(view: View) {
+                }
+
+                override fun onReservedSeatClick(view: View) {
+                }
+            },
+        )
+    }
+
+
     private fun generateSeatsString(
         capacity: Int,
         seats: List<SeatData>,
     ): String {
-        Log.d("Seat", "generateSeatsString: $seats")
+        val sb = StringBuilder()
+        var remainingCapacity = capacity
+        var seatCounter = 0
+        var space = 3
+        sb.append("/")
+
+        while (remainingCapacity > 0) {
+            if (seatCounter % 6 == 0 && seatCounter > 0) {
+                sb.append("/")
+            }
+
+            val seatsInRow = minOf(remainingCapacity, 3)
+            repeat(seatsInRow) {
+                val currentSeatIndex = seatCounter + it
+                if (currentSeatIndex < seats.size) {
+                    val seat = seats[currentSeatIndex]
+                    sb.append(if (seat.seatAvailable) "A" else "U") // Use API data
+                } else {
+                    sb.append("_")
+                }
+            }
+
+            remainingCapacity -= seatsInRow
+            seatCounter += seatsInRow
+            space += seatsInRow
+
+            if (space % 6 == 0 && remainingCapacity > 0) {
+                sb.append("_")
+            }
+        }
+
+        return sb.toString()
+    }
+
+
+    private fun generateSeatsStringReturn(
+        capacity: Int,
+        seats: List<SeatData>,
+    ): String {
         val sb = StringBuilder()
         var remainingCapacity = capacity
         var seatCounter = 0
@@ -169,113 +263,67 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     private fun setClickListener() {
         binding.btnSave.setOnClickListener {
             setSelectedSeat()
+            setSelectedSeatReturn()
+            booking?.let { booking ->
+                viewModel.viewModelScope.launch {
+                    viewModel.createBooking(booking)
+                }
+            }
+
+            val intent = Intent(this, CheckoutDetailActivity::class.java).apply {
+                putExtra("BOOKING", booking)
+                putExtra("SEARCH_PARAMS", searchParams)
+                flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            }
+            startActivity(intent)
         }
     }
 
 
+
+
     private fun setSelectedSeat() {
         val selectedSeatIds = seatBookView.getSelectedIdList()
-        val selectedSeatNumbersFromApi = mutableListOf<String>()
-
+        val selectedSeatCode = mutableListOf<String>()
         viewModel.seats.value?.let { seats ->
             selectedSeatIds.forEach { id ->
                 val seat = seats.getOrNull(id - 1)
                 seat?.let {
-                    selectedSeatNumbersFromApi.add(it.seatCode)
+                    selectedSeatCode.add(it.seatCode)
                 }
-
             }
         }
+        booking?.seatPayloads?.departureSeats = selectedSeatCode
+    }
 
-        val seatPayloads = SeatPayloads(selectedSeatNumbersFromApi, null)
-        booking?.seatPayloads?.departureSeats = seatPayloads.departureSeats
+    private fun setSelectedSeatReturn() {
+        val selectedSeatIds = seatBookViewReturn.getSelectedIdList()
+        val selectedSeatCodeReturn = mutableListOf<String>()
+        viewModel.seats.value?.let { seats ->
+            selectedSeatIds.forEach { id ->
+                val seat = seats.getOrNull(id - 1)
+                seat?.let {
+                    selectedSeatCodeReturn.add(it.seatCode)
+                }
+            }
+        }
+        booking?.seatPayloads?.returnSeats = selectedSeatCodeReturn
     }
 
 
 
 
     companion object {
-//        const val EXTRA_FLIGHT_SEARCH_PARAMS = "EXTRA_FLIGHT_SEARCH_PARAMS"
-//        const val EXTRA_BOOKING= "EXTRA_FLIGHT"
 
         fun startActivity(
             context: Context,
-//            params: Search,
-//            booking : Booking,
         ) {
             val intent = Intent(context, SelectPassengerSeatActivity::class.java)
-//            intent.putExtra(EXTRA_FLIGHT_SEARCH_PARAMS, params)
-//            intent.putExtra(EXTRA_BOOKING, booking)
-//            intent.putExtra(EXTRA_TOTAL_PRICE, totalPrice)
-//            intent.putExtra(EXTRA_PASSENGER_DATA, passengerData)
             context.startActivity(intent)
         }
     }
 
 }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(binding.root)
-//
-//        // Retrieve extras from intent
-//        searchParams = intent.getParcelableExtra("SEARCH_PARAMS") ?: Search()
-//        passengers = intent.getParcelableArrayListExtra("PASSENGER_LIST") ?: ArrayList()
-//
-//        seatBookView = findViewById(R.id.layoutSeat)
-//        seatBookView.setSeatsLayoutString(seats)
-//            .isCustomTitle(true)
-//            .setCustomTitle(title)
-//            .setSeatLayoutPadding(2)
-//            .setSeatSizeBySeatsColumnAndLayoutWidth(7, -1)
-//        // ParentLayoutWeight -1 if Your seatBookView layout_width = match_parent / wrap_content
-//
-//        seatBookView.show()
-//
-//        seatBookView.setSeatClickListener(
-//            object : SeatClickListener {
-//                override fun onAvailableSeatClick(
-//                    selectedIdList: List<Int>,
-//                    view: View,
-//                ) {
-//                    // Handle seat click events
-//                }
-//
-//                override fun onBookedSeatClick(view: View) {
-//                    // Handle booked seat click events
-//                }
-//
-//                override fun onReservedSeatClick(view: View) {
-//                    // Handle reserved seat click events
-//                }
-//            },
-//        )
-//
-//        seatBookView.setSeatLongClickListener(
-//            object : SeatLongClickListener {
-//                override fun onAvailableSeatLongClick(view: View) {
-//                    // Handle long click on available seats
-//                    Toast.makeText(this@SelectPassengerSeatActivity, "Long Pressed", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onBookedSeatLongClick(view: View) {
-//                    // Handle long click on booked seats
-//                }
-//
-//                override fun onReservedSeatLongClick(view: View) {
-//                    // Handle long click on reserved seats
-//                }
-//            },
-//        )
-//
-//        // Add a button click listener to save and show selected seats
-//        binding.btnSave.setOnClickListener {
-//            val selectedSeats =
-//                seatBookView.getSelectedIdList().joinToString(", ") { id ->
-//                    arrTitle[id - 1]
-//                }
-//            Toast.makeText(this, "Selected Seats: $selectedSeats", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
 

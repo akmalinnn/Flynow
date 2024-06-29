@@ -10,6 +10,8 @@ import com.km6.flynow.data.datasource.FlightApiDataSource
 import com.km6.flynow.data.datasource.FlightDataSource
 import com.km6.flynow.data.datasource.airport.AirportApiDataSource
 import com.km6.flynow.data.datasource.airport.AirportDataSource
+import com.km6.flynow.data.datasource.booking.BookingApiDataSource
+import com.km6.flynow.data.datasource.booking.BookingDataSource
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDataSource
 import com.km6.flynow.data.datasource.destination_history.DestinationHistoryDatabaseDataSource
 import com.km6.flynow.data.datasource.history.HistoryApiDataSource
@@ -48,7 +50,6 @@ import com.km6.flynow.data.source.network.service.FlynowApiService
 import com.km6.flynow.presentation.choose_destination.ChooseDestinationViewModel
 import com.km6.flynow.presentation.choose_passanger.ChoosePassangerViewModel
 import com.km6.flynow.presentation.choose_seat_class.ChooseSeatClassViewModel
-import com.km6.flynow.presentation.filter.FilterViewModel
 import com.km6.flynow.presentation.filter_result.FilterResultViewModel
 import com.km6.flynow.presentation.forgotpassword.ForgotPasswordViewModel
 import com.km6.flynow.presentation.history.HistoryViewModel
@@ -73,6 +74,7 @@ import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
 import com.km6.flynow.data.datasource.seat.SeatApiDataSource
 import com.km6.flynow.data.datasource.seat.SeatDataSource
+import com.km6.flynow.data.repository.BookingRepository
 import com.km6.flynow.data.repository.DetailFlightRepository
 import com.km6.flynow.data.repository.DetailFlightRepositoryImpl
 import com.km6.flynow.data.repository.FavoriteFlightRepository
@@ -80,7 +82,6 @@ import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
 import com.km6.flynow.data.repository.SeatRepository
 import com.km6.flynow.data.repository.SeatRepositoryImpl
 import com.km6.flynow.presentation.checkout.chooseseat.SelectPassengerSeatViewModel
-import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
 import com.km6.flynow.presentation.flight_detail.FlightDetailViewModel
 
 object AppModule {
@@ -116,6 +117,7 @@ object AppModule {
             single<FavoriteFlightDataSource> { FavoriteFlightApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
+            single<BookingDataSource> { BookingApiDataSource(get()) }
             single<SeatDataSource> { SeatApiDataSource(get()) }
             single<DetailFlightDataSource> { DetailFlightDataSourceImpl(get()) }
             single<NotificationDatasource> { NotificationApiDataSource(get()) }
@@ -133,6 +135,7 @@ object AppModule {
             single<DestinationHistoryRepository> { DestinationHistoryRepositoryImpl(get())}
             single<FlightRepository> { FlightRepositoryImpl(get()) }
             single<PaymentRepository> { PaymentRepository(get()) }
+            single<BookingRepository> { BookingRepository(get()) }
             single<DetailFlightRepository> { DetailFlightRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<SeatRepository> { SeatRepositoryImpl(get()) }
