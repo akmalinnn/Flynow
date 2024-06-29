@@ -9,10 +9,10 @@ data class Search(
     val aa: Airport? = null,
     val dd: String? = null,
     val rd: String? = null,
-    val adult: Int = 0,
-    val child: Int = 0,
-    val baby: Int = 0,
+    val adult: Int,
+    val child: Int,
+    val baby: Int,
     val clas: SeatClass? = null,
-    var totalPassenger : Int = 0,
+    var totalPassenger : Int,
     val roundTrip: Boolean
 ): Parcelable

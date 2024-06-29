@@ -71,10 +71,18 @@ import org.koin.dsl.module
 
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
+import com.km6.flynow.data.datasource.seat.SeatDataSource
+import com.km6.flynow.data.datasource.seat.SeatDataSourceImpl
 import com.km6.flynow.data.repository.DetailFlightRepository
 import com.km6.flynow.data.repository.DetailFlightRepositoryImpl
 import com.km6.flynow.data.repository.FavoriteFlightRepository
 import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
+import com.km6.flynow.data.repository.SeatRepository
+import com.km6.flynow.data.repository.SeatRepositoryImpl
+import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangActivity
+import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangViewModel
+import com.km6.flynow.presentation.checkout.chooseseat.ChooseSeatViewModel
+import com.km6.flynow.presentation.checkout.chooseseat.returnflight.ReturnChooseSeatViewModel
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
 import com.km6.flynow.presentation.flight_detail.FlightDetailViewModel
 
@@ -114,6 +122,8 @@ object AppModule {
             single<DetailFlightDataSource> { DetailFlightDataSourceImpl(get()) }
             single<NotificationDatasource> { NotificationApiDataSource(get()) }
             single<NotificationDetailDatasource> { NotificationDetailApiDataSource(get()) }
+            single<SeatDataSource> { SeatDataSourceImpl(get()) }
+
         }
 
     private val repositoryModule =
@@ -129,6 +139,7 @@ object AppModule {
             single<DetailFlightRepository> { DetailFlightRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
             single<NotificationDetailRepository> { NotificationDetailRepositoryImpl(get()) }
+            single<SeatRepository> { SeatRepositoryImpl(get()) }
         }
 
     private val viewModelModule =
@@ -143,6 +154,24 @@ object AppModule {
             viewModel { params ->
                 ChoosePassangerViewModel(
                     extras = params.get()
+                )
+            }
+            viewModel { params ->
+                BiodataPenumpangViewModel(
+                    extras = params.get(),
+                    get()
+                )
+            }
+            viewModel { params ->
+                ReturnChooseSeatViewModel(
+                    extras = params.get(),
+                    get()
+                )
+            }
+            viewModel { params ->
+                ChooseSeatViewModel(
+                    extras = params.get(),
+                    get()
                 )
             }
             viewModelOf(::HomeViewModel)

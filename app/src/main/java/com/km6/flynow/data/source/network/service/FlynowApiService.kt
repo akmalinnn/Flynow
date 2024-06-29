@@ -1,14 +1,18 @@
 package com.km6.flynow.data.source.network.service
 
-import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
-import com.km6.flynow.BuildConfig
-import com.km6.flynow.data.source.network.model.flight.FlightResponse
 //import com.km6.flynow.data.model.HistoryItem
+
+import com.km6.flynow.BuildConfig
 import com.km6.flynow.data.source.local.pref.UserPreference
 import com.km6.flynow.data.source.network.model.airport.SearchAirportResponse
+import com.km6.flynow.data.source.network.model.booking.BookingRequest
+import com.km6.flynow.data.source.network.model.booking.BookingResponse
+import com.km6.flynow.data.source.network.model.booking.BookingResponseData
 import com.km6.flynow.data.source.network.model.favorite_flight.FavoriteFlightResponse
+import com.km6.flynow.data.source.network.model.flight.FlightResponse
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordRequest
 import com.km6.flynow.data.source.network.model.forget_password.ForgotPasswordResponse
+import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.data.source.network.model.login.LoginResponse
 import com.km6.flynow.data.source.network.model.notification.NotificationDetailResponse
 import com.km6.flynow.data.source.network.model.notification.NotificationResponse
@@ -17,18 +21,18 @@ import com.km6.flynow.data.source.network.model.otp.ResendOtpResponse
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpRequest
 import com.km6.flynow.data.source.network.model.otp.VerifyOtpResponse
 import com.km6.flynow.data.source.network.model.payment.PaymentRequest
-
 import com.km6.flynow.data.source.network.model.payment.PaymentResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
+import com.km6.flynow.data.source.network.model.seat.SeatResponse
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -117,6 +121,15 @@ interface FlynowApiService {
     suspend fun getFavoriteFlights(
     ): FavoriteFlightResponse
 
+    @GET("seat/book/{id}")
+    suspend fun getSeat(
+        @Path("id") id: Int
+    ) : SeatResponse
+
+    @GET("booking")
+    suspend fun createBooking(
+        @Body bookingRequest: BookingRequest
+    ): BookingResponse
 
     companion object {
         @JvmStatic
