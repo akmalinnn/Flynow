@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.km6.flynow.data.model.Search
 import com.km6.flynow.databinding.ActivityBiodataPemesanBinding
 import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangActivity
 import com.km6.flynow.presentation.home.HomeViewModel
@@ -15,12 +16,14 @@ class BiodataPemesanActivity : AppCompatActivity() {
         ActivityBiodataPemesanBinding.inflate(layoutInflater)
     }
 
+    private var searchParams: Search? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setClickListener()
         setFamilyName()
+        searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
     }
 
     fun validateForm(): Boolean {
@@ -65,6 +68,7 @@ class BiodataPemesanActivity : AppCompatActivity() {
         startActivity(
             Intent(this, BiodataPenumpangActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                putExtra("SEARCH_PARAMS", searchParams)
             },
         )
 
