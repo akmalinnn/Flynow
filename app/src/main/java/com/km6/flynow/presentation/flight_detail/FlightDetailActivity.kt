@@ -10,6 +10,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.km6.flynow.R
+import com.km6.flynow.data.model.Booking
 import com.km6.flynow.databinding.ActivityFlightDetailBinding
 import com.km6.flynow.presentation.checkout.checkout_pemesan.BiodataPemesanActivity
 import com.km6.flynow.presentation.login.LoginActivity
@@ -17,8 +18,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import com.km6.flynow.data.model.Flight
 import com.km6.flynow.data.model.Search
+import com.km6.flynow.data.model.SeatPayloads
 import com.km6.flynow.data.source.network.model.flight.DepartureFlight
 import com.km6.flynow.data.source.network.model.flight.ReturnFlight
+import com.km6.flynow.presentation.checkout.chooseseat.SelectPassengerSeatActivity
+import com.km6.flynow.presentation.main.MainActivity
 import com.km6.flynow.utils.getFormatDate
 import com.km6.flynow.utils.getFormattedDate
 import com.km6.flynow.utils.getTime
@@ -72,23 +76,7 @@ class FlightDetailActivity : AppCompatActivity() {
     }
 
 
-//    private fun getFlightDetail(id: Int?) {
-//        id?.let {
-//            viewModel.getFlight(it).observe(this) { flight ->
-//                flight?.proceedWhen(
-//                    doOnSuccess = { success ->
-//                        Log.d("success", "getFlightDetail: $success")
-//                        // Tampilkan detail flight berdasarkan id
-//                        if (id == departureFlight.id) {
-//                            setBindDepature(departureFlight.id!!)
-//                        } else if (id == returnFlight?.id) {
-//                            setBindReturn(returnFlight?.id!!)
-//                        }
-//                    }
-//                )
-//            }
-//        }
-//    }
+
 
     private fun setBindReturn(returnFlight: Flight?) {
         Log.d("returnFlight", "setBindReturn: $returnFlight")
@@ -138,10 +126,28 @@ class FlightDetailActivity : AppCompatActivity() {
     }
 
     private fun navigateToBiodataPemesan() {
+        val booking = searchParams?.let {
+            Booking(
+                departureFlightId = departureFlight.id,
+                returnFlightId = returnFlight?.id,
+                numAdults = it.adult,
+                numChildren = it.child,
+                numBabies = it.baby,
+                passengerPayloads = emptyList(),
+                seatPayloads = SeatPayloads(
+                    emptyList(),
+                    emptyList()
+                )
+            )
+        }
+
         startActivity(
             Intent(this, BiodataPemesanActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra("SEARCH_PARAMS", searchParams)
+                putExtra("DEPARTURE_FLIGHT", departureFlight)
+                putExtra("RETURN_FLIGHT", returnFlight)
+                putExtra("BOOKING", booking)
             }
         )
     }

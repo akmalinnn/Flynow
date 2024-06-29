@@ -6,9 +6,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.km6.flynow.data.model.Booking
+import com.km6.flynow.data.model.Flight
 import com.km6.flynow.data.model.Search
 import com.km6.flynow.databinding.ActivityBiodataPemesanBinding
 import com.km6.flynow.presentation.checkout.checkout_penumpang.BiodataPenumpangActivity
+import com.km6.flynow.presentation.checkout.chooseseat.SelectPassengerSeatActivity
 import com.km6.flynow.presentation.home.HomeViewModel
 
 class BiodataPemesanActivity : AppCompatActivity() {
@@ -17,6 +20,9 @@ class BiodataPemesanActivity : AppCompatActivity() {
     }
 
     private var searchParams: Search? = null
+    private var flight: Flight? = null
+    private var booking: Booking? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,7 @@ class BiodataPemesanActivity : AppCompatActivity() {
         setClickListener()
         setFamilyName()
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
+        booking = intent.getParcelableExtra("BOOKING")
     }
 
     fun validateForm(): Boolean {
@@ -57,7 +64,8 @@ class BiodataPemesanActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
            if ( validateForm()){
                navigateToBiodataPenumpang()
-           }
+//               navigateToSeat()
+          }
         }
         binding.ivBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -69,11 +77,11 @@ class BiodataPemesanActivity : AppCompatActivity() {
             Intent(this, BiodataPenumpangActivity::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 putExtra("SEARCH_PARAMS", searchParams)
+                putExtra("BOOKING", booking)
             },
         )
-
-
     }
+
 
 
 

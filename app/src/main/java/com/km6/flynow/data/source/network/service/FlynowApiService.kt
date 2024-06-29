@@ -2,6 +2,7 @@ package com.km6.flynow.data.source.network.service
 
 import com.km6.flynow.data.source.network.model.history.HistoryItemResponse
 import com.km6.flynow.BuildConfig
+import com.km6.flynow.data.model.Response
 import com.km6.flynow.data.source.network.model.flight.FlightResponse
 //import com.km6.flynow.data.model.HistoryItem
 import com.km6.flynow.data.source.local.pref.UserPreference
@@ -20,6 +21,7 @@ import com.km6.flynow.data.source.network.model.payment.PaymentRequest
 
 import com.km6.flynow.data.source.network.model.payment.PaymentResponse
 import com.km6.flynow.data.source.network.model.register.RegisterResponse
+import com.km6.flynow.data.source.network.model.seat.SeatData
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -116,6 +118,12 @@ interface FlynowApiService {
     @GET("favorite-flights")
     suspend fun getFavoriteFlights(
     ): FavoriteFlightResponse
+
+    @GET("seats/book/{id}")
+    suspend fun getSeat(
+        @Path("id") id: Int?,
+    ): Response<List<SeatData>?>
+
 
 
     companion object {

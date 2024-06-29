@@ -15,8 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Flynow"
         tools:targetApi="31">
+
         <activity
-            android:name=".presentation.checkout.chooseseat.ChooseSeatActivity"
+            android:name=".presentation.checkout.chooseseat.SelectPassengerSeatActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.checkout.checkout_success.CheckoutSuccessActivity"

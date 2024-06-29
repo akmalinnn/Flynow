@@ -71,10 +71,15 @@ import org.koin.dsl.module
 
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightDataSource
 import com.km6.flynow.data.datasource.favorite_flight.FavoriteFlightApiDataSource
+import com.km6.flynow.data.datasource.seat.SeatApiDataSource
+import com.km6.flynow.data.datasource.seat.SeatDataSource
 import com.km6.flynow.data.repository.DetailFlightRepository
 import com.km6.flynow.data.repository.DetailFlightRepositoryImpl
 import com.km6.flynow.data.repository.FavoriteFlightRepository
 import com.km6.flynow.data.repository.FavoriteFlightRepositoryImpl
+import com.km6.flynow.data.repository.SeatRepository
+import com.km6.flynow.data.repository.SeatRepositoryImpl
+import com.km6.flynow.presentation.checkout.chooseseat.SelectPassengerSeatViewModel
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
 import com.km6.flynow.presentation.flight_detail.FlightDetailViewModel
 
@@ -111,9 +116,11 @@ object AppModule {
             single<FavoriteFlightDataSource> { FavoriteFlightApiDataSource(get()) }
             single<DestinationHistoryDataSource> {DestinationHistoryDatabaseDataSource(get())}
             single<PaymentDataSource> { PaymentApiDataSource(get()) }
+            single<SeatDataSource> { SeatApiDataSource(get()) }
             single<DetailFlightDataSource> { DetailFlightDataSourceImpl(get()) }
             single<NotificationDatasource> { NotificationApiDataSource(get()) }
             single<NotificationDetailDatasource> { NotificationDetailApiDataSource(get()) }
+
         }
 
     private val repositoryModule =
@@ -128,6 +135,7 @@ object AppModule {
             single<PaymentRepository> { PaymentRepository(get()) }
             single<DetailFlightRepository> { DetailFlightRepositoryImpl(get()) }
             single<NotificationRepository> { NotificationRepositoryImpl(get()) }
+            single<SeatRepository> { SeatRepositoryImpl(get()) }
             single<NotificationDetailRepository> { NotificationDetailRepositoryImpl(get()) }
         }
 
@@ -155,6 +163,7 @@ object AppModule {
             viewModelOf(::PaymentViewModel)
             viewModelOf(::NotificationDetailViewmodel)
             viewModelOf(::FavoriteDetailViewModel)
+            viewModelOf(::SelectPassengerSeatViewModel)
         }
 
     val modules =

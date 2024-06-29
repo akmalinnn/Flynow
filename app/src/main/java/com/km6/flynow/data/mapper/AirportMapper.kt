@@ -19,3 +19,4 @@ fun Collection<AirportItemResponse>?.toAirport() =
     this?.map {
         it.toAirport()
     } ?: listOf()
+

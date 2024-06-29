@@ -14,5 +14,5 @@ data class Search(
     val baby: Int = 0,
     val clas: SeatClass? = null,
     var totalPassenger : Int = 0,
-    val roundTrip: Boolean
+    val roundTrip: Boolean = false
 ): Parcelable

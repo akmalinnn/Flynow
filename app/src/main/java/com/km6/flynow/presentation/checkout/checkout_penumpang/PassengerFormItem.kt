@@ -7,11 +7,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.km6.flynow.R
 import com.km6.flynow.data.model.BioPenumpang
+import com.km6.flynow.data.model.Passenger
 import com.km6.flynow.databinding.ItemFormBiodataPenumpangBinding
 import com.xwray.groupie.viewbinding.BindableItem
 import java.util.Calendar
 
-class PassengerItem(private val bio: BioPenumpang) :
+class PassengerItem(private val bio: Passenger) :
     BindableItem<ItemFormBiodataPenumpangBinding>() {
 
     override fun getLayout(): Int {
@@ -27,7 +28,7 @@ class PassengerItem(private val bio: BioPenumpang) :
     private lateinit var binding: ItemFormBiodataPenumpangBinding
 
     override fun bind(viewBinding: ItemFormBiodataPenumpangBinding, position: Int) {
-        viewBinding.tvTitleFormPassenger.text = "Passenger ${position + 1} - ${bio.type}"
+        viewBinding.tvTitleFormPassenger.text = "Passenger ${position + 1} - ${bio.passengerType}"
 
         // Set up AutoCompleteTitle
         val items = listOf("Mr.", "Mrs.", "Miss ")
@@ -41,18 +42,18 @@ class PassengerItem(private val bio: BioPenumpang) :
                 Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
                     .show()
             }
-
-        setLastNameVisibility(viewBinding, false)
-        viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-            setLastNameVisibility(viewBinding, isChecked)
-        }
-//        if (bio.lastName != null) {
-//            viewBinding.etFamilyName.visibility = View.VISIBLE
-//            viewBinding.tilFamilyName.visibility = View.VISIBLE
-//        } else {
-//            viewBinding.etFamilyName.visibility = View.GONE
-//            viewBinding.tilFamilyName.visibility = View.GONE
+//
+//        setLastNameVisibility(viewBinding, false)
+//        viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
+//            setLastNameVisibility(viewBinding, isChecked)
 //        }
+////        if (bio.lastName != null) {
+////            viewBinding.etFamilyName.visibility = View.VISIBLE
+////            viewBinding.tilFamilyName.visibility = View.VISIBLE
+////        } else {
+////            viewBinding.etFamilyName.visibility = View.GONE
+////            viewBinding.tilFamilyName.visibility = View.GONE
+////        }
 
         // Set up birthDate
         viewBinding.etDate.setOnClickListener {
@@ -387,10 +388,10 @@ class PassengerItem(private val bio: BioPenumpang) :
         return isValid
     }
 
-    fun getPassengerData(): BioPenumpang {
-        return BioPenumpang(
-            type = bio.type,
-            firstName = binding.etFullName.text.toString(),
+    fun getPassengerData(): Passenger {
+        return Passenger(
+            passengerType = bio.passengerType,
+            name = binding.etFullName.text.toString(),
 //            lastName = binding.etFamilyName.text.toString(),
             dateOfBirth = binding.etDate.text.toString(),
             nationality = binding.etNationality.text.toString(),
