@@ -75,8 +75,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text=" Capacity - 72 Seats"
-                    />
+                    android:text="@string/capacity_72_seats" />
 
 
                 <dev.jahidhasanco.seatbookview.SeatBookView
@@ -110,7 +109,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layout_chooseSeat"
-                    android:text=" Capacity - 72 Seats"
+                    android:text="@string/capacity_72_seats"
+                    android:visibility="gone"
                     />
 
 
@@ -157,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:layout_marginTop="16dp"
-                android:text="Simpan"
+                android:text="@string/simpan_pesanan"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

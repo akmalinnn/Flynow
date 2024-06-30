@@ -31,7 +31,7 @@ data class BookingDetails(
     @SerializedName("departure")
     val departure: List<BookingDetail>,
     @SerializedName("return")
-    val returnDetails: List<BookingDetail?>
+    val returnDetails: List<BookingDetail?>?
 )
 
 data class Flight(

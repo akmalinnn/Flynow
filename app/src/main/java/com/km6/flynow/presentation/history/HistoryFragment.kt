@@ -92,11 +92,13 @@ class HistoryFragment : Fragment() {
                             getString(R.string.anda_belum_memiliki_riwayat),
                             Toast.LENGTH_SHORT
                         ).show()
+                        binding.pbLoading.isVisible = false
                     }
                 )
             }
         }
     }
+
 
     private fun bindHistoryList(data: List<History>) {
         productAdapter.submitData(data)
@@ -148,6 +150,7 @@ class HistoryFragment : Fragment() {
     private fun showMustLoginFragment() {
         binding.rvHistory.visibility = View.GONE
         binding.textView.visibility = View.GONE
+        binding.searchContent.historySearch.visibility = View.GONE
         binding.layoutMustLogin.imageView.visibility = View.VISIBLE
         binding.layoutMustLogin.textView2.visibility = View.VISIBLE
         binding.layoutMustLogin.btnLogin.visibility = View.VISIBLE
@@ -156,6 +159,7 @@ class HistoryFragment : Fragment() {
     private fun hideMustLoginFragment() {
         binding.rvHistory.visibility = View.VISIBLE
         binding.textView.visibility = View.VISIBLE
+        binding.searchContent.historySearch.visibility = View.VISIBLE
         binding.layoutMustLogin.imageView.visibility = View.GONE
         binding.layoutMustLogin.textView2.visibility = View.GONE
         binding.layoutMustLogin.btnLogin.visibility = View.GONE

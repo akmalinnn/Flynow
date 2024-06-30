@@ -108,7 +108,7 @@
     <string name="text_no_login">Maaf, Anda harus login terlebih dahulu!</string>
     <string name="text_login">Masuk</string>
     <string name="text_pilih_doc">Pilih Dokumen</string>
-    <string name="text_til_exp_date">yyyy/mm/dd</string>
+    <string name="text_til_exp_date">yyyy-mm-dd</string>
     <string name="text_exp_date">Berlaku Sampai</string>
     <string name="text_auto_complete">Pilih Title Anda</string>
     <string name="text_auto_ktp_paspor">Pilih Dokumen Anda</string>
@@ -128,7 +128,9 @@
      <string name="price_label">Price: %d</string>
     <string name="childernText">%1$s</string>
     <string name="adultText">%1$s</string>
+    <string name="babiesText">%1$s</string>
     <string name="anda_belum_memiliki_riwayat">Anda belum memiliki riwayat</string>
+    <string name="anda_belum_memiliki_notifikasi">Anda belum memiliki notifikasi</string>
     <string name="detail_pesan">Detail Pesan</string>
     <string name="destinasi_favorit">Destinasi Favorit</string>
     <string name="mulai_dari">Mulai Dari</string>
@@ -139,6 +141,12 @@
     <string name="depature_destination"><![CDATA[%1$s -> %2$s]]></string>
     <string name="terminal">%1$s - Terminal %2$s</string>
     <string name="pending">Pending</string>
+    <string name="bayar_sekarang">Bayar Sekarang</string>
+    <string name="tiket_berhasil_dipesan">Tiket berhasil dipesan</string>
+    <string name="kirim_ulang_otp_dalam">Kirim Ulang OTP dalam</string>
+    <string name="detik">detik</string>
+    <string name="capacity_72_seats">Capacity - 72 Seats</string>
+    <string name="simpan_pesanan">Simpan pesanan</string>
 
 
 </resources>

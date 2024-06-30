@@ -47,7 +47,7 @@ class BiodataPenumpangActivity : AppCompatActivity() {
             items.add(PassengerItem(Passenger(passengerType = "adult")))
         }
         for (i in 0 until numChild) {
-            items.add(PassengerItem(Passenger(passengerType = "child")))
+            items.add(PassengerItem(Passenger(passengerType = "children")))
         }
         for (i in 0 until numBaby) {
             items.add(PassengerItem(Passenger(passengerType = "baby")))

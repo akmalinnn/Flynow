@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_date"
                 android:hint="@string/text_til_date"
-                android:inputType="date"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -252,7 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/text_til_no_ktp_paspor"
-                android:inputType="number"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -330,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_date"
                 android:hint="@string/text_til_exp_date"
-                android:inputType="date"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

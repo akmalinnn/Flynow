@@ -41,18 +41,6 @@ class PassengerItem(private val bio: Passenger) :
             viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
             Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
         }
-//
-//        setLastNameVisibility(viewBinding, false)
-//        viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-//            setLastNameVisibility(viewBinding, isChecked)
-//        }
-////        if (bio.lastName != null) {
-////            viewBinding.etFamilyName.visibility = View.VISIBLE
-////            viewBinding.tilFamilyName.visibility = View.VISIBLE
-////        } else {
-////            viewBinding.etFamilyName.visibility = View.GONE
-////            viewBinding.tilFamilyName.visibility = View.GONE
-////        }
 
         // Set up birthDate
         viewBinding.etDate.setOnClickListener {

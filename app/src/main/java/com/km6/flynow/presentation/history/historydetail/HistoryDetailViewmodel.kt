@@ -46,7 +46,7 @@ class HistoryDetailViewModel(
 
             val totalAdults = (it.numAdults * price) + (it.numAdults * priceReturn)
             val totalChildren = (it.numChildren * price) + (it.numChildren * priceReturn)
-            val totalBaby = (it.numBabies * price) + (it.numBabies * priceReturn)
+            val totalBaby = (it.numBabies * price * 0) + (it.numBabies * priceReturn * 0)
 
             val total = totalAdults + totalChildren + totalBaby
 

@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import coil.load
 import com.km6.flynow.R
 import com.km6.flynow.data.model.Booking
 import com.km6.flynow.databinding.ActivityFlightDetailBinding
@@ -23,6 +25,7 @@ import com.km6.flynow.data.source.network.model.flight.DepartureFlight
 import com.km6.flynow.data.source.network.model.flight.ReturnFlight
 import com.km6.flynow.presentation.checkout.chooseseat.SelectPassengerSeatActivity
 import com.km6.flynow.presentation.main.MainActivity
+import com.km6.flynow.presentation.profile.ProfileViewModel
 import com.km6.flynow.utils.getFormatDate
 import com.km6.flynow.utils.getFormattedDate
 import com.km6.flynow.utils.getTime
@@ -38,6 +41,7 @@ class FlightDetailActivity : AppCompatActivity() {
         ActivityFlightDetailBinding.inflate(layoutInflater)
     }
     private val viewModel: FlightDetailViewModel by viewModel()
+    private val profileViewModel: ProfileViewModel by viewModel()
 
     private lateinit var departureFlight: Flight
     private var returnFlight: Flight? = null
@@ -58,7 +62,6 @@ class FlightDetailActivity : AppCompatActivity() {
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 
 
-
         // Display flight details
         displayFlightDetails()
 
@@ -67,20 +70,36 @@ class FlightDetailActivity : AppCompatActivity() {
 
 
     private fun setClickListener() {
-        binding.btnCheckout.setOnClickListener {
-//            if (viewModel.isLoggedIn == null) {
-//                NoLoginBottomSheet().show(supportFragmentManager, null)
-//            } else {
-            navigateToBiodataPemesan()
+
+        val token = viewModel.getToken()
+        if (token != null) {
+            binding.btnCheckout.setOnClickListener {
+                navigateToBiodataPemesan()
+            }
+        } else {
+            navigateToLogin()
         }
+
     }
 
 
+    private fun navigateToLogin() {
+        profileViewModel.logOut()
+        startActivity(
+            Intent(this, LoginActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+        )
+    }
 
 
     private fun setBindReturn(returnFlight: Flight?) {
         Log.d("returnFlight", "setBindReturn: $returnFlight")
-        binding.layoutArrivalFlight.tvDestination.text = getString(R.string.depature_destination, returnFlight?.depaturecity, returnFlight?.arrivalcity)
+        binding.layoutArrivalFlight.tvDestination.text = getString(
+            R.string.depature_destination,
+            returnFlight?.depaturecity,
+            returnFlight?.arrivalcity
+        )
         binding.layoutArrivalFlight.itemFlightDetail.apply {
             tvDepartureTime.text = returnFlight?.departureTime.toTimeFormat()
             tvDepartureDate.text = returnFlight?.departureTime.toDateFormat()
@@ -96,16 +115,29 @@ class FlightDetailActivity : AppCompatActivity() {
             tvReturnTime.text = returnFlight?.arrivalTime.toTimeFormat()
             tvReturnDate.text = returnFlight?.arrivalTime.toDateFormat()
             tvAirportReturn.text = returnFlight?.arrivalairportName
+
+            ivAirlineDeparture.load(returnFlight?.image) {
+                crossfade(true)
+                error(R.mipmap.ic_launcher)
+            }
+
         }
     }
 
     private fun setBindDepature(departureFlight: Flight) {
         Log.d("departureFlight", "setBindDepature: $departureFlight")
-        binding.layoutDepartureFlight.tvDestination.text = getString(R.string.depature_destination, departureFlight.depaturecity, departureFlight.arrivalcity)
+        binding.layoutDepartureFlight.tvDestination.text = getString(
+            R.string.depature_destination,
+            departureFlight.depaturecity,
+            departureFlight.arrivalcity
+        )
         val formattedTime = departureFlight.departureTime.toTimeFormat()
         Log.d("formattedTime", "Formatted Departure Time: $formattedTime")
         binding.layoutDepartureFlight.itemFlightDetail.tvDepartureTime.text = formattedTime
-        Log.d("tvDepartureTime", "Departure Time TextView: ${binding.layoutDepartureFlight.itemFlightDetail.tvDepartureTime.text}")
+        Log.d(
+            "tvDepartureTime",
+            "Departure Time TextView: ${binding.layoutDepartureFlight.itemFlightDetail.tvDepartureTime.text}"
+        )
         binding.layoutDepartureFlight.itemFlightDetail.apply {
 
             tvDepartureDate.text = departureFlight.departureTime.toDateFormat()
@@ -121,6 +153,12 @@ class FlightDetailActivity : AppCompatActivity() {
             tvReturnTime.text = departureFlight.arrivalTime.toTimeFormat()
             tvReturnDate.text = departureFlight.arrivalTime.toDateFormat()
             tvAirportReturn.text = departureFlight.arrivalairportName
+
+            ivAirlineDeparture.load(departureFlight.image) {
+                crossfade(true)
+                error(R.mipmap.ic_launcher)
+            }
+
 
         }
     }
@@ -163,7 +201,6 @@ class FlightDetailActivity : AppCompatActivity() {
             setBindReturn(returnFlight)
         } else {
             // One-way trip, display departure flight only
-//            getFlightDetail(departureFlight.id)
             setBindDepature(departureFlight)
         }
 

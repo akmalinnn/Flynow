@@ -27,37 +27,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-//        getDataFromApi()
-
-        /*//filter result
-        val intent = Intent(this, FilterResultActivity::class.java)
-        startActivity(intent)*/
 
         checkFirstRun()
         setupBottomNav()
 
 
-//        testCrash()
     }
-//
-//    //crashlytics ok
-//    private fun testCrash() {
-//        throw RuntimeException("Test Crash")
-//    }
+
 
     private fun setupBottomNav() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         binding.navView.setupWithNavController(navController)
-//        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-//            when (destination.id) {
-//                R.id.menu_tab_account-> {
-//                    if (!mainViewModel.isLoggedIn()) {
-////                        navigateToLogin()
-//                        controller.popBackStack(R.id.menu_tab_home, false)
-//                    }
-//                }
-//            }
-//        }
+
     }
 
     private fun checkFirstRun() {
@@ -72,24 +53,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    private fun getDataFromApi() {
-//        val apiService = FlynowApiService.invoke()
-//        GlobalScope.launch(Dispatchers.IO) {
-//            try {
-//                val response = apiService.searchFlight("CGK", "DPS", "2024-08-02", "2024-08-02","1","1","0","economy","price-asc")
-//                Log.d("Coins", "Response: $response")
-//            } catch (e: Exception) {
-//                if (e is retrofit2.HttpException) {
-//                    val errorBody = e.response()?.errorBody()?.string()
-//                    Log.e("Coins Error", "HTTP Error: ${e.code()} - ${e.message()}\nBody: $errorBody", e)
-//                } else {
-//                    Log.e("Coins Error", "Error: ${e.message}", e)
-//                }
-//            }
-//        }
-//    }
-
-//    private fun navigateToLogin() {
-//        startActivity(Intent(this, LoginActivity::class.java))
-//    }
 }

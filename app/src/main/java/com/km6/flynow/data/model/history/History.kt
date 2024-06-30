@@ -21,6 +21,7 @@ data class History(
     val price: Int,
     val flightClass: String,
     val flightCode: String,
+    val flightInformation: String,
 
     val airportDepartureCity: String,
     val airportArrivalCity: String,
@@ -30,6 +31,7 @@ data class History(
     val airlineDepartureName: String?,
     val airlineLogo: String?,
     val passengerName: List<String>,
+    val passengerSeat: List<String>,
 
 
     val departureTimeReturn: String?,
@@ -37,6 +39,8 @@ data class History(
     val priceReturn: Int?,
     val flightClassReturn: String?,
     val flightCodeReturn: String?,
+    val flightInformationReturn: String,
+
     val airportDepartureCityReturn: String?,
     val airportArrivalCityReturn: String?,
     val airportDepartureNameReturn: String?,
@@ -44,9 +48,9 @@ data class History(
 
     val airlineDepartureNameReturn: String?,
     val airlineLogoReturn: String?,
-
     val paymentStatus: String?,
     val snapUrl: String?,
+    val passengerSeatReturn: List<String>?
 
 
 

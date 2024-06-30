@@ -39,7 +39,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     }
 
     private lateinit var seatBookView: SeatBookView
-    private lateinit var seatBookViewReturn: SeatBookView
+    private var seatBookViewReturn: SeatBookView? = null
     private lateinit var passengers: ArrayList<Passenger>
 
     private var searchParams: Search? = null
@@ -47,20 +47,20 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
     private var title =
         listOf(
-            "/", "A1", "B1", "C1", "", "D1", "E1", "F1",
-            "/", "A2", "B2", "C2", "", "D2", "E2", "F2",
-            "/", "A3", "B3", "C3", "", "D3", "E3", "F3",
-            "/", "A4", "B4", "C4", "", "D4", "E4", "F4",
-            "/", "A5", "B5", "C5", "", "D5", "E5", "F5",
-            "/", "A6", "B6", "C6", "", "D6", "E6", "F6",
-            "/", "A7", "B7", "C7", "", "D7", "E7", "F7",
-            "/", "A8", "B8", "C8", "", "D8", "E8", "F8",
-            "/", "A9", "B9", "C9", "", "D9", "E9", "F9",
-            "/", "A10", "B10", "C10", "", "D10", "E10", "F10",
-            "/", "A11", "B11", "C11", "", "D11", "E11", "F11",
-            "/", "A12", "B12", "C12", "", "D12", "E12", "F12",
-            "/", "A13", "B13", "C13", "", "D13", "E13", "F13",
-            "/", "A14", "B14", "C14", "", "D14", "E14", "F14",
+            "/", "1A", "1B", "1C", "", "1D", "1E", "1F",
+            "/", "2A", "2B", "2C", "", "2D", "2E", "2F",
+            "/", "3A", "3B", "3C", "", "3D", "3E", "3F",
+            "/", "4A", "4B", "4C", "", "4D", "4E", "4F",
+            "/", "5A", "5B", "5C", "", "5D", "5E", "5F",
+            "/", "6A", "6B", "6C", "", "6D", "6E", "6F",
+            "/", "7A", "7B", "7C", "", "7D", "7E", "7F",
+            "/", "8A", "8B", "8C", "", "8D", "8E", "8F",
+            "/", "9A", "9B", "9C", "", "9D", "9E", "9F",
+            "/", "10A", "10B", "10C", "", "10D", "10E", "10F",
+            "/", "11A", "11B", "11C", "", "11D", "11E", "11F",
+            "/", "12A", "12B", "12C", "", "12D", "12E", "12F",
+            "/", "13A", "13B", "13C", "", "13D", "13E", "13F",
+            "/", "14A", "14B", "14C", "", "14D", "14E", "14F"
         )
 
     private val arrTitle = title.filter { it.isNotEmpty() && !it.contains("/") }
@@ -75,9 +75,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         passengers = intent.getParcelableArrayListExtra("PASSENGER_LIST") ?: arrayListOf()
 
         getSeat()
-
         getSeatReturn()
-
         setClickListener()
     }
 
@@ -92,7 +90,12 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                         }
                     },
                     doOnError = {
+
                     },
+
+                    doOnEmpty = {
+
+                    }
                 )
             }
         }
@@ -103,6 +106,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             viewModel.getSeat(it).observe(this) { it ->
                 it.proceedWhen(
                     doOnSuccess = {
+                        binding.tvTitleInfoSeatReturn.visibility = View.VISIBLE
                         it.payload?.let { seat ->
                             setSeatViewReturn(seat)
                             viewModel.seat.value = seat
@@ -116,7 +120,10 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                     binding.layoutChooseSeatReturn.visibility = View.GONE
                     booking?.seatPayloads?.returnSeats = null
                         booking?.returnFlightId = null
+
+                    binding.tvTitleInfoSeatReturn.visibility = View.GONE
                     }
+
                 )
             }
         }
@@ -156,16 +163,16 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     private fun setSeatViewReturn(seats: List<SeatData>) {
         val newSeats = generateSeatsStringReturn(viewModel.capacity, seats)
         seatBookViewReturn = findViewById(R.id.layout_chooseSeat_return)
-        seatBookViewReturn.setSeatsLayoutString(newSeats)
-            .isCustomTitle(true)
-            .setCustomTitle(title)
-            .setSeatLayoutPadding(2)
-            .setSelectSeatLimit(searchParams?.totalPassenger!!)
-            .setSeatSizeBySeatsColumnAndLayoutWidth(8, -1)
+        seatBookViewReturn?.setSeatsLayoutString(newSeats)
+            ?.isCustomTitle(true)
+            ?.setCustomTitle(title)
+            ?.setSeatLayoutPadding(2)
+            ?.setSelectSeatLimit(searchParams?.totalPassenger!!)
+            ?.setSeatSizeBySeatsColumnAndLayoutWidth(8, -1)
 
-        seatBookViewReturn.show()
+        seatBookViewReturn?.show()
 
-        seatBookViewReturn.setSeatClickListener(
+        seatBookViewReturn?.setSeatClickListener(
             object : SeatClickListener {
                 override fun onAvailableSeatClick(
                     selectedIdList: List<Int>,
@@ -264,12 +271,24 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             setSelectedSeat()
             setSelectedSeatReturn()
+
+            val totalSelectedSeats = (booking?.seatPayloads?.departureSeats?.size ?: 0)
+
+            val totalSelectedSeatsReturn = (booking?.seatPayloads?.returnSeats?.size ?: 0)
+
+            if ( (totalSelectedSeats != searchParams?.totalPassenger) && (totalSelectedSeatsReturn != searchParams?.totalPassenger)) {
+                Toast.makeText(this, "Please select seats for all passengers", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+                }
+
+            else {
+
             booking?.let { booking ->
                 viewModel.viewModelScope.launch {
                     viewModel.createBooking(booking)
                 }
+                }
             }
-
             val intent = Intent(this, CheckoutDetailActivity::class.java).apply {
                 putExtra("BOOKING", booking)
                 putExtra("SEARCH_PARAMS", searchParams)
@@ -297,10 +316,10 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
     }
 
     private fun setSelectedSeatReturn() {
-        val selectedSeatIds = seatBookViewReturn.getSelectedIdList()
+        val selectedSeatIds = seatBookViewReturn?.getSelectedIdList()
         val selectedSeatCodeReturn = mutableListOf<String>()
         viewModel.seats.value?.let { seats ->
-            selectedSeatIds.forEach { id ->
+            selectedSeatIds?.forEach { id ->
                 val seat = seats.getOrNull(id - 1)
                 seat?.let {
                     selectedSeatCodeReturn.add(it.seatCode)
