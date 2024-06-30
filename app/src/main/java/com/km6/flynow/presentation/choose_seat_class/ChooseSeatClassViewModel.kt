@@ -15,10 +15,10 @@ class ChooseSeatClassViewModel : ViewModel() {
     init {
         // Initialize the options list
         seatClass.value = listOf(
-            SeatClass("Economy", "IDR 4.950.000"),
-            SeatClass("Premium Economy", "IDR 7.550.000"),
-            SeatClass("Business", "IDR 29.220.000"),
-            SeatClass("First Class", "IDR 87.620.000")
+            SeatClass("Economy", " IDR 1.000.000"),
+            SeatClass("Premium Economy", "  IDR 4.000.000"),
+            SeatClass("Business", "IDR 10.000.000"),
+            SeatClass("First Class", "IDR 20.620.000")
         )
         _selectedPosition.value = -1
     }

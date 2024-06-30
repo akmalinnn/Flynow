@@ -147,6 +147,8 @@
     <string name="detik">detik</string>
     <string name="capacity_72_seats">Capacity - 72 Seats</string>
     <string name="simpan_pesanan">Simpan pesanan</string>
+    <string name="silahkan_login_kembali">Silahkan login kembali</string>
+    <string name="membuat_pembayaran">membuat pembayaran</string>
 
 
 </resources>

@@ -2,7 +2,9 @@ package com.km6.flynow.presentation.checkout.checkout_detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.km6.flynow.R
 import com.km6.flynow.databinding.ActivityCreateBookingSuccessBinding
 import com.km6.flynow.presentation.history.HistoryViewModel
@@ -28,6 +30,7 @@ class CheckoutDetailActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.btnPaymentTicket.setOnClickListener {
+            Toast.makeText(this, getString(R.string.membuat_pembayaran), Toast.LENGTH_SHORT).show()
             fetchLatestHistoryAndNavigate()
         }
     }
