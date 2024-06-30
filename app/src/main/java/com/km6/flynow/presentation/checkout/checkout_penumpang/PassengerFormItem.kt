@@ -39,7 +39,7 @@ class PassengerItem(private val bio: Passenger) :
         autoCompleteTitle.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
             val selectedTitle = adapterView.getItemAtPosition(i) as String
             viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
-            Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
         }
 
         // Set up birthDate
@@ -59,8 +59,8 @@ class PassengerItem(private val bio: Passenger) :
         autoCompleteDoc.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
                 val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
+//                    .show()
             }
 
         // Set up AutoCompleteCountry
@@ -269,8 +269,8 @@ class PassengerItem(private val bio: Passenger) :
         autoCompleteCountry.onItemClickListener =
             AdapterView.OnItemClickListener { adapterView, view, i, l ->
                 val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
+//                    .show()
             }
 
         // Set up ExpDate

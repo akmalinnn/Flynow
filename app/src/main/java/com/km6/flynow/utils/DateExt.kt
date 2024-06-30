@@ -99,6 +99,13 @@ fun String.toCustomTimeFormat(): String? {
 
 }
 
+fun toSnakeCase(value: String): String {
+    return value
+        .trim()                   // Remove leading/trailing spaces
+        .lowercase()              // Convert to lowercase
+        .replace(" ", "_")        // Replace spaces with underscores
+}
+
 fun calculateEstimatedTime(departureTime: String, arrivalTime: String): String {
     val format = SimpleDateFormat("HH:mm", Locale.getDefault())
     format.timeZone = TimeZone.getTimeZone("UTC") // Adjust timezone if necessary
@@ -120,4 +127,5 @@ fun calculateEstimatedTime(departureTime: String, arrivalTime: String): String {
         e.printStackTrace()
         return ""
     }
+
 }
