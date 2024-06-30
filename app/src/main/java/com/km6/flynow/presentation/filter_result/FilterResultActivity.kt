@@ -3,8 +3,10 @@ package com.km6.flynow.presentation.filter_result
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.km6.flynow.R
 import com.km6.flynow.data.model.Filter
 import com.km6.flynow.data.model.Flight
@@ -42,13 +44,14 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
 
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 
-
         setupListFlight()
         getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas?.name?.lowercase(), "price-asc")
         setClickListener()
+
     }
 
     private fun setClickListener() {
+        binding.btnFilterSelectedButton.visibility = GONE
         binding.btnFilterSelectedButton.setOnClickListener{
             chooseFilter()
         }

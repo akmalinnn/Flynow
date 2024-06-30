@@ -5,13 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import coil.load
 import com.km6.flynow.R
 import com.km6.flynow.data.model.history.History
 import com.km6.flynow.databinding.ActivityDetailHistoryBinding
+import com.km6.flynow.presentation.main.MainActivity
 import com.km6.flynow.presentation.payment.PaymentActivity
 import com.km6.flynow.utils.toCustomDateFormat
 import com.km6.flynow.utils.toCustomTimeFormat
@@ -50,7 +50,7 @@ class HistoryDetailActivity : AppCompatActivity() {
         }
 
         viewModel.totalBabyPrice.observe(this) { totalPrice ->
-            binding.tvPricePassengersChildren.text = totalPrice.toIDRFormat()
+            binding.tvPricePassengersBabies.text = totalPrice.toIDRFormat()
         }
 
         viewModel.historyItem.observe(this) { historyItem ->
@@ -59,9 +59,20 @@ class HistoryDetailActivity : AppCompatActivity() {
 
     }
 
+
+    private fun backtoMain() {
+        startActivity(
+            Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            },
+        )
+
+    }
+
     private fun setClickListener() {
         binding.ivBack.setOnClickListener {
             onBackPressed()
+            backtoMain()
         }
         binding.btnContinueToBeranda.setOnClickListener {
             val historyItem = viewModel.historyItem.value
@@ -120,6 +131,12 @@ class HistoryDetailActivity : AppCompatActivity() {
             tvFlightDestination.text = destinationText
 
             val passengerNames = historyItem.passengerName.joinToString(", ")
+            val passengerSeat = historyItem.passengerSeat.joinToString(", ")
+            val passengerSeatReturn = historyItem.passengerSeatReturn?.joinToString(", ")
+
+            seatReturn.text = passengerSeatReturn
+            seat.text = passengerSeat
+
 
             tvNumberBookingCode.text = historyItem.bookingCode
             tvTakeOffTime.text = historyItem.departureTime.toCustomTimeFormat()
@@ -138,6 +155,11 @@ class HistoryDetailActivity : AppCompatActivity() {
                 crossfade(true)
                 error(R.mipmap.ic_launcher)
             }
+
+            tvNamePassengerPayload.text = historyItem.flightInformation
+            tvPrice.text = historyItem.price.toIDRFormat()
+
+
 
 
             // Return flight details
@@ -168,14 +190,23 @@ class HistoryDetailActivity : AppCompatActivity() {
 
             val adultsText = getString(R.string.adults_label, historyItem.numAdults)
             val childrenText = getString(R.string.children_label, historyItem.numChildren)
+            val babiesText = getString(R.string.babies_label, historyItem.numBabies)
+
 
 
             tvPriceDetailsPassengers.text = getString(R.string.adultText, adultsText)
             tvPriceDetailsPassengersChildren.text = getString(R.string.childernText, childrenText)
+            tvPriceDetailsPassengersBabies.text = getString(R.string.babiesText, babiesText)
             ivLogoReturn.load(historyItem.airlineLogo) {
                 crossfade(true)
                 error(R.mipmap.ic_launcher)
             }
+
+
+            tvNamePassengerPayloadReturn.text = historyItem.flightInformationReturn
+            tvPriceReturn.text = historyItem.priceReturn.toIDRFormat()
+
+
         }
     }
 
@@ -201,4 +232,5 @@ class HistoryDetailActivity : AppCompatActivity() {
             context.startActivity(intent)
         }
     }
+
 }

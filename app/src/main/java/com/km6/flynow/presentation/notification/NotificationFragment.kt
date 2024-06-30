@@ -92,7 +92,7 @@ class NotificationFragment : Fragment() {
                     doOnEmpty = { error ->
                         Toast.makeText(
                             requireContext(),
-                            getString(R.string.anda_belum_memiliki_riwayat),
+                            getString(R.string.anda_belum_memiliki_notifikasi),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

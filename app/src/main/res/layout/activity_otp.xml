@@ -60,20 +60,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:text="@string/kirim_ulang_otp_dalam"
         app:layout_constraintEnd_toEndOf="@+id/pinview"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinview"
-        android:text="Kirim Ulang OTP dalam " />
+        app:layout_constraintTop_toBottomOf="@+id/pinview" />
 
     <TextView
         android:id="@+id/time_otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/resendOtp"
         app:layout_constraintStart_toEndOf="@+id/resendOtp"
         app:layout_constraintTop_toTopOf="@+id/resendOtp"
         tools:text="60 " />
+
+    <TextView
+        android:id="@+id/time_otp_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:text="@string/detik"
+        app:layout_constraintBottom_toBottomOf="@+id/time_otp"
+        app:layout_constraintStart_toEndOf="@+id/time_otp"
+        app:layout_constraintTop_toTopOf="@+id/time_otp" />
 
     <TextView
         android:id="@+id/requestNewOtpEmail"

@@ -99,10 +99,10 @@
                 android:id="@+id/tv_flight_airline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
                 android:textColor="@color/md_theme_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="@+id/tv_flight_destination"
                 app:layout_constraintTop_toBottomOf="@+id/tv_flight_destination"
                 tools:text="Air Asia" />
@@ -199,6 +199,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.512"
                         tools:text="efwgweg" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

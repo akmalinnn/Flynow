@@ -62,8 +62,8 @@
 
         <ImageView
             android:id="@+id/iv_airline_departure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:scaleType="centerCrop"
             android:layout_margin="8dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -134,9 +134,10 @@
             android:id="@+id/tv_detail_information"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
             android:text="@string/detail_information"
             android:textSize="14sp"
-            android:layout_marginHorizontal="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_return"
             app:layout_constraintStart_toEndOf="@id/iv_airline_departure"
             app:layout_constraintTop_toBottomOf="@id/tv_information" />
 

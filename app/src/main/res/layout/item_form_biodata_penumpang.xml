@@ -104,74 +104,19 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tv_switch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/text_switch"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_full_name" />
-
-        <com.google.android.material.materialswitch.MaterialSwitch
-            android:id="@+id/switch_button"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:checked="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_full_name" />
-
-        <TextView
-            android:id="@+id/tv_family_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/text_family_name"
-            android:textColor="@color/md_theme_primary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_switch" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_family_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:boxCornerRadiusBottomEnd="4dp"
-            app:boxCornerRadiusBottomStart="4dp"
-            app:boxCornerRadiusTopEnd="4dp"
-            app:boxCornerRadiusTopStart="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_family_name">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_family_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/text_til_family_name"
-                android:inputType="text"
-                android:textSize="16sp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:text="@string/text_date"
             android:textColor="@color/md_theme_primary"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_family_name" />
+            app:layout_constraintTop_toBottomOf="@+id/til_full_name" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_date"
@@ -193,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_date"
                 android:hint="@string/text_til_date"
-                android:inputType="date"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -269,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/text_auto_ktp_paspor"
-                android:inputType="none"
+                android:inputType="text"
                 android:paddingBottom="16dp"
                 android:textSize="16sp" />
 
@@ -307,7 +252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/text_til_no_ktp_paspor"
-                android:inputType="number"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -346,7 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/text_auto_negara_penerbit"
-                android:inputType="none"
+                android:inputType="text"
                 android:paddingBottom="16dp"
                 android:textSize="16sp" />
 
@@ -385,7 +330,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_date"
                 android:hint="@string/text_til_exp_date"
-                android:inputType="date"
+                android:inputType="textWebEditText"
                 android:textSize="16sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

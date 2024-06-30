@@ -28,7 +28,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/background_view"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:visibility="gone"/>
 
 
     <TextView
@@ -45,7 +46,8 @@
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/ivEdit"
         app:layout_constraintStart_toEndOf="@id/ivEdit"
-        app:layout_constraintTop_toBottomOf="@+id/background_view" />
+        app:layout_constraintTop_toBottomOf="@+id/background_view"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/ivSetting"
@@ -56,7 +58,8 @@
         android:src="@drawable/ic_account_settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivEdit"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/tvSetting"
@@ -72,7 +75,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivSetting"
         app:layout_constraintStart_toEndOf="@id/ivSetting"
-        app:layout_constraintTop_toBottomOf="@id/ivEdit" />
+        app:layout_constraintTop_toBottomOf="@id/ivEdit"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/ivLogout"
@@ -119,7 +123,8 @@
         android:layout_marginTop="7dp"
         android:background="@drawable/ic_line"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSetting" />
+        app:layout_constraintTop_toBottomOf="@id/tvSetting"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/divider3"

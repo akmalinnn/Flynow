@@ -12,12 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/cv_bottom_price"
-
+        android:layout_marginBottom="20dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
 
             <include
                 android:id="@+id/layout_header"
@@ -26,7 +27,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
                 android:id="@+id/tv_depature"
@@ -49,7 +51,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_depature" />
+                app:layout_constraintTop_toBottomOf="@id/tv_depature"
+                />
 
             <TextView
                 android:id="@+id/tv_arrival"
@@ -103,21 +106,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/btn_checkout"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_total_price"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="@color/md_theme_primary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/btn_checkout"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="IDR. 80.000.000/pax" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_checkout"

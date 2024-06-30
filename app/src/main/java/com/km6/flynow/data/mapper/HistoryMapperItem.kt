@@ -27,6 +27,10 @@ fun HistoryItem.toHistory() =
         airlineDepartureName = this.flight.departure.airline?.airlineName.orEmpty(),
         airlineLogo = this.flight.departure.airline?.image.orEmpty(),
         passengerName = this.details.departure.map { it.passenger.name },
+        passengerSeat = this.details.departure.map { it.seat.seatCode.orEmpty() },
+
+        passengerSeatReturn = this.details.returnDetails?.map { it?.seat?.seatCode.orEmpty() },
+
 
         departureTimeReturn = this.flight.returnFlight?.departureTime.orEmpty(),
         arrivalTimeReturn = this.flight.returnFlight?.arrivalTime.orEmpty(),
@@ -41,9 +45,8 @@ fun HistoryItem.toHistory() =
         airlineLogoReturn = this.flight.returnFlight?.airline?.image.orEmpty(),
         paymentStatus = this.payment?.paymentStatus.orEmpty(),
         snapUrl = this.payment?.snapRedirectUrl.orEmpty(),
-
-
-
+        flightInformationReturn = this.flight.returnFlight?.information.orEmpty(),
+        flightInformation = this.flight.departure.information.orEmpty(),
 
     )
 

@@ -187,12 +187,13 @@
 
                     <LinearLayout
                         android:id="@+id/ll_flight_info"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginTop="16dp"
                         android:orientation="vertical"
-                        app:layout_constraintStart_toEndOf="@id/iv_logo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_logo"
                         app:layout_constraintTop_toBottomOf="@id/v_line">
 
                         <TextView
@@ -218,10 +219,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:text="Nama Penumpang:"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="Nama Penumpang:" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_name_passenger"
@@ -231,13 +232,55 @@
                             android:textSize="14sp"
                             tools:text="Penumpang 1: Mr.Harry Potter" />
 
+
                         <TextView
-                            android:id="@+id/tv_id_passenger"
+                            android:id="@+id/tv_information_title_payload"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Informasi:"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            tools:text="ID: 789658" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_name_passenger_payload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            tools:text="Penumpang 1: Mr.Harry Potter" />
+
+                        <TextView
+                            android:id="@+id/seat_payload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Kursi:"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            tools:text="Penumpang 1: Mr.Harry Potter"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/tv_price"
+                            android:layout_width="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="Penumpang 1: Mr.Harry Potter" />
+
 
                     </LinearLayout>
 
@@ -416,11 +459,12 @@
 
                     <LinearLayout
                         android:id="@+id/ll_flight_info_return"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="8dp"
                         android:layout_marginTop="16dp"
                         android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/v_line_return"
                         app:layout_constraintStart_toEndOf="@id/iv_logo_return"
                         app:layout_constraintTop_toBottomOf="@id/v_line_return">
 
@@ -447,10 +491,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
+                            android:text="Nama Penumpang:"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:text="Nama Penumpang:" />
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tv_name_passenger_return"
@@ -461,12 +505,55 @@
                             tools:text="Penumpang 1: Mr.Harry Potter" />
 
                         <TextView
-                            android:id="@+id/tv_id_passenger_return"
+                            android:id="@+id/tv_information_title_payload_return"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Informasi:"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
-                            tools:text="ID: 789658" />
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_name_passenger_payload_return"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            tools:text="Penumpang 1: Mr.Harry Potter"
+                            />
+
+
+
+                        <TextView
+                            android:id="@+id/seat_payload_return"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="Kursi:"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/seat_return"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            tools:text="Penumpang 1: Mr.Harry Potter"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_price_return"
+                            android:layout_width="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_primary"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="Penumpang 1: Mr.Harry Potter" />
+
 
                     </LinearLayout>
 

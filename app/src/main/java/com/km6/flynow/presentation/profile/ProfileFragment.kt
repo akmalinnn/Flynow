@@ -35,6 +35,7 @@ class ProfileFragment : Fragment() {
         checkLoginStatus()
         setProfile()
 
+
     }
 
     private fun setClickListeners() {
@@ -61,6 +62,9 @@ class ProfileFragment : Fragment() {
                 },
             )
         }
+
+        binding.tvSetting.setOnClickListener{
+        }
     }
 
     private fun setProfile() {
@@ -76,6 +80,8 @@ class ProfileFragment : Fragment() {
             navigateToLogin()
         }
     }
+
+
 
     private fun navigateToLogin() {
         startActivity(

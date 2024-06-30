@@ -7,11 +7,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.km6.flynow.R
 import com.km6.flynow.data.model.BioPenumpang
+import com.km6.flynow.data.model.Passenger
 import com.km6.flynow.databinding.ItemFormBiodataPenumpangBinding
 import com.xwray.groupie.viewbinding.BindableItem
 import java.util.Calendar
 
-class PassengerItem(private val bio: BioPenumpang) :
+class PassengerItem(private val bio: Passenger) :
     BindableItem<ItemFormBiodataPenumpangBinding>() {
 
     override fun getLayout(): Int {
@@ -27,40 +28,29 @@ class PassengerItem(private val bio: BioPenumpang) :
     private lateinit var binding: ItemFormBiodataPenumpangBinding
 
     override fun bind(viewBinding: ItemFormBiodataPenumpangBinding, position: Int) {
-        viewBinding.tvTitleFormPassenger.text = "Passenger ${position + 1} - ${bio.type}"
+        viewBinding.tvTitleFormPassenger.text = "Passenger ${position + 1} - ${bio.passengerType}"
 
         // Set up AutoCompleteTitle
-        val items = listOf("Mr.", "Mrs.", "Miss ")
-        val autoComplete = viewBinding.autocompleteTitle
-        val adapter = ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, items)
+        val titles = listOf("Mr.", "Mrs.", "Miss")
+        val autoCompleteTitle = viewBinding.autocompleteTitle
+        val titleAdapter = ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, titles)
 
-        autoComplete.setAdapter(adapter)
-        autoComplete.onItemClickListener =
-            AdapterView.OnItemClickListener { adapterView, view, i, l ->
-                val itemSelected = adapterView.getItemAtPosition(i)
-                Toast.makeText(viewBinding.root.context, "Item : $itemSelected", Toast.LENGTH_SHORT)
-                    .show()
-            }
-
-        setLastNameVisibility(viewBinding, false)
-        viewBinding.switchButton.setOnCheckedChangeListener { _, isChecked ->
-            setLastNameVisibility(viewBinding, isChecked)
+        autoCompleteTitle.setAdapter(titleAdapter)
+        autoCompleteTitle.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            val selectedTitle = adapterView.getItemAtPosition(i) as String
+            viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
+            Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
         }
-//        if (bio.lastName != null) {
-//            viewBinding.etFamilyName.visibility = View.VISIBLE
-//            viewBinding.tilFamilyName.visibility = View.VISIBLE
-//        } else {
-//            viewBinding.etFamilyName.visibility = View.GONE
-//            viewBinding.tilFamilyName.visibility = View.GONE
-//        }
 
         // Set up birthDate
         viewBinding.etDate.setOnClickListener {
             showBirthDate(viewBinding)
         }
 
+
+
         // Set up AutoCompleteDocument
-        val itemDoc = listOf("KTP", "Paspor", "Kartu Keluarga")
+        val itemDoc = DocumentType.entries.map { it. displayName }
         val autoCompleteDoc = viewBinding.autoCompleteKtpPaspor
         val adapterdoc =
             ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, itemDoc)
@@ -300,7 +290,7 @@ class PassengerItem(private val bio: BioPenumpang) :
                 binding.root.context,
                 { _, selectedYear, selectedMonth, selectedDay ->
                     // Set the selected date to the input
-                    val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                    val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
                     binding.etDate.setText(selectedDate)
                 },
                 year,
@@ -321,7 +311,7 @@ class PassengerItem(private val bio: BioPenumpang) :
                 binding.root.context,
                 { _, selectedYear, selectedMonth, selectedDay ->
                     // Set the selected date to the input
-                    val selectedDate = "${selectedDay}/${selectedMonth + 1}/${selectedYear}"
+                    val selectedDate = "${selectedYear}-${selectedMonth + 1}-${selectedDay}"
                     binding.etExpDate.setText(selectedDate)
                 },
                 year,
@@ -329,21 +319,6 @@ class PassengerItem(private val bio: BioPenumpang) :
                 day,
             )
         dateExp.show()
-    }
-
-    private fun setLastNameVisibility(
-        viewBinding: ItemFormBiodataPenumpangBinding,
-        isVisible: Boolean
-    ) {
-        if (isVisible) {
-            viewBinding.tvFamilyName.visibility = View.VISIBLE
-            viewBinding.etFamilyName.visibility = View.VISIBLE
-            viewBinding.tilFamilyName.visibility = View.VISIBLE
-        } else {
-            viewBinding.tvFamilyName.visibility = View.GONE
-            viewBinding.etFamilyName.visibility = View.GONE
-            viewBinding.tilFamilyName.visibility = View.GONE
-        }
     }
     
     fun validateForm(): Boolean {
@@ -387,10 +362,10 @@ class PassengerItem(private val bio: BioPenumpang) :
         return isValid
     }
 
-    fun getPassengerData(): BioPenumpang {
-        return BioPenumpang(
-            type = bio.type,
-            firstName = binding.etFullName.text.toString(),
+    fun getPassengerData(): Passenger {
+        return Passenger(
+            passengerType = bio.passengerType,
+            name = binding.etFullName.text.toString(),
 //            lastName = binding.etFamilyName.text.toString(),
             dateOfBirth = binding.etDate.text.toString(),
             nationality = binding.etNationality.text.toString(),
@@ -402,3 +377,8 @@ class PassengerItem(private val bio: BioPenumpang) :
     }
 }
 
+enum class DocumentType(val displayName: String) {
+    KTP("ktp"),
+    Paspor("paspor"),
+    Kartu_Keluarga("kartu_keluarga");
+}

@@ -115,13 +115,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToMain() {
-        startActivity(
-            Intent(this, MainActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            },
-        )
-    }
+
 
     private fun isFormValid(): Boolean {
         val password = binding.etPassword.text.toString().trim()
