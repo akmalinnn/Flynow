@@ -69,6 +69,8 @@ class FlightDetailActivity : AppCompatActivity() {
     }
 
 
+
+
     private fun setClickListener() {
 
         val token = viewModel.getToken()
@@ -78,6 +80,10 @@ class FlightDetailActivity : AppCompatActivity() {
             }
         } else {
             navigateToLogin()
+        }
+
+        binding.layoutHeader.ivBack.setOnClickListener {
+            onBackPressed()
         }
 
     }

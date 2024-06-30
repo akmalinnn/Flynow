@@ -286,7 +286,7 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             booking?.let { booking ->
                 viewModel.viewModelScope.launch {
                     viewModel.createBooking(booking)
-                }
+                    }
                 }
             }
             val intent = Intent(this, CheckoutDetailActivity::class.java).apply {

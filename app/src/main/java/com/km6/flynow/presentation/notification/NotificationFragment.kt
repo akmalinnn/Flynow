@@ -78,7 +78,7 @@ class NotificationFragment : Fragment() {
                     doOnError = { error ->
                         Toast.makeText(
                             requireContext(),
-                            "Error: ${error.message}",
+                            getString(R.string.silahkan_login_kembali),
                             Toast.LENGTH_SHORT
                         ).show()
                         profileViewModel.logOut()

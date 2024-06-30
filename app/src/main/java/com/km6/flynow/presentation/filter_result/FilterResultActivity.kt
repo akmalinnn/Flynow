@@ -37,10 +37,6 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        // ini diganti jadi ngambil data class yg baru contoh bentuknya
-        // ini di bawah buat ngambil data di detail, di sini nanti tinggal ganti tag nya yang sesuai sama halaman home
-//        departureFlight = intent.getParcelableExtra("DEPARTURE_FLIGHT")!!
-//        returnFlight = intent.getParcelableExtra("RETURN_FLIGHT")
 
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 
@@ -54,6 +50,10 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
         binding.btnFilterSelectedButton.visibility = GONE
         binding.btnFilterSelectedButton.setOnClickListener{
             chooseFilter()
+        }
+
+        binding.layoutHeader.ivBack.setOnClickListener {
+            onBackPressed()
         }
     }
 
