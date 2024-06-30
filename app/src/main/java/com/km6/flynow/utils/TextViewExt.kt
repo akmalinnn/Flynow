@@ -32,4 +32,6 @@ fun TextView.highLightWord(
     )
     text = ssBuilder
     movementMethod = LinkMovementMethod.getInstance()
+
+
 }

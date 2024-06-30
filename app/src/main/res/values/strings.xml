@@ -149,6 +149,10 @@
     <string name="simpan_pesanan">Simpan pesanan</string>
     <string name="silahkan_login_kembali">Silahkan login kembali</string>
     <string name="membuat_pembayaran">membuat pembayaran</string>
+    <string name="_register">Nama</string>
+    <string name="email_register">email</string>
+    <string name="no_telepon">+62 </string>
+    <string name="password_register">Password</string>
 
 
 </resources>

@@ -17,6 +17,7 @@ import com.km6.flynow.presentation.filter.OnFilterSelectedListener
 import com.km6.flynow.presentation.filter_result.adapter.FilterResultAdapter
 import com.km6.flynow.presentation.flight_detail.FlightDetailActivity
 import com.km6.flynow.utils.proceedWhen
+import com.km6.flynow.utils.toSnakeCase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
@@ -41,7 +42,7 @@ class FilterResultActivity : AppCompatActivity(), OnFilterSelectedListener {
         searchParams = intent.getParcelableExtra("SEARCH_PARAMS")
 
         setupListFlight()
-        getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), searchParams?.clas?.name?.lowercase(), "price-asc")
+        getSearchFlight(searchParams?.da?.airportCode, searchParams?.aa?.airportCode, searchParams?.dd, searchParams?.rd, searchParams?.adult.toString(), searchParams?.child.toString(), searchParams?.baby.toString(), toSnakeCase(searchParams?.clas?.name!!), "price-asc")
         setClickListener()
 
     }

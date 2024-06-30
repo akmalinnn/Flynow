@@ -78,9 +78,13 @@ class FlightDetailActivity : AppCompatActivity() {
             binding.btnCheckout.setOnClickListener {
                 navigateToBiodataPemesan()
             }
-        } else {
-            navigateToLogin()
         }
+        else {
+            binding.btnCheckout.setOnClickListener {
+                navigateToLogin()
+            }
+        }
+
 
         binding.layoutHeader.ivBack.setOnClickListener {
             onBackPressed()
