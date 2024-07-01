@@ -30,6 +30,7 @@ import com.km6.flynow.utils.getFormatDate
 import com.km6.flynow.utils.getFormattedDate
 import com.km6.flynow.utils.getTime
 import com.km6.flynow.utils.proceedWhen
+import com.km6.flynow.utils.toCustomDateFormat
 import com.km6.flynow.utils.toDateFormat
 import com.km6.flynow.utils.toIDRFormat
 import com.km6.flynow.utils.toTimeFormat
@@ -112,7 +113,7 @@ class FlightDetailActivity : AppCompatActivity() {
         )
         binding.layoutArrivalFlight.itemFlightDetail.apply {
             tvDepartureTime.text = returnFlight?.departureTime.toTimeFormat()
-            tvDepartureDate.text = returnFlight?.departureTime.toDateFormat()
+            tvDepartureDate.text = returnFlight?.departureTime?.toCustomDateFormat()
             tvAirportDeparture.text = getString(
                 R.string.terminal,
                 returnFlight?.depatureairportName,
@@ -123,7 +124,7 @@ class FlightDetailActivity : AppCompatActivity() {
             tvNumberPlane.text = returnFlight?.flightCode
             tvDetailInformation.text = returnFlight?.information
             tvReturnTime.text = returnFlight?.arrivalTime.toTimeFormat()
-            tvReturnDate.text = returnFlight?.arrivalTime.toDateFormat()
+            tvReturnDate.text = returnFlight?.arrivalTime?.toCustomDateFormat()
             tvAirportReturn.text = returnFlight?.arrivalairportName
 
             ivAirlineDeparture.load(returnFlight?.image) {
@@ -150,7 +151,7 @@ class FlightDetailActivity : AppCompatActivity() {
         )
         binding.layoutDepartureFlight.itemFlightDetail.apply {
 
-            tvDepartureDate.text = departureFlight.departureTime.toDateFormat()
+            tvDepartureDate.text = departureFlight.departureTime?.toCustomDateFormat()
             tvAirportDeparture.text = getString(
                 R.string.terminal,
                 departureFlight.depatureairportName,
@@ -161,7 +162,7 @@ class FlightDetailActivity : AppCompatActivity() {
             tvNumberPlane.text = departureFlight.flightCode
             tvDetailInformation.text = departureFlight.information
             tvReturnTime.text = departureFlight.arrivalTime.toTimeFormat()
-            tvReturnDate.text = departureFlight.arrivalTime.toDateFormat()
+            tvReturnDate.text = departureFlight.arrivalTime?.toCustomDateFormat()
             tvAirportReturn.text = departureFlight.arrivalairportName
 
             ivAirlineDeparture.load(departureFlight.image) {
@@ -227,7 +228,7 @@ class FlightDetailActivity : AppCompatActivity() {
                         returnFlight?.arrivalcity
                     )
                 layoutArrivalFlight.itemFlightDetail.tvDepartureTime.text =
-                    returnFlight?.departureTime
+                    returnFlight?.departureTime.toTimeFormat()
                 // Tambahkan field lainnya sesuai kebutuhan
             } else {
                 layoutArrivalFlight.root.visibility = View.GONE
