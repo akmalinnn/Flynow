@@ -153,6 +153,7 @@
     <string name="email_register">email</string>
     <string name="no_telepon">+62 </string>
     <string name="password_register">Password</string>
+    <string name="text_pilih_kursi">Pilih Kursi</string>
 
 
 </resources>

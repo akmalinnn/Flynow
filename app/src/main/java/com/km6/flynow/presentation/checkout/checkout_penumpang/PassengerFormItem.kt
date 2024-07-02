@@ -33,24 +33,24 @@ class PassengerItem(private val bio: Passenger) :
         // Set up AutoCompleteTitle
         val titles = listOf("Mr.", "Mrs.", "Miss")
         val autoCompleteTitle = viewBinding.autocompleteTitle
-        val titleAdapter = ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, titles)
+        val titleAdapter =
+            ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, titles)
 
         autoCompleteTitle.setAdapter(titleAdapter)
-        autoCompleteTitle.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
-            val selectedTitle = adapterView.getItemAtPosition(i) as String
-            viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
+        autoCompleteTitle.onItemClickListener =
+            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+                val selectedTitle = adapterView.getItemAtPosition(i) as String
+                viewBinding.etFullName.setText("$selectedTitle ${viewBinding.etFullName.text}")
 //            Toast.makeText(viewBinding.root.context, "Title: $selectedTitle", Toast.LENGTH_SHORT).show()
-        }
+            }
 
         // Set up birthDate
         viewBinding.etDate.setOnClickListener {
             showBirthDate(viewBinding)
         }
 
-
-
         // Set up AutoCompleteDocument
-        val itemDoc = DocumentType.entries.map { it. displayName }
+        val itemDoc = DocumentType.entries.map { it.displayName }
         val autoCompleteDoc = viewBinding.autoCompleteKtpPaspor
         val adapterdoc =
             ArrayAdapter(viewBinding.root.context, R.layout.item_title_biodata, itemDoc)
@@ -320,7 +320,7 @@ class PassengerItem(private val bio: Passenger) :
             )
         dateExp.show()
     }
-    
+
     fun validateForm(): Boolean {
         var isValid = true
 
@@ -378,7 +378,7 @@ class PassengerItem(private val bio: Passenger) :
 }
 
 enum class DocumentType(val displayName: String) {
-    KTP("ktp"),
-    Paspor("paspor"),
-    Kartu_Keluarga("kartu_keluarga");
+    KTP("KTP"),
+    Paspor("Paspor"),
+    Kartu_Keluarga("Kartu Keluarga");
 }
