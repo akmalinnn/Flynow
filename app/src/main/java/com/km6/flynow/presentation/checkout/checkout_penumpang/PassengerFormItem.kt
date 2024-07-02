@@ -378,7 +378,7 @@ class PassengerItem(private val bio: Passenger) :
 }
 
 enum class DocumentType(val displayName: String) {
-    KTP("KTP"),
-    Paspor("Paspor"),
-    Kartu_Keluarga("Kartu Keluarga");
+    KTP("ktp"),
+    Paspor("paspor"),
+    Kartu_Keluarga("kartu_keluarga");
 }
