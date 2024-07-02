@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:textColor="@color/white"
-            tools:text="Pilih Kursi" />
+            android:text="@string/text_pilih_kursi" />
 
     </LinearLayout>
 

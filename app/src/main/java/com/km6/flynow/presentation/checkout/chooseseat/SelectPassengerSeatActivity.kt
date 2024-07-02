@@ -3,31 +3,23 @@ package com.km6.flynow.presentation.checkout.chooseseat
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.viewModelScope
 import com.km6.flynow.R
 import com.km6.flynow.data.model.Booking
-import com.km6.flynow.data.model.Flight
-import com.km6.flynow.databinding.ActivitySelectPassengerSeatBinding
 import com.km6.flynow.data.model.Passenger
 import com.km6.flynow.data.model.Search
-import com.km6.flynow.data.model.SeatPayloads
-import com.km6.flynow.data.source.network.model.history.Seat
 import com.km6.flynow.data.source.network.model.seat.SeatData
+import com.km6.flynow.databinding.ActivitySelectPassengerSeatBinding
 import com.km6.flynow.presentation.checkout.checkout_detail.CheckoutDetailActivity
-import com.km6.flynow.presentation.checkout.checkout_penumpang.PassengerItem
 import com.km6.flynow.utils.proceedWhen
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.GroupieViewHolder
 import dev.jahidhasanco.seatbookview.SeatBookView
 import dev.jahidhasanco.seatbookview.SeatClickListener
-import dev.jahidhasanco.seatbookview.SeatLongClickListener
 import kotlinx.coroutines.launch
-import org.koin.core.parameter.parametersOf
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class SelectPassengerSeatActivity : AppCompatActivity() {
     private val binding: ActivitySelectPassengerSeatBinding by lazy {
@@ -117,11 +109,11 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
                     },
 
                     doOnEmpty = {
-                    binding.layoutChooseSeatReturn.visibility = View.GONE
-                    booking?.seatPayloads?.returnSeats = null
+                        binding.layoutChooseSeatReturn.visibility = View.GONE
+                        booking?.seatPayloads?.returnSeats = null
                         booking?.returnFlightId = null
 
-                    binding.tvTitleInfoSeatReturn.visibility = View.GONE
+                        binding.tvTitleInfoSeatReturn.visibility = View.GONE
                     }
 
                 )
@@ -276,16 +268,15 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
 
             val totalSelectedSeatsReturn = (booking?.seatPayloads?.returnSeats?.size ?: 0)
 
-            if ( (totalSelectedSeats != searchParams?.totalPassenger) && (totalSelectedSeatsReturn != searchParams?.totalPassenger)) {
-                Toast.makeText(this, "Please select seats for all passengers", Toast.LENGTH_SHORT).show()
+            if ((totalSelectedSeats != searchParams?.totalPassenger) && (totalSelectedSeatsReturn != searchParams?.totalPassenger)) {
+                Toast.makeText(this, "Please select seats for all passengers", Toast.LENGTH_SHORT)
+                    .show()
                 return@setOnClickListener
-                }
+            } else {
 
-            else {
-
-            booking?.let { booking ->
-                viewModel.viewModelScope.launch {
-                    viewModel.createBooking(booking)
+                booking?.let { booking ->
+                    viewModel.viewModelScope.launch {
+                        viewModel.createBooking(booking)
                     }
                 }
             }
@@ -297,8 +288,6 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 
 
     private fun setSelectedSeat() {
@@ -328,9 +317,6 @@ class SelectPassengerSeatActivity : AppCompatActivity() {
         }
         booking?.seatPayloads?.returnSeats = selectedSeatCodeReturn
     }
-
-
-
 
     companion object {
 
